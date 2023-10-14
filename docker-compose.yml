@@ -1,4 +1,5 @@
 services:
+
   db:
     image: postgres
     restart: always
@@ -7,11 +8,13 @@ services:
       POSTGRES_PASSWORD: paperless
     ports:
       - "5432:5432"
+
   adminer:
     image: adminer:fastcgi
     restart: always
     ports:
       - "9091:8080"
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
@@ -33,6 +36,7 @@ services:
       MINIO_ROOT_USER: paperless_minio
       MINIO_ROOT_PASSWORD: paperless
     command: server --console-address ":9001" /data
+
 
 volumes:
   rabbitmq-data: {}
