@@ -21,7 +21,7 @@
 | test     | for experimenting and testing      |
 | feature  | for adding or removing features    |
 
-### Branching naming example
+### Branch naming example
 
-- "category/ { issue }" 
-- E.g. feature/3-login-for-cool-website
+- Template: "category/ { issue name }" 
+- Example: feature/3-login-for-cool-website
