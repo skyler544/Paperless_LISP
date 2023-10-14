@@ -1,0 +1,32 @@
+name: test-paperlessREST
+run-name: "Testing of paperlessREST is running"
+on: #the action runs on push against feature, bugfix, hotfix and/or open/synch PR into main
+    pull_request_target: #with pull_request_target we can define pull requests coming from any branch but targeting main (https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request_target)
+      types:
+        - opened, synchronize #the
+      branches:
+        - main
+    push:
+      branches:
+        - 'feature/**'
+        - 'bugfix/**'
+        - 'hotfix/**'
+        - 'test/**'
+jobs:
+  #if_merged: #the jobs run only if the pull request was closed AND merged see (https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request)
+    build_and_test_paperlessREST: # comes from (https://dev.to/ewefie/getting-started-with-github-actions-run-junit-5-tests-in-a-java-project-with-maven-20g4) https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+      runs-on: ubuntu-22.04 #it looks like the only linux distro available is ubuntu
+      defaults: #we want to execute the following commands in the directory containing the java project
+        run:
+          working-directory: paperlessREST
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4 #fetch the code from the actual branch (https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idsteps
+        - name: Set up JDK 17
+          uses: actions/setup-java@v3
+          with:
+            java-version: '17'
+            architecture: x64
+            cache: maven #we cache the maven packages, so that we do not have to fetch them at every job run
+        - name: Run tests in the project
+          run: mvn -B test --file pom.xmlrun
