@@ -13,3 +13,15 @@
 -  PostgreSQL
 -  GitHub Actions
 
+## Project specific branch naming convention
+| Category | Description                        |
+|----------|------------------------------------|
+| bugfix   | for fixing a bug                   |
+| hotfix   | for quickly fixing critical issues |
+| test     | for experimenting and testing      |
+| feature  | for adding or removing features    |
+
+### Branch naming example
+
+- Template: "category/ { issue name }" 
+- Example: feature/3-login-for-cool-website
