@@ -15,15 +15,15 @@ jobs:
         working-directory: paperlessREST
     steps:
       - name: Checkout code
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
       - name: Set up JDK 17
-      - uses: actions/setup-java@v3
+        uses: actions/setup-java@v3
         with:
           java-version: '17'
           architecture: x64
           cache: maven #we cache the maven packages, so that we do not have to fetch them at every job run
-      - run: mvn clean package
-      - run: mkdir staging && cp target/*.jar staging
+        run: mvn clean package
+        run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v3
         with:
           name: Package
