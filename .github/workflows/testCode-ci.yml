@@ -5,6 +5,7 @@ on: #the action runs on push against main
     push:
       branches:
         - main
+        - 'feature/7-add-github-actions-to-trigger-the-cicd'
 
 jobs:
   test_paperlessREST:
