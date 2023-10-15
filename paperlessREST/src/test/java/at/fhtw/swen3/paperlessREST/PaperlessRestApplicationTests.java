@@ -19,7 +19,7 @@ class PaperlessRestApplicationTests {
 
 		final int sum = one + two;
 
-		assertEquals(one + two, sum);
+		assertEquals(one + two + 1, sum);
 	}
 
 }
