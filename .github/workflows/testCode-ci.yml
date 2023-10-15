@@ -1,6 +1,6 @@
 # see https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 name: main-ci
-run-name: "MAIN CI running"
+run-name: "TEST CI running"
 on: #the action runs on push against main
     push:
       branches:
@@ -22,4 +22,4 @@ jobs:
           java-version: '17'
           architecture: x64
           cache: maven #we cache the maven packages, so that we do not have to fetch them at every job run
-        run: mvn -B test --file pom.xml
+      - run: mvn -B test --file pom.xml
