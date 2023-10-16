@@ -25,3 +25,10 @@
 
 - Template: "category/ { issue name }" 
 - Example: feature/3-login-for-cool-website
+
+##
+
+Github actions:
+
+  - Main CI
+  - Test Code
