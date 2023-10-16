@@ -1,6 +1,6 @@
 # see https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-name: test-ci
-run-name: "TEST CI running"
+name: "test ci"
+run-name: "TEST CI"
 on:
     pull_request:
       branches:
