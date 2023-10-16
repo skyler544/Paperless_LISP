@@ -1,6 +1,6 @@
 # see https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-name: main-ci
-run-name: "MAIN CI running"
+name: "MAIN CI"
+run-name: "MAIN CI"
 on: #the action runs on push against main
     push:
       branches:
