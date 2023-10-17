@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>at.fhtw.swen3</groupId>
 	<artifactId>paperlessREST</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>paperlessREST</name>
 	<description>SW Komponenten Projekt for the Paperless REST</description>
 	<properties>

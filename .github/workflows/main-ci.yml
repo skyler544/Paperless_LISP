@@ -1,0 +1,29 @@
+# see https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+name: "MAIN CI"
+run-name: "MAIN CI"
+on: #the action runs on push against main
+    push:
+      branches:
+        - main
+
+jobs:
+  build_and_test_paperlessREST:
+    runs-on: ubuntu-22.04
+    defaults: #we want to execute the following commands in the directory containing the java project
+      run:
+        working-directory: paperlessREST
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          architecture: x64
+          cache: maven #we cache the maven packages, so that we do not have to fetch them at every job
+          distribution: oracle
+      - run: mvn --batch-mode --update-snapshots verify
+      - uses: actions/upload-artifact@v3
+        with:
+          name: paperlessREST
+          path: paperlessREST/target/*.jar

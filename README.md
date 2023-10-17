@@ -1,10 +1,10 @@
 # Paperless
 [Paperless-ngx](https://docs.paperless-ngx.com/)
 
-## Authors: 
+## Authors:
 -  Comberlato Bampi, Julio
 -  Gamsjäger, Peter
--  Mayfield, Skyler 
+-  Mayfield, Skyler
 
 ## Technology Stack
 -  JDK 17
@@ -23,5 +23,17 @@
 
 ### Branch naming example
 
-- Template: "category/ { issue name }" 
+- Template: "category/ { issue name }"
 - Example: feature/3-login-for-cool-website
+
+## GitHub actions:
+
+The project contains two gitHub actions, namely:
+
+  - Main CI:
+    - The action is triggered on push into main branch (e.g. after a PR was approved and completed)
+    - The action builds the version of the paperlessREST project from the main branch and publishes the build artifact on gitHub
+
+  - Test CI
+    - The action is used as a status check for pull requests against main. It was implemented to guarantee that only tested code is pushed into main
+    - The action builds and tests the actual version of the paperlessREST project, if any tests fail the pull request cannot be completed
