@@ -402,36 +402,6 @@ paths:
                 notes:
                   type: array
                   items: {}
-                set_permissions:
-                  type: object
-                  properties:
-                    view:
-                      type: object
-                      properties:
-                        users:
-                          type: array
-                          items: {}
-                        groups:
-                          type: array
-                          items: {}
-                      required:
-                        - users
-                        - groups
-                    change:
-                      type: object
-                      properties:
-                        users:
-                          type: array
-                          items: {}
-                        groups:
-                          type: array
-                          items: {}
-                      required:
-                        - users
-                        - groups
-                  required:
-                    - view
-                    - change
               required:
                 - id
                 - correspondent
@@ -449,7 +419,6 @@ paths:
                 - owner
                 - permissions
                 - notes
-                - set_permissions
             examples:
               default:
                 value: >-
@@ -681,7 +650,7 @@ paths:
                   BauMarkt GmbH Kassenzettel 15.07.2023
                   (1).pdf","archived_file_name":"2023-07-15 toom BauMarkt GmbH
                   Kassenzettel 15.07.2023
-                  (1).pdf","owner":3,"permissions":{"view":{"users":[],"groups":[]},"change":{"users":[],"groups":[]}},"notes":[],"set_permissions":{"view":{"users":[],"groups":[]},"change":{"users":[],"groups":[]}}}
+                  (1).pdf","owner":3,"permissions":{"view":{"users":[],"groups":[]},"change":{"users":[],"groups":[]}},"notes":[],"change":{"users":[],"groups":[]}}}
       responses:
         '200':
           description: Success
@@ -1361,74 +1330,13 @@ paths:
                   required:
                     - view
                     - change
-                set_permissions:
-                  type: object
-                  properties:
-                    view:
-                      type: object
-                      properties:
-                        users:
-                          type: array
-                          items: {}
-                        groups:
-                          type: array
-                          items: {}
-                      required:
-                        - users
-                        - groups
-                    change:
-                      type: object
-                      properties:
-                        users:
-                          type: array
-                          items: {}
-                        groups:
-                          type: array
-                          items: {}
-                      required:
-                        - users
-                        - groups
-                  required:
-                    - view
-                    - change
                 permissions_form:
                   type: object
                   properties:
                     owner:
                       type: integer
-                    set_permissions:
-                      type: object
-                      properties:
-                        view:
-                          type: object
-                          properties:
-                            users:
-                              type: array
-                              items: {}
-                            groups:
-                              type: array
-                              items: {}
-                          required:
-                            - users
-                            - groups
-                        change:
-                          type: object
-                          properties:
-                            users:
-                              type: array
-                              items: {}
-                            groups:
-                              type: array
-                              items: {}
-                          required:
-                            - users
-                            - groups
-                      required:
-                        - view
-                        - change
                   required:
                     - owner
-                    - set_permissions
               required:
                 - id
                 - slug
@@ -1439,12 +1347,10 @@ paths:
                 - document_count
                 - owner
                 - permissions
-                - set_permissions
-                - permissions_form
             examples:
               default:
                 value: >-
-                  {"id":2,"slug":"testdocdel","name":"testdocdel","match":"del.*","matching_algorithm":4,"is_insensitive":true,"document_count":0,"owner":3,"permissions":{"view":{"users":[],"groups":[]},"change":{"users":[],"groups":[]}},"set_permissions":{"view":{"users":[],"groups":[]},"change":{"users":[],"groups":[]}},"permissions_form":{"owner":3,"set_permissions":{"view":{"users":[],"groups":[]},"change":{"users":[],"groups":[]}}}}
+                  {"id":2,"slug":"testdocdel","name":"testdocdel","match":"del.*","matching_algorithm":4,"is_insensitive":true,"document_count":0,"owner":3,"permissions":{"view":{"users":[],"groups":[]},"change":{"users":[],"groups":[]}},"permissions_form":{"owner":3,}}
       responses:
         '200':
           description: Success
@@ -1782,80 +1688,13 @@ paths:
                   required:
                     - view
                     - change
-                set_permissions:
-                  type: object
-                  properties:
-                    view:
-                      type: object
-                      properties:
-                        users:
-                          type: array
-                          items:
-                            type: integer
-                        groups:
-                          type: array
-                          items:
-                            type: integer
-                      required:
-                        - users
-                        - groups
-                    change:
-                      type: object
-                      properties:
-                        users:
-                          type: array
-                          items:
-                            type: integer
-                        groups:
-                          type: array
-                          items:
-                            type: integer
-                      required:
-                        - users
-                        - groups
-                  required:
-                    - view
-                    - change
                 permissions_form:
                   type: object
                   properties:
                     owner:
                       type: integer
-                    set_permissions:
-                      type: object
-                      properties:
-                        view:
-                          type: object
-                          properties:
-                            users:
-                              type: array
-                              items:
-                                type: integer
-                            groups:
-                              type: array
-                              items: {}
-                          required:
-                            - users
-                            - groups
-                        change:
-                          type: object
-                          properties:
-                            users:
-                              type: array
-                              items:
-                                type: integer
-                            groups:
-                              type: array
-                              items: {}
-                          required:
-                            - users
-                            - groups
-                      required:
-                        - view
-                        - change
                   required:
                     - owner
-                    - set_permissions
               required:
                 - id
                 - slug
@@ -1867,12 +1706,11 @@ paths:
                 - document_count
                 - owner
                 - permissions
-                - set_permissions
                 - permissions_form
             examples:
               default:
                 value: >-
-                  {"id":1,"slug":"testdir","name":"testdir2","path":"testdirp","match":"","matching_algorithm":6,"is_insensitive":true,"document_count":1,"owner":3,"permissions":{"view":{"users":[3],"groups":[]},"change":{"users":[3],"groups":[]}},"set_permissions":{"view":{"users":[3],"groups":[1]},"change":{"users":[3],"groups":[1]}},"permissions_form":{"owner":3,"set_permissions":{"view":{"users":[3],"groups":[]},"change":{"users":[3],"groups":[]}}}}
+                  {"id":1,"slug":"testdir","name":"testdir2","path":"testdirp","match":"","matching_algorithm":6,"is_insensitive":true,"document_count":1,"owner":3,"permissions":{"view":{"users":[3],"groups":[]},"change":{"users":[3],"groups":[]}},"permissions_form":{"owner":3,}}
       responses:
         '200':
           description: Success
