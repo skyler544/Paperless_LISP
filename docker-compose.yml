@@ -76,6 +76,17 @@ services:
     ports:
       - 8081:8080
 
+  web:
+    image: nginx
+    volumes:
+      - "./web-server/nginx.conf:/etc/nginx/nginx.conf"
+      - "./web-server/static:/usr/share/nginx/html"
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_PORT=80
+
+
 volumes:
   rabbitmq-data: {}
   rabbitmq-log: {}
