@@ -16,44 +16,44 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * UpdateDocumentTypeRequestPermissionsForm
+ * CreateUISettings200Response
  */
 
-@JsonTypeName("UpdateDocumentType_request_permissions_form")
+@JsonTypeName("CreateUISettings_200_response")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
-public class UpdateDocumentTypeRequestPermissionsForm {
+public class CreateUISettings200Response {
 
-  private Integer owner;
+  private Boolean success;
 
-  public UpdateDocumentTypeRequestPermissionsForm() {
+  public CreateUISettings200Response() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public UpdateDocumentTypeRequestPermissionsForm(Integer owner) {
-    this.owner = owner;
+  public CreateUISettings200Response(Boolean success) {
+    this.success = success;
   }
 
-  public UpdateDocumentTypeRequestPermissionsForm owner(Integer owner) {
-    this.owner = owner;
+  public CreateUISettings200Response success(Boolean success) {
+    this.success = success;
     return this;
   }
 
   /**
-   * Get owner
-   * @return owner
+   * Get success
+   * @return success
   */
   @NotNull 
-  @Schema(name = "owner", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("owner")
-  public Integer getOwner() {
-    return owner;
+  @Schema(name = "success", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("success")
+  public Boolean getSuccess() {
+    return success;
   }
 
-  public void setOwner(Integer owner) {
-    this.owner = owner;
+  public void setSuccess(Boolean success) {
+    this.success = success;
   }
 
   @Override
@@ -64,20 +64,20 @@ public class UpdateDocumentTypeRequestPermissionsForm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UpdateDocumentTypeRequestPermissionsForm updateDocumentTypeRequestPermissionsForm = (UpdateDocumentTypeRequestPermissionsForm) o;
-    return Objects.equals(this.owner, updateDocumentTypeRequestPermissionsForm.owner);
+    CreateUISettings200Response createUISettings200Response = (CreateUISettings200Response) o;
+    return Objects.equals(this.success, createUISettings200Response.success);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(owner);
+    return Objects.hash(success);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UpdateDocumentTypeRequestPermissionsForm {\n");
-    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("class CreateUISettings200Response {\n");
+    sb.append("    success: ").append(toIndentedString(success)).append("\n");
     sb.append("}");
     return sb.toString();
   }

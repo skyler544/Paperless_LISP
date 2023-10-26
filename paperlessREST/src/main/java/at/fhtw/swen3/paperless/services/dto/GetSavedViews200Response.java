@@ -2,7 +2,7 @@ package at.fhtw.swen3.paperless.services.dto;
 
 import java.net.URI;
 import java.util.Objects;
-import at.fhtw.swen3.paperless.services.dto.GetStoragePaths200ResponseResultsInner;
+import at.fhtw.swen3.paperless.services.dto.GetSavedViews200ResponseResultsInner;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -20,33 +20,33 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * GetStoragePaths200Response
+ * GetSavedViews200Response
  */
 
-@JsonTypeName("GetStoragePaths_200_response")
+@JsonTypeName("GetSavedViews_200_response")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
-public class GetStoragePaths200Response {
+public class GetSavedViews200Response {
 
   private Integer count;
 
-  private Boolean next;
+  private Integer next;
 
-  private Boolean previous;
+  private Integer previous;
 
   @Valid
   private List<Integer> all = new ArrayList<>();
 
   @Valid
-  private List<@Valid GetStoragePaths200ResponseResultsInner> results = new ArrayList<>();
+  private List<@Valid GetSavedViews200ResponseResultsInner> results = new ArrayList<>();
 
-  public GetStoragePaths200Response() {
+  public GetSavedViews200Response() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public GetStoragePaths200Response(Integer count, Boolean next, Boolean previous, List<Integer> all, List<@Valid GetStoragePaths200ResponseResultsInner> results) {
+  public GetSavedViews200Response(Integer count, Integer next, Integer previous, List<Integer> all, List<@Valid GetSavedViews200ResponseResultsInner> results) {
     this.count = count;
     this.next = next;
     this.previous = previous;
@@ -54,7 +54,7 @@ public class GetStoragePaths200Response {
     this.results = results;
   }
 
-  public GetStoragePaths200Response count(Integer count) {
+  public GetSavedViews200Response count(Integer count) {
     this.count = count;
     return this;
   }
@@ -74,7 +74,7 @@ public class GetStoragePaths200Response {
     this.count = count;
   }
 
-  public GetStoragePaths200Response next(Boolean next) {
+  public GetSavedViews200Response next(Integer next) {
     this.next = next;
     return this;
   }
@@ -86,15 +86,15 @@ public class GetStoragePaths200Response {
   @NotNull 
   @Schema(name = "next", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("next")
-  public Boolean getNext() {
+  public Integer getNext() {
     return next;
   }
 
-  public void setNext(Boolean next) {
+  public void setNext(Integer next) {
     this.next = next;
   }
 
-  public GetStoragePaths200Response previous(Boolean previous) {
+  public GetSavedViews200Response previous(Integer previous) {
     this.previous = previous;
     return this;
   }
@@ -106,20 +106,20 @@ public class GetStoragePaths200Response {
   @NotNull 
   @Schema(name = "previous", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("previous")
-  public Boolean getPrevious() {
+  public Integer getPrevious() {
     return previous;
   }
 
-  public void setPrevious(Boolean previous) {
+  public void setPrevious(Integer previous) {
     this.previous = previous;
   }
 
-  public GetStoragePaths200Response all(List<Integer> all) {
+  public GetSavedViews200Response all(List<Integer> all) {
     this.all = all;
     return this;
   }
 
-  public GetStoragePaths200Response addAllItem(Integer allItem) {
+  public GetSavedViews200Response addAllItem(Integer allItem) {
     if (this.all == null) {
       this.all = new ArrayList<>();
     }
@@ -142,12 +142,12 @@ public class GetStoragePaths200Response {
     this.all = all;
   }
 
-  public GetStoragePaths200Response results(List<@Valid GetStoragePaths200ResponseResultsInner> results) {
+  public GetSavedViews200Response results(List<@Valid GetSavedViews200ResponseResultsInner> results) {
     this.results = results;
     return this;
   }
 
-  public GetStoragePaths200Response addResultsItem(GetStoragePaths200ResponseResultsInner resultsItem) {
+  public GetSavedViews200Response addResultsItem(GetSavedViews200ResponseResultsInner resultsItem) {
     if (this.results == null) {
       this.results = new ArrayList<>();
     }
@@ -162,11 +162,11 @@ public class GetStoragePaths200Response {
   @NotNull @Valid 
   @Schema(name = "results", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("results")
-  public List<@Valid GetStoragePaths200ResponseResultsInner> getResults() {
+  public List<@Valid GetSavedViews200ResponseResultsInner> getResults() {
     return results;
   }
 
-  public void setResults(List<@Valid GetStoragePaths200ResponseResultsInner> results) {
+  public void setResults(List<@Valid GetSavedViews200ResponseResultsInner> results) {
     this.results = results;
   }
 
@@ -178,12 +178,12 @@ public class GetStoragePaths200Response {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GetStoragePaths200Response getStoragePaths200Response = (GetStoragePaths200Response) o;
-    return Objects.equals(this.count, getStoragePaths200Response.count) &&
-        Objects.equals(this.next, getStoragePaths200Response.next) &&
-        Objects.equals(this.previous, getStoragePaths200Response.previous) &&
-        Objects.equals(this.all, getStoragePaths200Response.all) &&
-        Objects.equals(this.results, getStoragePaths200Response.results);
+    GetSavedViews200Response getSavedViews200Response = (GetSavedViews200Response) o;
+    return Objects.equals(this.count, getSavedViews200Response.count) &&
+        Objects.equals(this.next, getSavedViews200Response.next) &&
+        Objects.equals(this.previous, getSavedViews200Response.previous) &&
+        Objects.equals(this.all, getSavedViews200Response.all) &&
+        Objects.equals(this.results, getSavedViews200Response.results);
   }
 
   @Override
@@ -194,7 +194,7 @@ public class GetStoragePaths200Response {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class GetStoragePaths200Response {\n");
+    sb.append("class GetSavedViews200Response {\n");
     sb.append("    count: ").append(toIndentedString(count)).append("\n");
     sb.append("    next: ").append(toIndentedString(next)).append("\n");
     sb.append("    previous: ").append(toIndentedString(previous)).append("\n");

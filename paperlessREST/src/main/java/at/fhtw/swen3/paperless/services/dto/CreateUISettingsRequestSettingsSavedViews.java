@@ -16,44 +16,44 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * UpdateDocumentTypeRequestPermissionsForm
+ * CreateUISettingsRequestSettingsSavedViews
  */
 
-@JsonTypeName("UpdateDocumentType_request_permissions_form")
+@JsonTypeName("CreateUISettings_request_settings_saved_views")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
-public class UpdateDocumentTypeRequestPermissionsForm {
+public class CreateUISettingsRequestSettingsSavedViews {
 
-  private Integer owner;
+  private Boolean warnOnUnsavedChange;
 
-  public UpdateDocumentTypeRequestPermissionsForm() {
+  public CreateUISettingsRequestSettingsSavedViews() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public UpdateDocumentTypeRequestPermissionsForm(Integer owner) {
-    this.owner = owner;
+  public CreateUISettingsRequestSettingsSavedViews(Boolean warnOnUnsavedChange) {
+    this.warnOnUnsavedChange = warnOnUnsavedChange;
   }
 
-  public UpdateDocumentTypeRequestPermissionsForm owner(Integer owner) {
-    this.owner = owner;
+  public CreateUISettingsRequestSettingsSavedViews warnOnUnsavedChange(Boolean warnOnUnsavedChange) {
+    this.warnOnUnsavedChange = warnOnUnsavedChange;
     return this;
   }
 
   /**
-   * Get owner
-   * @return owner
+   * Get warnOnUnsavedChange
+   * @return warnOnUnsavedChange
   */
   @NotNull 
-  @Schema(name = "owner", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("owner")
-  public Integer getOwner() {
-    return owner;
+  @Schema(name = "warn_on_unsaved_change", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("warn_on_unsaved_change")
+  public Boolean getWarnOnUnsavedChange() {
+    return warnOnUnsavedChange;
   }
 
-  public void setOwner(Integer owner) {
-    this.owner = owner;
+  public void setWarnOnUnsavedChange(Boolean warnOnUnsavedChange) {
+    this.warnOnUnsavedChange = warnOnUnsavedChange;
   }
 
   @Override
@@ -64,20 +64,20 @@ public class UpdateDocumentTypeRequestPermissionsForm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UpdateDocumentTypeRequestPermissionsForm updateDocumentTypeRequestPermissionsForm = (UpdateDocumentTypeRequestPermissionsForm) o;
-    return Objects.equals(this.owner, updateDocumentTypeRequestPermissionsForm.owner);
+    CreateUISettingsRequestSettingsSavedViews createUISettingsRequestSettingsSavedViews = (CreateUISettingsRequestSettingsSavedViews) o;
+    return Objects.equals(this.warnOnUnsavedChange, createUISettingsRequestSettingsSavedViews.warnOnUnsavedChange);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(owner);
+    return Objects.hash(warnOnUnsavedChange);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UpdateDocumentTypeRequestPermissionsForm {\n");
-    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("class CreateUISettingsRequestSettingsSavedViews {\n");
+    sb.append("    warnOnUnsavedChange: ").append(toIndentedString(warnOnUnsavedChange)).append("\n");
     sb.append("}");
     return sb.toString();
   }

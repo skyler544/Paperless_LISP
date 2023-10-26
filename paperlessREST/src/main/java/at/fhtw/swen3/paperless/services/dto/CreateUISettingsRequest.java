@@ -2,6 +2,7 @@ package at.fhtw.swen3.paperless.services.dto;
 
 import java.net.URI;
 import java.util.Objects;
+import at.fhtw.swen3.paperless.services.dto.CreateUISettingsRequestSettings;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -16,44 +17,44 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * UpdateDocumentTypeRequestPermissionsForm
+ * CreateUISettingsRequest
  */
 
-@JsonTypeName("UpdateDocumentType_request_permissions_form")
+@JsonTypeName("CreateUISettings_request")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
-public class UpdateDocumentTypeRequestPermissionsForm {
+public class CreateUISettingsRequest {
 
-  private Integer owner;
+  private CreateUISettingsRequestSettings settings;
 
-  public UpdateDocumentTypeRequestPermissionsForm() {
+  public CreateUISettingsRequest() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public UpdateDocumentTypeRequestPermissionsForm(Integer owner) {
-    this.owner = owner;
+  public CreateUISettingsRequest(CreateUISettingsRequestSettings settings) {
+    this.settings = settings;
   }
 
-  public UpdateDocumentTypeRequestPermissionsForm owner(Integer owner) {
-    this.owner = owner;
+  public CreateUISettingsRequest settings(CreateUISettingsRequestSettings settings) {
+    this.settings = settings;
     return this;
   }
 
   /**
-   * Get owner
-   * @return owner
+   * Get settings
+   * @return settings
   */
-  @NotNull 
-  @Schema(name = "owner", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("owner")
-  public Integer getOwner() {
-    return owner;
+  @NotNull @Valid 
+  @Schema(name = "settings", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("settings")
+  public CreateUISettingsRequestSettings getSettings() {
+    return settings;
   }
 
-  public void setOwner(Integer owner) {
-    this.owner = owner;
+  public void setSettings(CreateUISettingsRequestSettings settings) {
+    this.settings = settings;
   }
 
   @Override
@@ -64,20 +65,20 @@ public class UpdateDocumentTypeRequestPermissionsForm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UpdateDocumentTypeRequestPermissionsForm updateDocumentTypeRequestPermissionsForm = (UpdateDocumentTypeRequestPermissionsForm) o;
-    return Objects.equals(this.owner, updateDocumentTypeRequestPermissionsForm.owner);
+    CreateUISettingsRequest createUISettingsRequest = (CreateUISettingsRequest) o;
+    return Objects.equals(this.settings, createUISettingsRequest.settings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(owner);
+    return Objects.hash(settings);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UpdateDocumentTypeRequestPermissionsForm {\n");
-    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("class CreateUISettingsRequest {\n");
+    sb.append("    settings: ").append(toIndentedString(settings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

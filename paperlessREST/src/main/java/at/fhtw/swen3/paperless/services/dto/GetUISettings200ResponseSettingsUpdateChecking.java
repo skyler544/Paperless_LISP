@@ -16,44 +16,44 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * UpdateDocumentTypeRequestPermissionsForm
+ * GetUISettings200ResponseSettingsUpdateChecking
  */
 
-@JsonTypeName("UpdateDocumentType_request_permissions_form")
+@JsonTypeName("GetUISettings_200_response_settings_update_checking")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
-public class UpdateDocumentTypeRequestPermissionsForm {
+public class GetUISettings200ResponseSettingsUpdateChecking {
 
-  private Integer owner;
+  private String backendSetting;
 
-  public UpdateDocumentTypeRequestPermissionsForm() {
+  public GetUISettings200ResponseSettingsUpdateChecking() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public UpdateDocumentTypeRequestPermissionsForm(Integer owner) {
-    this.owner = owner;
+  public GetUISettings200ResponseSettingsUpdateChecking(String backendSetting) {
+    this.backendSetting = backendSetting;
   }
 
-  public UpdateDocumentTypeRequestPermissionsForm owner(Integer owner) {
-    this.owner = owner;
+  public GetUISettings200ResponseSettingsUpdateChecking backendSetting(String backendSetting) {
+    this.backendSetting = backendSetting;
     return this;
   }
 
   /**
-   * Get owner
-   * @return owner
+   * Get backendSetting
+   * @return backendSetting
   */
   @NotNull 
-  @Schema(name = "owner", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("owner")
-  public Integer getOwner() {
-    return owner;
+  @Schema(name = "backend_setting", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("backend_setting")
+  public String getBackendSetting() {
+    return backendSetting;
   }
 
-  public void setOwner(Integer owner) {
-    this.owner = owner;
+  public void setBackendSetting(String backendSetting) {
+    this.backendSetting = backendSetting;
   }
 
   @Override
@@ -64,20 +64,20 @@ public class UpdateDocumentTypeRequestPermissionsForm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UpdateDocumentTypeRequestPermissionsForm updateDocumentTypeRequestPermissionsForm = (UpdateDocumentTypeRequestPermissionsForm) o;
-    return Objects.equals(this.owner, updateDocumentTypeRequestPermissionsForm.owner);
+    GetUISettings200ResponseSettingsUpdateChecking getUISettings200ResponseSettingsUpdateChecking = (GetUISettings200ResponseSettingsUpdateChecking) o;
+    return Objects.equals(this.backendSetting, getUISettings200ResponseSettingsUpdateChecking.backendSetting);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(owner);
+    return Objects.hash(backendSetting);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UpdateDocumentTypeRequestPermissionsForm {\n");
-    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("class GetUISettings200ResponseSettingsUpdateChecking {\n");
+    sb.append("    backendSetting: ").append(toIndentedString(backendSetting)).append("\n");
     sb.append("}");
     return sb.toString();
   }

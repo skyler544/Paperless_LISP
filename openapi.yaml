@@ -3,6 +3,195 @@ info:
   title: Paperless Rest Server
   version: '1.0'
 paths:
+  /api/saved_views:
+    get:
+      tags:
+        - Config
+      operationId: GetSavedViews
+      parameters:
+        - name: page
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: page_size
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: integer
+                  previous:
+                    type: integer
+                  all:
+                    type: array
+                    items:
+                      type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        show_on_dashboard:
+                          type: boolean
+                        show_in_sidebar:
+                          type: boolean
+                        sort_field:
+                          type: string
+                        sort_reverse:
+                          type: boolean
+                        filter_rules:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              rule_type:
+                                type: integer
+                              value:
+                                type: string
+                            required:
+                              - rule_type
+                              - value
+                        owner:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            password:
+                              type: string
+                            last_login:
+                              type: string
+                            is_superuser:
+                              type: boolean
+                            username:
+                              type: string
+                            first_name:
+                              type: string
+                            last_name:
+                              type: string
+                            email:
+                              type: string
+                            is_staff:
+                              type: boolean
+                            is_active:
+                              type: boolean
+                            date_joined:
+                              type: string
+                            groups:
+                              type: array
+                              items: {}
+                            user_permissions:
+                              type: array
+                              items:
+                                type: integer
+                          required:
+                            - id
+                            - password
+                            - last_login
+                            - is_superuser
+                            - username
+                            - first_name
+                            - last_name
+                            - email
+                            - is_staff
+                            - is_active
+                            - date_joined
+                            - groups
+                            - user_permissions
+                        user_can_change:
+                          type: boolean
+                      required:
+                        - id
+                        - name
+                        - show_on_dashboard
+                        - show_in_sidebar
+                        - sort_field
+                        - sort_reverse
+                        - filter_rules
+                        - owner
+                        - user_can_change
+                required:
+                  - count
+                  - next
+                  - previous
+                  - all
+                  - results
+              examples:
+                default:
+                  value: >-
+                    {"count":6,"next":null,"previous":null,"all":[8,17,7,4,11,15],"results":[{"id":8,"name":"Correspondent
+                    2","show_on_dashboard":false,"show_in_sidebar":false,"sort_field":"created","sort_reverse":true,"filter_rules":[{"rule_type":3,"value":"2"}],"owner":{"id":2,"password":"pbkdf2_sha256$390000$ElHGEQzOIS3Gv2wu8YDbSt$bWASwmUfHtFMZ6+rG+4rrrtejjC9RiwXm6xMi0bxMZo=","last_login":"2023-04-26T09:08:14Z","is_superuser":false,"username":"testuser","first_name":"","last_name":"","email":"test@user.com","is_staff":true,"is_active":true,"date_joined":"2021-01-03T07:37:04Z","groups":[],"user_permissions":[57,58,59,60,5,6,7,8,1,2,3,4,9,10,11,12,61,62,63,64,65,66,67,68,13,14,15,16,117,118,119,120,121,122,123,124,113,114,115,116,77,78,79,80,85,86,87,88,69,70,71,72,81,82,83,84,73,74,75,76,33,34,35,36,21,22,23,24,37,38,39,40,89,90,91,92,29,30,31,32,109,137,110,138,111,139,112,140,105,106,107,108,41,42,43,44,45,46,47,48,93,94,95,96,25,26,27,28,101,102,103,104,97,98,99,100,125,126,127,128,129,130,131,132,49,50,51,52,53,54,55,56,133,134,135,136,17,18,19,20]},"user_can_change":true},{"id":17,"name":"In
+                    the Last
+                    Month","show_on_dashboard":false,"show_in_sidebar":false,"sort_field":"created","sort_reverse":true,"filter_rules":[{"rule_type":20,"value":"created:[-1
+                    month to
+                    now]"}],"owner":{"id":2,"password":"pbkdf2_sha256$390000$ElHGEQzOIS3Gv2wu8YDbSt$bWASwmUfHtFMZ6+rG+4rrrtejjC9RiwXm6xMi0bxMZo=","last_login":"2023-04-26T09:08:14Z","is_superuser":false,"username":"testuser","first_name":"","last_name":"","email":"test@user.com","is_staff":true,"is_active":true,"date_joined":"2021-01-03T07:37:04Z","groups":[],"user_permissions":[57,58,59,60,5,6,7,8,1,2,3,4,9,10,11,12,61,62,63,64,65,66,67,68,13,14,15,16,117,118,119,120,121,122,123,124,113,114,115,116,77,78,79,80,85,86,87,88,69,70,71,72,81,82,83,84,73,74,75,76,33,34,35,36,21,22,23,24,37,38,39,40,89,90,91,92,29,30,31,32,109,137,110,138,111,139,112,140,105,106,107,108,41,42,43,44,45,46,47,48,93,94,95,96,25,26,27,28,101,102,103,104,97,98,99,100,125,126,127,128,129,130,131,132,49,50,51,52,53,54,55,56,133,134,135,136,17,18,19,20]},"user_can_change":true},{"id":7,"name":"Inbox","show_on_dashboard":true,"show_in_sidebar":true,"sort_field":"created","sort_reverse":true,"filter_rules":[{"rule_type":6,"value":"9"}],"owner":{"id":2,"password":"pbkdf2_sha256$390000$ElHGEQzOIS3Gv2wu8YDbSt$bWASwmUfHtFMZ6+rG+4rrrtejjC9RiwXm6xMi0bxMZo=","last_login":"2023-04-26T09:08:14Z","is_superuser":false,"username":"testuser","first_name":"","last_name":"","email":"test@user.com","is_staff":true,"is_active":true,"date_joined":"2021-01-03T07:37:04Z","groups":[],"user_permissions":[57,58,59,60,5,6,7,8,1,2,3,4,9,10,11,12,61,62,63,64,65,66,67,68,13,14,15,16,117,118,119,120,121,122,123,124,113,114,115,116,77,78,79,80,85,86,87,88,69,70,71,72,81,82,83,84,73,74,75,76,33,34,35,36,21,22,23,24,37,38,39,40,89,90,91,92,29,30,31,32,109,137,110,138,111,139,112,140,105,106,107,108,41,42,43,44,45,46,47,48,93,94,95,96,25,26,27,28,101,102,103,104,97,98,99,100,125,126,127,128,129,130,131,132,49,50,51,52,53,54,55,56,133,134,135,136,17,18,19,20]},"user_can_change":true},{"id":4,"name":"Recently
+                    Added","show_on_dashboard":true,"show_in_sidebar":true,"sort_field":"created","sort_reverse":true,"filter_rules":[],"owner":{"id":2,"password":"pbkdf2_sha256$390000$ElHGEQzOIS3Gv2wu8YDbSt$bWASwmUfHtFMZ6+rG+4rrrtejjC9RiwXm6xMi0bxMZo=","last_login":"2023-04-26T09:08:14Z","is_superuser":false,"username":"testuser","first_name":"","last_name":"","email":"test@user.com","is_staff":true,"is_active":true,"date_joined":"2021-01-03T07:37:04Z","groups":[],"user_permissions":[57,58,59,60,5,6,7,8,1,2,3,4,9,10,11,12,61,62,63,64,65,66,67,68,13,14,15,16,117,118,119,120,121,122,123,124,113,114,115,116,77,78,79,80,85,86,87,88,69,70,71,72,81,82,83,84,73,74,75,76,33,34,35,36,21,22,23,24,37,38,39,40,89,90,91,92,29,30,31,32,109,137,110,138,111,139,112,140,105,106,107,108,41,42,43,44,45,46,47,48,93,94,95,96,25,26,27,28,101,102,103,104,97,98,99,100,125,126,127,128,129,130,131,132,49,50,51,52,53,54,55,56,133,134,135,136,17,18,19,20]},"user_can_change":true},{"id":11,"name":"Tag:
+                    Another Sample
+                    Tag","show_on_dashboard":false,"show_in_sidebar":true,"sort_field":"created","sort_reverse":true,"filter_rules":[{"rule_type":6,"value":"4"}],"owner":{"id":2,"password":"pbkdf2_sha256$390000$ElHGEQzOIS3Gv2wu8YDbSt$bWASwmUfHtFMZ6+rG+4rrrtejjC9RiwXm6xMi0bxMZo=","last_login":"2023-04-26T09:08:14Z","is_superuser":false,"username":"testuser","first_name":"","last_name":"","email":"test@user.com","is_staff":true,"is_active":true,"date_joined":"2021-01-03T07:37:04Z","groups":[],"user_permissions":[57,58,59,60,5,6,7,8,1,2,3,4,9,10,11,12,61,62,63,64,65,66,67,68,13,14,15,16,117,118,119,120,121,122,123,124,113,114,115,116,77,78,79,80,85,86,87,88,69,70,71,72,81,82,83,84,73,74,75,76,33,34,35,36,21,22,23,24,37,38,39,40,89,90,91,92,29,30,31,32,109,137,110,138,111,139,112,140,105,106,107,108,41,42,43,44,45,46,47,48,93,94,95,96,25,26,27,28,101,102,103,104,97,98,99,100,125,126,127,128,129,130,131,132,49,50,51,52,53,54,55,56,133,134,135,136,17,18,19,20]},"user_can_change":true},{"id":15,"name":"View
+                    ASN not
+                    empty","show_on_dashboard":false,"show_in_sidebar":false,"sort_field":"created","sort_reverse":true,"filter_rules":[{"rule_type":18,"value":"false"}],"owner":{"id":2,"password":"pbkdf2_sha256$390000$ElHGEQzOIS3Gv2wu8YDbSt$bWASwmUfHtFMZ6+rG+4rrrtejjC9RiwXm6xMi0bxMZo=","last_login":"2023-04-26T09:08:14Z","is_superuser":false,"username":"testuser","first_name":"","last_name":"","email":"test@user.com","is_staff":true,"is_active":true,"date_joined":"2021-01-03T07:37:04Z","groups":[],"user_permissions":[57,58,59,60,5,6,7,8,1,2,3,4,9,10,11,12,61,62,63,64,65,66,67,68,13,14,15,16,117,118,119,120,121,122,123,124,113,114,115,116,77,78,79,80,85,86,87,88,69,70,71,72,81,82,83,84,73,74,75,76,33,34,35,36,21,22,23,24,37,38,39,40,89,90,91,92,29,30,31,32,109,137,110,138,111,139,112,140,105,106,107,108,41,42,43,44,45,46,47,48,93,94,95,96,25,26,27,28,101,102,103,104,97,98,99,100,125,126,127,128,129,130,131,132,49,50,51,52,53,54,55,56,133,134,135,136,17,18,19,20]},"user_can_change":true}]}
+    post:
+      tags:
+        - Config
+      operationId: CreateSavedViews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                show_on_dashboard:
+                  type: boolean
+                show_in_sidebar:
+                  type: boolean
+                filter_rules:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      rule_type:
+                        type: integer
+                      value:
+                        type: string
+                    required:
+                      - rule_type
+                      - value
+                sort_reverse:
+                  type: boolean
+                sort_field:
+                  type: string
+              required:
+                - name
+                - show_on_dashboard
+                - show_in_sidebar
+                - filter_rules
+                - sort_reverse
+                - sort_field
+            examples:
+              default:
+                value: >-
+                  {"name":"test","show_on_dashboard":true,"show_in_sidebar":true,"filter_rules":[{"rule_type":19,"value":"test"},{"rule_type":28,"value":"1"},{"rule_type":30,"value":"1"}],"sort_reverse":true,"sort_field":"created"}
+      responses:
+        '200':
+          description: Success
   /api/documents:
     get:
       tags:
@@ -1769,6 +1958,201 @@ paths:
       responses:
         '204':
           description: Success
+  /api/ui_settings:
+    get:
+      tags:
+        - Config
+      operationId: GetUISettings
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  display_name:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      username:
+                        type: string
+                      is_superuser:
+                        type: boolean
+                      groups:
+                        type: array
+                        items: {}
+                    required:
+                      - id
+                      - username
+                      - is_superuser
+                      - groups
+                  settings:
+                    type: object
+                    properties:
+                      update_checking:
+                        type: object
+                        properties:
+                          backend_setting:
+                            type: string
+                        required:
+                          - backend_setting
+                    required:
+                      - update_checking
+                  permissions:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - display_name
+                  - user
+                  - settings
+                  - permissions
+              examples:
+                default:
+                  value: >-
+                    {"user":{"id":3,"username":"demo","is_superuser":true,"groups":[]},"settings":{"update_checking":{"backend_setting":"default"}},"permissions":["view_savedviewfilterrule","delete_token","view_session","add_correspondent","add_savedview","view_taskresult","delete_savedviewfilterrule","change_user","view_logentry","change_documenttype","change_permission","change_userobjectpermission","view_tokenproxy","view_groupobjectpermission","view_note","change_mailrule","delete_group","add_uisettings","add_session","change_mailaccount","delete_note","change_processedmail","add_taskresult","view_user","view_document","view_paperlesstask","view_contenttype","delete_processedmail","change_uisettings","change_tag","change_paperlesstask","change_groupobjectpermission","change_token","add_mailrule","delete_tag","view_token","view_tag","change_document","delete_document","add_userobjectpermission","add_documenttype","delete_uisettings","delete_documenttype","view_correspondent","view_chordcounter","view_group","add_processedmail","delete_permission","add_contenttype","view_storagepath","add_note","view_documenttype","change_logentry","add_token","view_permission","delete_userobjectpermission","change_correspondent","view_uisettings","change_contenttype","change_tokenproxy","delete_groupobjectpermission","add_permission","delete_savedview","view_savedview","view_processedmail","add_tag","add_log","add_group","view_groupresult","add_user","change_group","change_savedview","add_storagepath","delete_mailrule","view_userobjectpermission","delete_contenttype","add_chordcounter","add_groupresult","change_storagepath","change_taskresult","view_log","delete_storagepath","add_document","delete_taskresult","delete_user","delete_paperlesstask","change_savedviewfilterrule","delete_correspondent","delete_session","delete_logentry","delete_tokenproxy","view_mailaccount","change_chordcounter","delete_mailaccount","add_logentry","view_mailrule","delete_groupresult","add_groupobjectpermission","add_mailaccount","delete_log","change_log","delete_chordcounter","change_note","add_savedviewfilterrule","change_groupresult","add_tokenproxy","add_paperlesstask","change_session"]}
+    post:
+      tags:
+        - Config
+      operationId: CreateUISettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                settings:
+                  type: object
+                  properties:
+                    update_checking:
+                      type: object
+                      properties:
+                        backend_setting:
+                          type: string
+                        enabled:
+                          type: boolean
+                      required:
+                        - backend_setting
+                        - enabled
+                    tour_complete:
+                      type: boolean
+                    bulk_edit:
+                      type: object
+                      properties:
+                        apply_on_close:
+                          type: boolean
+                        confirmation_dialogs:
+                          type: boolean
+                      required:
+                        - apply_on_close
+                        - confirmation_dialogs
+                    documentListSize:
+                      type: integer
+                    slim_sidebar:
+                      type: boolean
+                    dark_mode:
+                      type: object
+                      properties:
+                        use_system:
+                          type: boolean
+                        enabled:
+                          type: string
+                        thumb_inverted:
+                          type: string
+                      required:
+                        - use_system
+                        - enabled
+                        - thumb_inverted
+                    theme:
+                      type: object
+                      properties:
+                        color:
+                          type: string
+                      required:
+                        - color
+                    document_details:
+                      type: object
+                      properties:
+                        native_pdf_viewer:
+                          type: boolean
+                      required:
+                        - native_pdf_viewer
+                    date_display:
+                      type: object
+                      properties:
+                        date_locale:
+                          type: string
+                        date_format:
+                          type: string
+                      required:
+                        - date_locale
+                        - date_format
+                    notifications:
+                      type: object
+                      properties:
+                        consumer_new_documents:
+                          type: boolean
+                        consumer_success:
+                          type: boolean
+                        consumer_failed:
+                          type: boolean
+                        consumer_suppress_on_dashboard:
+                          type: boolean
+                      required:
+                        - consumer_new_documents
+                        - consumer_success
+                        - consumer_failed
+                        - consumer_suppress_on_dashboard
+                    notes_enabled:
+                      type: boolean
+                    saved_views:
+                      type: object
+                      properties:
+                        warn_on_unsaved_change:
+                          type: boolean
+                      required:
+                        - warn_on_unsaved_change
+                    language:
+                      type: string
+                  required:
+                    - update_checking
+                    - tour_complete
+                    - bulk_edit
+                    - documentListSize
+                    - slim_sidebar
+                    - dark_mode
+                    - theme
+                    - document_details
+                    - date_display
+                    - notifications
+                    - notes_enabled
+                    - saved_views
+                    - language
+              required:
+                - settings
+            examples:
+              default:
+                value: >-
+                  {"settings":{"update_checking":{"backend_setting":"default","enabled":false},"tour_complete":true,"bulk_edit":{"apply_on_close":false,"confirmation_dialogs":true},"documentListSize":50,"slim_sidebar":false,"dark_mode":{"use_system":true,"enabled":"false","thumb_inverted":"true"},"theme":{"color":"#45d058"},"document_details":{"native_pdf_viewer":false},"date_display":{"date_locale":"","date_format":"mediumDate"},"notifications":{"consumer_new_documents":true,"consumer_success":true,"consumer_failed":true,"consumer_suppress_on_dashboard":true},"notes_enabled":true,"saved_views":{"warn_on_unsaved_change":true},"language":""}}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                required:
+                  - success
+              examples:
+                default:
+                  value: '{"success":true}'
   /ws/status:
     get:
       tags:

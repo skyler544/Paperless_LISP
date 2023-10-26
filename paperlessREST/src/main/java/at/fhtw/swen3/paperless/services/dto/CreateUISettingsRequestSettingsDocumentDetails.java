@@ -16,44 +16,44 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * UpdateDocumentTypeRequestPermissionsForm
+ * CreateUISettingsRequestSettingsDocumentDetails
  */
 
-@JsonTypeName("UpdateDocumentType_request_permissions_form")
+@JsonTypeName("CreateUISettings_request_settings_document_details")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
-public class UpdateDocumentTypeRequestPermissionsForm {
+public class CreateUISettingsRequestSettingsDocumentDetails {
 
-  private Integer owner;
+  private Boolean nativePdfViewer;
 
-  public UpdateDocumentTypeRequestPermissionsForm() {
+  public CreateUISettingsRequestSettingsDocumentDetails() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public UpdateDocumentTypeRequestPermissionsForm(Integer owner) {
-    this.owner = owner;
+  public CreateUISettingsRequestSettingsDocumentDetails(Boolean nativePdfViewer) {
+    this.nativePdfViewer = nativePdfViewer;
   }
 
-  public UpdateDocumentTypeRequestPermissionsForm owner(Integer owner) {
-    this.owner = owner;
+  public CreateUISettingsRequestSettingsDocumentDetails nativePdfViewer(Boolean nativePdfViewer) {
+    this.nativePdfViewer = nativePdfViewer;
     return this;
   }
 
   /**
-   * Get owner
-   * @return owner
+   * Get nativePdfViewer
+   * @return nativePdfViewer
   */
   @NotNull 
-  @Schema(name = "owner", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("owner")
-  public Integer getOwner() {
-    return owner;
+  @Schema(name = "native_pdf_viewer", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("native_pdf_viewer")
+  public Boolean getNativePdfViewer() {
+    return nativePdfViewer;
   }
 
-  public void setOwner(Integer owner) {
-    this.owner = owner;
+  public void setNativePdfViewer(Boolean nativePdfViewer) {
+    this.nativePdfViewer = nativePdfViewer;
   }
 
   @Override
@@ -64,20 +64,20 @@ public class UpdateDocumentTypeRequestPermissionsForm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UpdateDocumentTypeRequestPermissionsForm updateDocumentTypeRequestPermissionsForm = (UpdateDocumentTypeRequestPermissionsForm) o;
-    return Objects.equals(this.owner, updateDocumentTypeRequestPermissionsForm.owner);
+    CreateUISettingsRequestSettingsDocumentDetails createUISettingsRequestSettingsDocumentDetails = (CreateUISettingsRequestSettingsDocumentDetails) o;
+    return Objects.equals(this.nativePdfViewer, createUISettingsRequestSettingsDocumentDetails.nativePdfViewer);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(owner);
+    return Objects.hash(nativePdfViewer);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UpdateDocumentTypeRequestPermissionsForm {\n");
-    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("class CreateUISettingsRequestSettingsDocumentDetails {\n");
+    sb.append("    nativePdfViewer: ").append(toIndentedString(nativePdfViewer)).append("\n");
     sb.append("}");
     return sb.toString();
   }

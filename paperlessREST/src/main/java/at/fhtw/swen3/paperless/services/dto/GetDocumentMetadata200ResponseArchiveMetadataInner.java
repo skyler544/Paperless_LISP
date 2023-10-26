@@ -20,7 +20,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("GetDocumentMetadata_200_response_archive_metadata_inner")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-19T14:47:55.426414Z[Etc/UTC]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
 public class GetDocumentMetadata200ResponseArchiveMetadataInner {
 
   private String namespace;

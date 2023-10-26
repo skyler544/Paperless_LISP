@@ -16,44 +16,44 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * UpdateDocumentTypeRequestPermissionsForm
+ * CreateUISettingsRequestSettingsTheme
  */
 
-@JsonTypeName("UpdateDocumentType_request_permissions_form")
+@JsonTypeName("CreateUISettings_request_settings_theme")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
-public class UpdateDocumentTypeRequestPermissionsForm {
+public class CreateUISettingsRequestSettingsTheme {
 
-  private Integer owner;
+  private String color;
 
-  public UpdateDocumentTypeRequestPermissionsForm() {
+  public CreateUISettingsRequestSettingsTheme() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public UpdateDocumentTypeRequestPermissionsForm(Integer owner) {
-    this.owner = owner;
+  public CreateUISettingsRequestSettingsTheme(String color) {
+    this.color = color;
   }
 
-  public UpdateDocumentTypeRequestPermissionsForm owner(Integer owner) {
-    this.owner = owner;
+  public CreateUISettingsRequestSettingsTheme color(String color) {
+    this.color = color;
     return this;
   }
 
   /**
-   * Get owner
-   * @return owner
+   * Get color
+   * @return color
   */
   @NotNull 
-  @Schema(name = "owner", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("owner")
-  public Integer getOwner() {
-    return owner;
+  @Schema(name = "color", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("color")
+  public String getColor() {
+    return color;
   }
 
-  public void setOwner(Integer owner) {
-    this.owner = owner;
+  public void setColor(String color) {
+    this.color = color;
   }
 
   @Override
@@ -64,20 +64,20 @@ public class UpdateDocumentTypeRequestPermissionsForm {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UpdateDocumentTypeRequestPermissionsForm updateDocumentTypeRequestPermissionsForm = (UpdateDocumentTypeRequestPermissionsForm) o;
-    return Objects.equals(this.owner, updateDocumentTypeRequestPermissionsForm.owner);
+    CreateUISettingsRequestSettingsTheme createUISettingsRequestSettingsTheme = (CreateUISettingsRequestSettingsTheme) o;
+    return Objects.equals(this.color, createUISettingsRequestSettingsTheme.color);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(owner);
+    return Objects.hash(color);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UpdateDocumentTypeRequestPermissionsForm {\n");
-    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("class CreateUISettingsRequestSettingsTheme {\n");
+    sb.append("    color: ").append(toIndentedString(color)).append("\n");
     sb.append("}");
     return sb.toString();
   }

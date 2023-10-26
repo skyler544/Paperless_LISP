@@ -24,7 +24,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("UpdateDocument_request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-19T14:47:55.426414Z[Etc/UTC]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
 public class UpdateDocumentRequest {
 
   private Integer id;
