@@ -289,7 +289,7 @@ public interface ConfigApi {
 
 
     /**
-     * GET /api/ui_settings
+     * GET /api/ui_settings/
      *
      * @return Success (status code 200)
      */
@@ -304,7 +304,7 @@ public interface ConfigApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/api/ui_settings",
+        value = "/api/ui_settings/",
         produces = { "application/json" }
     )
     
@@ -320,7 +320,7 @@ public interface ConfigApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
