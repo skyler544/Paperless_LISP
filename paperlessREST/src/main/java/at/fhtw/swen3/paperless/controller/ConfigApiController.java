@@ -1,8 +1,13 @@
 package at.fhtw.swen3.paperless.controller;
 
+import at.fhtw.swen3.paperless.services.dto.CreateSavedViewsRequest;
 import at.fhtw.swen3.paperless.services.dto.CreateStoragePath200Response;
 import at.fhtw.swen3.paperless.services.dto.CreateStoragePathRequest;
+import at.fhtw.swen3.paperless.services.dto.CreateUISettings200Response;
+import at.fhtw.swen3.paperless.services.dto.CreateUISettingsRequest;
+import at.fhtw.swen3.paperless.services.dto.GetSavedViews200Response;
 import at.fhtw.swen3.paperless.services.dto.GetStoragePaths200Response;
+import at.fhtw.swen3.paperless.services.dto.GetUISettings200Response;
 import at.fhtw.swen3.paperless.services.dto.UpdateStoragePath200Response;
 import at.fhtw.swen3.paperless.services.dto.UpdateStoragePathRequest;
 
@@ -30,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-19T14:47:55.426414Z[Etc/UTC]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
 public class ConfigApiController implements ConfigApi {
