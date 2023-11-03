@@ -10,6 +10,8 @@ src/main/java/at/fhtw/swen3/paperless/controller/DocumentTypesApi.java
 src/main/java/at/fhtw/swen3/paperless/controller/DocumentTypesApiController.java
 src/main/java/at/fhtw/swen3/paperless/controller/DocumentsApi.java
 src/main/java/at/fhtw/swen3/paperless/controller/DocumentsApiController.java
+src/main/java/at/fhtw/swen3/paperless/controller/LoginApi.java
+src/main/java/at/fhtw/swen3/paperless/controller/LoginApiController.java
 src/main/java/at/fhtw/swen3/paperless/controller/SearchApi.java
 src/main/java/at/fhtw/swen3/paperless/controller/SearchApiController.java
 src/main/java/at/fhtw/swen3/paperless/services/OpenApiGeneratorApplication.java
@@ -39,6 +41,8 @@ src/main/java/at/fhtw/swen3/paperless/services/dto/GetStoragePaths200ResponseRes
 src/main/java/at/fhtw/swen3/paperless/services/dto/NewCorrespondent.java
 src/main/java/at/fhtw/swen3/paperless/services/dto/NewDocumentType.java
 src/main/java/at/fhtw/swen3/paperless/services/dto/NewTag.java
+src/main/java/at/fhtw/swen3/paperless/services/dto/Statistics200Response.java
+src/main/java/at/fhtw/swen3/paperless/services/dto/Statistics200ResponseDocumentFileTypeCountsInner.java
 src/main/java/at/fhtw/swen3/paperless/services/dto/UpdateDocument200Response.java
 src/main/java/at/fhtw/swen3/paperless/services/dto/UpdateDocumentRequest.java
 src/main/java/at/fhtw/swen3/paperless/services/dto/UpdateDocumentRequestPermissions.java

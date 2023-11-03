@@ -5,6 +5,26 @@ info:
 servers:
 - url: /
 paths:
+  /api/statistics:
+    get:
+      operationId: Statistics
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value: "{\"documents_total\":1,\"documents_inbox\":1,\"inbox_tag\"\
+                    :1,\"document_file_type_counts\":[{\"mime_type\":\"application/pdf\"\
+                    ,\"mime_type_count\":1}],\"character_count\":4}"
+              schema:
+                $ref: '#/components/schemas/Statistics_200_response'
+          description: Success
+      tags:
+      - Login
+      x-accepts: application/json
+      x-tags:
+      - tag: Login
   /api/saved_views:
     get:
       operationId: GetSavedViews
@@ -1232,6 +1252,50 @@ components:
         password:
           nullable: true
           type: string
+      type: object
+    Statistics_200_response_document_file_type_counts_inner:
+      example:
+        mime_type: mime_type
+        mime_type_count: 5
+      properties:
+        mime_type:
+          type: string
+        mime_type_count:
+          type: integer
+      required:
+      - mime_type
+      - mime_type_count
+      type: object
+    Statistics_200_response:
+      example:
+        document_file_type_counts:
+        - mime_type: mime_type
+          mime_type_count: 5
+        - mime_type: mime_type
+          mime_type_count: 5
+        documents_inbox: 6
+        inbox_tag: 1
+        documents_total: 0
+        character_count: 5
+      properties:
+        documents_total:
+          type: integer
+        documents_inbox:
+          type: integer
+        inbox_tag:
+          type: integer
+        document_file_type_counts:
+          items:
+            $ref: '#/components/schemas/Statistics_200_response_document_file_type_counts_inner'
+          type: array
+        character_count:
+          type: integer
+      required:
+      - character_count
+      - document_file_type_counts
+      - documents_inbox
+      - documents_total
+      - inbox_tag
       type: object
     GetSavedViews_200_response_results_inner_filter_rules_inner:
       example:

@@ -3,6 +3,49 @@ info:
   title: Paperless Rest Server
   version: '1.0'
 paths:
+  /api/statistics:
+    get:
+      tags:
+        - Login
+      operationId: Statistics
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documents_total:
+                    type: integer
+                  documents_inbox:
+                    type: integer
+                  inbox_tag:
+                    type: integer
+                  document_file_type_counts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        mime_type:
+                          type: string
+                        mime_type_count:
+                          type: integer
+                      required:
+                        - mime_type
+                        - mime_type_count
+                  character_count:
+                    type: integer
+                required:
+                  - documents_total
+                  - documents_inbox
+                  - inbox_tag
+                  - document_file_type_counts
+                  - character_count
+              examples:
+                default:
+                  value: >-
+                    {"documents_total":1,"documents_inbox":1,"inbox_tag":1,"document_file_type_counts":[{"mime_type":"application/pdf","mime_type_count":1}],"character_count":4}
   /api/saved_views:
     get:
       tags:
