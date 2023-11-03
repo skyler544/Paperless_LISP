@@ -156,7 +156,7 @@ public interface DocumentsApi {
 
 
     /**
-     * GET /api/documents
+     * GET /api/documents/
      *
      * @param page  (optional)
      * @param pageSize  (optional)
@@ -180,7 +180,7 @@ public interface DocumentsApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/api/documents",
+        value = "/api/documents/",
         produces = { "application/json" }
     )
     
@@ -204,7 +204,7 @@ public interface DocumentsApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
