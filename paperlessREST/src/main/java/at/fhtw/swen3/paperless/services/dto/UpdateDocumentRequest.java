@@ -2,7 +2,7 @@ package at.fhtw.swen3.paperless.services.dto;
 
 import java.net.URI;
 import java.util.Objects;
-import at.fhtw.swen3.paperless.services.dto.UpdateDocumentRequestPermissions;
+import at.fhtw.swen3.paperless.services.dto.GetTags200ResponseResultsInnerPermissions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -56,7 +56,7 @@ public class UpdateDocumentRequest {
 
   private Integer owner;
 
-  private UpdateDocumentRequestPermissions permissions;
+  private GetTags200ResponseResultsInnerPermissions permissions;
 
   @Valid
   private List<Object> notes = new ArrayList<>();
@@ -68,7 +68,7 @@ public class UpdateDocumentRequest {
   /**
    * Constructor with only required parameters
    */
-  public UpdateDocumentRequest(Integer id, Integer correspondent, Integer documentType, Integer storagePath, String title, String content, List<Integer> tags, String createdDate, String modified, String added, Integer archiveSerialNumber, String originalFileName, String archivedFileName, Integer owner, UpdateDocumentRequestPermissions permissions, List<Object> notes) {
+  public UpdateDocumentRequest(Integer id, Integer correspondent, Integer documentType, Integer storagePath, String title, String content, List<Integer> tags, String createdDate, String modified, String added, Integer archiveSerialNumber, String originalFileName, String archivedFileName, Integer owner, GetTags200ResponseResultsInnerPermissions permissions, List<Object> notes) {
     this.id = id;
     this.correspondent = correspondent;
     this.documentType = documentType;
@@ -375,7 +375,7 @@ public class UpdateDocumentRequest {
     this.owner = owner;
   }
 
-  public UpdateDocumentRequest permissions(UpdateDocumentRequestPermissions permissions) {
+  public UpdateDocumentRequest permissions(GetTags200ResponseResultsInnerPermissions permissions) {
     this.permissions = permissions;
     return this;
   }
@@ -387,11 +387,11 @@ public class UpdateDocumentRequest {
   @NotNull @Valid 
   @Schema(name = "permissions", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("permissions")
-  public UpdateDocumentRequestPermissions getPermissions() {
+  public GetTags200ResponseResultsInnerPermissions getPermissions() {
     return permissions;
   }
 
-  public void setPermissions(UpdateDocumentRequestPermissions permissions) {
+  public void setPermissions(GetTags200ResponseResultsInnerPermissions permissions) {
     this.permissions = permissions;
   }
 

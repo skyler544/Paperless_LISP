@@ -17,12 +17,12 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * GetDocumentTypes200ResponseResultsInner
+ * GetTags200ResponseResultsInner
  */
 
-@JsonTypeName("GetDocumentTypes_200_response_results_inner")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
-public class GetDocumentTypes200ResponseResultsInner {
+@JsonTypeName("GetTags_200_response_results_inner")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-11-03T13:46:03.125613Z[Etc/UTC]")
+public class GetTags200ResponseResultsInner {
 
   private Integer id;
 
@@ -30,11 +30,17 @@ public class GetDocumentTypes200ResponseResultsInner {
 
   private String name;
 
+  private String color;
+
+  private String textColor;
+
   private String match;
 
   private Integer matchingAlgorithm;
 
   private Boolean isInsensitive;
+
+  private Boolean isInboxTag;
 
   private Integer documentCount;
 
@@ -42,26 +48,29 @@ public class GetDocumentTypes200ResponseResultsInner {
 
   private GetTags200ResponseResultsInnerPermissions permissions;
 
-  public GetDocumentTypes200ResponseResultsInner() {
+  public GetTags200ResponseResultsInner() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public GetDocumentTypes200ResponseResultsInner(Integer id, String slug, String name, String match, Integer matchingAlgorithm, Boolean isInsensitive, Integer documentCount, Integer owner, GetTags200ResponseResultsInnerPermissions permissions) {
+  public GetTags200ResponseResultsInner(Integer id, String slug, String name, String color, String textColor, String match, Integer matchingAlgorithm, Boolean isInsensitive, Boolean isInboxTag, Integer documentCount, Integer owner, GetTags200ResponseResultsInnerPermissions permissions) {
     this.id = id;
     this.slug = slug;
     this.name = name;
+    this.color = color;
+    this.textColor = textColor;
     this.match = match;
     this.matchingAlgorithm = matchingAlgorithm;
     this.isInsensitive = isInsensitive;
+    this.isInboxTag = isInboxTag;
     this.documentCount = documentCount;
     this.owner = owner;
     this.permissions = permissions;
   }
 
-  public GetDocumentTypes200ResponseResultsInner id(Integer id) {
+  public GetTags200ResponseResultsInner id(Integer id) {
     this.id = id;
     return this;
   }
@@ -81,7 +90,7 @@ public class GetDocumentTypes200ResponseResultsInner {
     this.id = id;
   }
 
-  public GetDocumentTypes200ResponseResultsInner slug(String slug) {
+  public GetTags200ResponseResultsInner slug(String slug) {
     this.slug = slug;
     return this;
   }
@@ -101,7 +110,7 @@ public class GetDocumentTypes200ResponseResultsInner {
     this.slug = slug;
   }
 
-  public GetDocumentTypes200ResponseResultsInner name(String name) {
+  public GetTags200ResponseResultsInner name(String name) {
     this.name = name;
     return this;
   }
@@ -121,7 +130,47 @@ public class GetDocumentTypes200ResponseResultsInner {
     this.name = name;
   }
 
-  public GetDocumentTypes200ResponseResultsInner match(String match) {
+  public GetTags200ResponseResultsInner color(String color) {
+    this.color = color;
+    return this;
+  }
+
+  /**
+   * Get color
+   * @return color
+  */
+  @NotNull 
+  @Schema(name = "color", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("color")
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  public GetTags200ResponseResultsInner textColor(String textColor) {
+    this.textColor = textColor;
+    return this;
+  }
+
+  /**
+   * Get textColor
+   * @return textColor
+  */
+  @NotNull 
+  @Schema(name = "text_color", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("text_color")
+  public String getTextColor() {
+    return textColor;
+  }
+
+  public void setTextColor(String textColor) {
+    this.textColor = textColor;
+  }
+
+  public GetTags200ResponseResultsInner match(String match) {
     this.match = match;
     return this;
   }
@@ -141,7 +190,7 @@ public class GetDocumentTypes200ResponseResultsInner {
     this.match = match;
   }
 
-  public GetDocumentTypes200ResponseResultsInner matchingAlgorithm(Integer matchingAlgorithm) {
+  public GetTags200ResponseResultsInner matchingAlgorithm(Integer matchingAlgorithm) {
     this.matchingAlgorithm = matchingAlgorithm;
     return this;
   }
@@ -161,7 +210,7 @@ public class GetDocumentTypes200ResponseResultsInner {
     this.matchingAlgorithm = matchingAlgorithm;
   }
 
-  public GetDocumentTypes200ResponseResultsInner isInsensitive(Boolean isInsensitive) {
+  public GetTags200ResponseResultsInner isInsensitive(Boolean isInsensitive) {
     this.isInsensitive = isInsensitive;
     return this;
   }
@@ -181,7 +230,27 @@ public class GetDocumentTypes200ResponseResultsInner {
     this.isInsensitive = isInsensitive;
   }
 
-  public GetDocumentTypes200ResponseResultsInner documentCount(Integer documentCount) {
+  public GetTags200ResponseResultsInner isInboxTag(Boolean isInboxTag) {
+    this.isInboxTag = isInboxTag;
+    return this;
+  }
+
+  /**
+   * Get isInboxTag
+   * @return isInboxTag
+  */
+  @NotNull 
+  @Schema(name = "is_inbox_tag", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("is_inbox_tag")
+  public Boolean getIsInboxTag() {
+    return isInboxTag;
+  }
+
+  public void setIsInboxTag(Boolean isInboxTag) {
+    this.isInboxTag = isInboxTag;
+  }
+
+  public GetTags200ResponseResultsInner documentCount(Integer documentCount) {
     this.documentCount = documentCount;
     return this;
   }
@@ -201,7 +270,7 @@ public class GetDocumentTypes200ResponseResultsInner {
     this.documentCount = documentCount;
   }
 
-  public GetDocumentTypes200ResponseResultsInner owner(Integer owner) {
+  public GetTags200ResponseResultsInner owner(Integer owner) {
     this.owner = owner;
     return this;
   }
@@ -221,7 +290,7 @@ public class GetDocumentTypes200ResponseResultsInner {
     this.owner = owner;
   }
 
-  public GetDocumentTypes200ResponseResultsInner permissions(GetTags200ResponseResultsInnerPermissions permissions) {
+  public GetTags200ResponseResultsInner permissions(GetTags200ResponseResultsInnerPermissions permissions) {
     this.permissions = permissions;
     return this;
   }
@@ -249,33 +318,39 @@ public class GetDocumentTypes200ResponseResultsInner {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GetDocumentTypes200ResponseResultsInner getDocumentTypes200ResponseResultsInner = (GetDocumentTypes200ResponseResultsInner) o;
-    return Objects.equals(this.id, getDocumentTypes200ResponseResultsInner.id) &&
-        Objects.equals(this.slug, getDocumentTypes200ResponseResultsInner.slug) &&
-        Objects.equals(this.name, getDocumentTypes200ResponseResultsInner.name) &&
-        Objects.equals(this.match, getDocumentTypes200ResponseResultsInner.match) &&
-        Objects.equals(this.matchingAlgorithm, getDocumentTypes200ResponseResultsInner.matchingAlgorithm) &&
-        Objects.equals(this.isInsensitive, getDocumentTypes200ResponseResultsInner.isInsensitive) &&
-        Objects.equals(this.documentCount, getDocumentTypes200ResponseResultsInner.documentCount) &&
-        Objects.equals(this.owner, getDocumentTypes200ResponseResultsInner.owner) &&
-        Objects.equals(this.permissions, getDocumentTypes200ResponseResultsInner.permissions);
+    GetTags200ResponseResultsInner getTags200ResponseResultsInner = (GetTags200ResponseResultsInner) o;
+    return Objects.equals(this.id, getTags200ResponseResultsInner.id) &&
+        Objects.equals(this.slug, getTags200ResponseResultsInner.slug) &&
+        Objects.equals(this.name, getTags200ResponseResultsInner.name) &&
+        Objects.equals(this.color, getTags200ResponseResultsInner.color) &&
+        Objects.equals(this.textColor, getTags200ResponseResultsInner.textColor) &&
+        Objects.equals(this.match, getTags200ResponseResultsInner.match) &&
+        Objects.equals(this.matchingAlgorithm, getTags200ResponseResultsInner.matchingAlgorithm) &&
+        Objects.equals(this.isInsensitive, getTags200ResponseResultsInner.isInsensitive) &&
+        Objects.equals(this.isInboxTag, getTags200ResponseResultsInner.isInboxTag) &&
+        Objects.equals(this.documentCount, getTags200ResponseResultsInner.documentCount) &&
+        Objects.equals(this.owner, getTags200ResponseResultsInner.owner) &&
+        Objects.equals(this.permissions, getTags200ResponseResultsInner.permissions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, slug, name, match, matchingAlgorithm, isInsensitive, documentCount, owner, permissions);
+    return Objects.hash(id, slug, name, color, textColor, match, matchingAlgorithm, isInsensitive, isInboxTag, documentCount, owner, permissions);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class GetDocumentTypes200ResponseResultsInner {\n");
+    sb.append("class GetTags200ResponseResultsInner {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    slug: ").append(toIndentedString(slug)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    color: ").append(toIndentedString(color)).append("\n");
+    sb.append("    textColor: ").append(toIndentedString(textColor)).append("\n");
     sb.append("    match: ").append(toIndentedString(match)).append("\n");
     sb.append("    matchingAlgorithm: ").append(toIndentedString(matchingAlgorithm)).append("\n");
     sb.append("    isInsensitive: ").append(toIndentedString(isInsensitive)).append("\n");
+    sb.append("    isInboxTag: ").append(toIndentedString(isInboxTag)).append("\n");
     sb.append("    documentCount: ").append(toIndentedString(documentCount)).append("\n");
     sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
     sb.append("    permissions: ").append(toIndentedString(permissions)).append("\n");

@@ -5,6 +5,82 @@ info:
 servers:
 - url: /
 paths:
+  /api/tags:
+    get:
+      operationId: GetTags
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: full_perms
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value: "{\"count\":2,\"next\":null,\"previous\":null,\"all\":[2,1],\"\
+                    results\":[{\"id\":2,\"slug\":\"deltag\",\"name\":\"deltag\",\"\
+                    color\":\"#b62d74\",\"text_color\":\"#ffffff\",\"match\":\"test\"\
+                    ,\"matching_algorithm\":5,\"is_insensitive\":true,\"is_inbox_tag\"\
+                    :false,\"document_count\":0,\"owner\":3,\"permissions\":{\"view\"\
+                    :{\"users\":[],\"groups\":[]},\"change\":{\"users\":[],\"groups\"\
+                    :[]}}},{\"id\":1,\"slug\":\"testtag\",\"name\":\"testtag\",\"\
+                    color\":\"#ddd977\",\"text_color\":\"#000000\",\"match\":\"\"\
+                    ,\"matching_algorithm\":6,\"is_insensitive\":true,\"is_inbox_tag\"\
+                    :true,\"document_count\":1,\"owner\":3,\"permissions\":{\"view\"\
+                    :{\"users\":[],\"groups\":[]},\"change\":{\"users\":[],\"groups\"\
+                    :[]}}}]}"
+              schema:
+                $ref: '#/components/schemas/GetTags_200_response'
+          description: Success
+      tags:
+      - Tags
+      x-accepts: application/json
+      x-tags:
+      - tag: Tags
+    post:
+      operationId: CreateTag
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value: "{\"name\":\"deltag\",\"color\":\"#b62d74\",\"is_inbox_tag\"\
+                  :false,\"matching_algorithm\":5,\"match\":\"test\",\"is_insensitive\"\
+                  :true,\"owner\":3}"
+            schema:
+              $ref: '#/components/schemas/CreateTag_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value: "{\"id\":2,\"slug\":\"deltag\",\"name\":\"deltag\",\"color\"\
+                    :\"#b62d74\",\"text_color\":\"#ffffff\",\"match\":\"test\",\"\
+                    matching_algorithm\":5,\"is_insensitive\":true,\"is_inbox_tag\"\
+                    :false,\"owner\":3,\"user_can_change\":true}"
+              schema:
+                $ref: '#/components/schemas/CreateTag_200_response'
+          description: Success
+      tags:
+      - Tags
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: Tags
   /api/statistics:
     get:
       operationId: Statistics
@@ -1278,6 +1354,274 @@ components:
           nullable: true
           type: string
       type: object
+    GetTags_200_response_results_inner_permissions_view:
+      example:
+        groups:
+        - ""
+        - ""
+        users:
+        - ""
+        - ""
+      properties:
+        users:
+          items: {}
+          type: array
+        groups:
+          items: {}
+          type: array
+      required:
+      - groups
+      - users
+      type: object
+    GetTags_200_response_results_inner_permissions:
+      example:
+        view:
+          groups:
+          - ""
+          - ""
+          users:
+          - ""
+          - ""
+        change:
+          groups:
+          - ""
+          - ""
+          users:
+          - ""
+          - ""
+      properties:
+        view:
+          $ref: '#/components/schemas/GetTags_200_response_results_inner_permissions_view'
+        change:
+          $ref: '#/components/schemas/GetTags_200_response_results_inner_permissions_view'
+      required:
+      - change
+      - view
+      type: object
+    GetTags_200_response_results_inner:
+      example:
+        owner: 9
+        matching_algorithm: 2
+        document_count: 7
+        color: color
+        is_insensitive: true
+        permissions:
+          view:
+            groups:
+            - ""
+            - ""
+            users:
+            - ""
+            - ""
+          change:
+            groups:
+            - ""
+            - ""
+            users:
+            - ""
+            - ""
+        name: name
+        match: match
+        id: 5
+        text_color: text_color
+        is_inbox_tag: true
+        slug: slug
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        text_color:
+          type: string
+        match:
+          type: string
+        matching_algorithm:
+          type: integer
+        is_insensitive:
+          type: boolean
+        is_inbox_tag:
+          type: boolean
+        document_count:
+          type: integer
+        owner:
+          type: integer
+        permissions:
+          $ref: '#/components/schemas/GetTags_200_response_results_inner_permissions'
+      required:
+      - color
+      - document_count
+      - id
+      - is_inbox_tag
+      - is_insensitive
+      - match
+      - matching_algorithm
+      - name
+      - owner
+      - permissions
+      - slug
+      - text_color
+      type: object
+    GetTags_200_response:
+      example:
+        next: 6
+        all:
+        - 5
+        - 5
+        previous: 1
+        count: 0
+        results:
+        - owner: 9
+          matching_algorithm: 2
+          document_count: 7
+          color: color
+          is_insensitive: true
+          permissions:
+            view:
+              groups:
+              - ""
+              - ""
+              users:
+              - ""
+              - ""
+            change:
+              groups:
+              - ""
+              - ""
+              users:
+              - ""
+              - ""
+          name: name
+          match: match
+          id: 5
+          text_color: text_color
+          is_inbox_tag: true
+          slug: slug
+        - owner: 9
+          matching_algorithm: 2
+          document_count: 7
+          color: color
+          is_insensitive: true
+          permissions:
+            view:
+              groups:
+              - ""
+              - ""
+              users:
+              - ""
+              - ""
+            change:
+              groups:
+              - ""
+              - ""
+              users:
+              - ""
+              - ""
+          name: name
+          match: match
+          id: 5
+          text_color: text_color
+          is_inbox_tag: true
+          slug: slug
+      properties:
+        count:
+          type: integer
+        next:
+          type: integer
+        previous:
+          type: integer
+        all:
+          items:
+            type: integer
+          type: array
+        results:
+          items:
+            $ref: '#/components/schemas/GetTags_200_response_results_inner'
+          type: array
+      required:
+      - all
+      - count
+      - next
+      - previous
+      - results
+      type: object
+    CreateTag_request:
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+        is_inbox_tag:
+          type: boolean
+        matching_algorithm:
+          type: integer
+        match:
+          type: string
+        is_insensitive:
+          type: boolean
+        owner:
+          type: integer
+      required:
+      - color
+      - is_inbox_tag
+      - is_insensitive
+      - match
+      - matching_algorithm
+      - name
+      - owner
+      type: object
+    CreateTag_200_response:
+      example:
+        owner: 1
+        matching_algorithm: 6
+        user_can_change: true
+        color: color
+        is_insensitive: true
+        name: name
+        match: match
+        id: 0
+        text_color: text_color
+        is_inbox_tag: true
+        slug: slug
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        text_color:
+          type: string
+        match:
+          type: string
+        matching_algorithm:
+          type: integer
+        is_insensitive:
+          type: boolean
+        is_inbox_tag:
+          type: boolean
+        owner:
+          type: integer
+        user_can_change:
+          type: boolean
+      required:
+      - color
+      - id
+      - is_inbox_tag
+      - is_insensitive
+      - match
+      - matching_algorithm
+      - name
+      - owner
+      - slug
+      - text_color
+      - user_can_change
+      type: object
     Statistics_200_response_document_file_type_counts_inner:
       example:
         mime_type: mime_type
@@ -1973,50 +2317,6 @@ components:
       - tags
       - title
       type: object
-    UpdateDocument_request_permissions_view:
-      example:
-        groups:
-        - ""
-        - ""
-        users:
-        - ""
-        - ""
-      properties:
-        users:
-          items: {}
-          type: array
-        groups:
-          items: {}
-          type: array
-      required:
-      - groups
-      - users
-      type: object
-    UpdateDocument_request_permissions:
-      example:
-        view:
-          groups:
-          - ""
-          - ""
-          users:
-          - ""
-          - ""
-        change:
-          groups:
-          - ""
-          - ""
-          users:
-          - ""
-          - ""
-      properties:
-        view:
-          $ref: '#/components/schemas/UpdateDocument_request_permissions_view'
-        change:
-          $ref: '#/components/schemas/UpdateDocument_request_permissions_view'
-      required:
-      - change
-      - view
-      type: object
     UpdateDocument_request:
       properties:
         id:
@@ -2050,7 +2350,7 @@ components:
         owner:
           type: integer
         permissions:
-          $ref: '#/components/schemas/UpdateDocument_request_permissions'
+          $ref: '#/components/schemas/GetTags_200_response_results_inner_permissions'
         notes:
           items: {}
           type: array
@@ -2306,7 +2606,7 @@ components:
         owner:
           type: integer
         permissions:
-          $ref: '#/components/schemas/UpdateDocument_request_permissions'
+          $ref: '#/components/schemas/GetTags_200_response_results_inner_permissions'
       required:
       - document_count
       - id
@@ -2477,7 +2777,7 @@ components:
         owner:
           type: integer
         permissions:
-          $ref: '#/components/schemas/UpdateDocument_request_permissions'
+          $ref: '#/components/schemas/GetTags_200_response_results_inner_permissions'
         permissions_form:
           $ref: '#/components/schemas/UpdateDocumentType_request_permissions_form'
       required:
