@@ -46,6 +46,56 @@ paths:
                 default:
                   value: >-
                     {"documents_total":1,"documents_inbox":1,"inbox_tag":1,"document_file_type_counts":[{"mime_type":"application/pdf","mime_type_count":1}],"character_count":4}
+  /api/tasks:
+    get:
+      tags:
+        - Tasks
+      operationId: GetTasks
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    task_id:
+                      type: string
+                    task_file_name:
+                      type: string
+                    date_created:
+                      type: string
+                    date_done:
+                      type: string
+                    type:
+                      type: string
+                    status:
+                      type: string
+                    result:
+                      type: string
+                    acknowledged:
+                      type: boolean
+                    related_document:
+                      type: string
+                  required:
+                    - id
+                    - task_id
+                    - task_file_name
+                    - date_created
+                    - type
+                    - status
+                    - result
+                    - acknowledged
+              examples:
+                default:
+                  value: >-
+                    [{"id":1,"task_id":"fa2c4c82-e692-4612-afa3-7720fa2819ae","task_file_name":"test.pdf","date_created":"2023-09-08T12:04:53.631118Z","date_done":"2023-09-08T12:05:30.021809Z","type":"file","status":"SUCCESS","result":"Success.
+                    New document id 1
+                    created","acknowledged":false,"related_document":"1"}]
   /api/saved_views:
     get:
       tags:

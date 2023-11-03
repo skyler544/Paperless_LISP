@@ -25,6 +25,31 @@ paths:
       x-accepts: application/json
       x-tags:
       - tag: Login
+  /api/tasks:
+    get:
+      operationId: GetTasks
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value: "[{\"id\":1,\"task_id\":\"fa2c4c82-e692-4612-afa3-7720fa2819ae\"\
+                    ,\"task_file_name\":\"test.pdf\",\"date_created\":\"2023-09-08T12:04:53.631118Z\"\
+                    ,\"date_done\":\"2023-09-08T12:05:30.021809Z\",\"type\":\"file\"\
+                    ,\"status\":\"SUCCESS\",\"result\":\"Success. New document id\
+                    \ 1 created\",\"acknowledged\":false,\"related_document\":\"1\"\
+                    }]"
+              schema:
+                items:
+                  $ref: '#/components/schemas/GetTasks_200_response_inner'
+                type: array
+          description: Success
+      tags:
+      - Tasks
+      x-accepts: application/json
+      x-tags:
+      - tag: Tasks
   /api/saved_views:
     get:
       operationId: GetSavedViews
@@ -1296,6 +1321,49 @@ components:
       - documents_inbox
       - documents_total
       - inbox_tag
+      type: object
+    GetTasks_200_response_inner:
+      example:
+        date_done: date_done
+        result: result
+        acknowledged: true
+        task_file_name: task_file_name
+        date_created: date_created
+        related_document: related_document
+        task_id: task_id
+        id: 0
+        type: type
+        status: status
+      properties:
+        id:
+          type: integer
+        task_id:
+          type: string
+        task_file_name:
+          type: string
+        date_created:
+          type: string
+        date_done:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+        result:
+          type: string
+        acknowledged:
+          type: boolean
+        related_document:
+          type: string
+      required:
+      - acknowledged
+      - date_created
+      - id
+      - result
+      - status
+      - task_file_name
+      - task_id
+      - type
       type: object
     GetSavedViews_200_response_results_inner_filter_rules_inner:
       example:
