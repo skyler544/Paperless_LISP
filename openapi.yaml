@@ -3,6 +3,296 @@ info:
   title: Paperless Rest Server
   version: '1.0'
 paths:
+  /api/tags:
+    get:
+      tags:
+        - Tags
+      operationId: GetTags
+      parameters:
+        - name: page
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: full_perms
+          in: query
+          style: form
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: integer
+                  previous:
+                    type: integer
+                  all:
+                    type: array
+                    items:
+                      type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        slug:
+                          type: string
+                        name:
+                          type: string
+                        color:
+                          type: string
+                        text_color:
+                          type: string
+                        match:
+                          type: string
+                        matching_algorithm:
+                          type: integer
+                        is_insensitive:
+                          type: boolean
+                        is_inbox_tag:
+                          type: boolean
+                        document_count:
+                          type: integer
+                        owner:
+                          type: integer
+                        permissions:
+                          type: object
+                          properties:
+                            view:
+                              type: object
+                              properties:
+                                users:
+                                  type: array
+                                  items: {}
+                                groups:
+                                  type: array
+                                  items: {}
+                              required:
+                                - users
+                                - groups
+                            change:
+                              type: object
+                              properties:
+                                users:
+                                  type: array
+                                  items: {}
+                                groups:
+                                  type: array
+                                  items: {}
+                              required:
+                                - users
+                                - groups
+                          required:
+                            - view
+                            - change
+                      required:
+                        - id
+                        - slug
+                        - name
+                        - color
+                        - text_color
+                        - match
+                        - matching_algorithm
+                        - is_insensitive
+                        - is_inbox_tag
+                        - document_count
+                        - owner
+                        - permissions
+                required:
+                  - count
+                  - next
+                  - previous
+                  - all
+                  - results
+              examples:
+                default:
+                  value: >-
+                    {"count":2,"next":null,"previous":null,"all":[2,1],"results":[{"id":2,"slug":"deltag","name":"deltag","color":"#b62d74","text_color":"#ffffff","match":"test","matching_algorithm":5,"is_insensitive":true,"is_inbox_tag":false,"document_count":0,"owner":3,"permissions":{"view":{"users":[],"groups":[]},"change":{"users":[],"groups":[]}}},{"id":1,"slug":"testtag","name":"testtag","color":"#ddd977","text_color":"#000000","match":"","matching_algorithm":6,"is_insensitive":true,"is_inbox_tag":true,"document_count":1,"owner":3,"permissions":{"view":{"users":[],"groups":[]},"change":{"users":[],"groups":[]}}}]}
+    post:
+      tags:
+        - Tags
+      operationId: CreateTag
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                color:
+                  type: string
+                is_inbox_tag:
+                  type: boolean
+                matching_algorithm:
+                  type: integer
+                match:
+                  type: string
+                is_insensitive:
+                  type: boolean
+                owner:
+                  type: integer
+              required:
+                - name
+                - color
+                - is_inbox_tag
+                - matching_algorithm
+                - match
+                - is_insensitive
+                - owner
+            examples:
+              default:
+                value: >-
+                  {"name":"deltag","color":"#b62d74","is_inbox_tag":false,"matching_algorithm":5,"match":"test","is_insensitive":true,"owner":3}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  slug:
+                    type: string
+                  name:
+                    type: string
+                  color:
+                    type: string
+                  text_color:
+                    type: string
+                  match:
+                    type: string
+                  matching_algorithm:
+                    type: integer
+                  is_insensitive:
+                    type: boolean
+                  is_inbox_tag:
+                    type: boolean
+                  owner:
+                    type: integer
+                  user_can_change:
+                    type: boolean
+                required:
+                  - id
+                  - slug
+                  - name
+                  - color
+                  - text_color
+                  - match
+                  - matching_algorithm
+                  - is_insensitive
+                  - is_inbox_tag
+                  - owner
+                  - user_can_change
+              examples:
+                default:
+                  value: >-
+                    {"id":2,"slug":"deltag","name":"deltag","color":"#b62d74","text_color":"#ffffff","match":"test","matching_algorithm":5,"is_insensitive":true,"is_inbox_tag":false,"owner":3,"user_can_change":true}
+  /api/statistics:
+    get:
+      tags:
+        - Login
+      operationId: Statistics
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documents_total:
+                    type: integer
+                  documents_inbox:
+                    type: integer
+                  inbox_tag:
+                    type: integer
+                  document_file_type_counts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        mime_type:
+                          type: string
+                        mime_type_count:
+                          type: integer
+                      required:
+                        - mime_type
+                        - mime_type_count
+                  character_count:
+                    type: integer
+                required:
+                  - documents_total
+                  - documents_inbox
+                  - inbox_tag
+                  - document_file_type_counts
+                  - character_count
+              examples:
+                default:
+                  value: >-
+                    {"documents_total":1,"documents_inbox":1,"inbox_tag":1,"document_file_type_counts":[{"mime_type":"application/pdf","mime_type_count":1}],"character_count":4}
+  /api/tasks:
+    get:
+      tags:
+        - Tasks
+      operationId: GetTasks
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    task_id:
+                      type: string
+                    task_file_name:
+                      type: string
+                    date_created:
+                      type: string
+                    date_done:
+                      type: string
+                    type:
+                      type: string
+                    status:
+                      type: string
+                    result:
+                      type: string
+                    acknowledged:
+                      type: boolean
+                    related_document:
+                      type: string
+                  required:
+                    - id
+                    - task_id
+                    - task_file_name
+                    - date_created
+                    - type
+                    - status
+                    - result
+                    - acknowledged
+              examples:
+                default:
+                  value: >-
+                    [{"id":1,"task_id":"fa2c4c82-e692-4612-afa3-7720fa2819ae","task_file_name":"test.pdf","date_created":"2023-09-08T12:04:53.631118Z","date_done":"2023-09-08T12:05:30.021809Z","type":"file","status":"SUCCESS","result":"Success.
+                    New document id 1
+                    created","acknowledged":false,"related_document":"1"}]
   /api/saved_views:
     get:
       tags:

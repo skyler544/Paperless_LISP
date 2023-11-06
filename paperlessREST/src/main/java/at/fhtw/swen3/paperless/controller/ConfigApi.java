@@ -53,7 +53,7 @@ public interface ConfigApi {
     }
 
     /**
-     * POST /api/saved_views
+     * POST /api/saved_views/
      *
      * @param createSavedViewsRequest  (optional)
      * @return Success (status code 200)
@@ -67,7 +67,7 @@ public interface ConfigApi {
     )
     @RequestMapping(
         method = RequestMethod.POST,
-        value = "/api/saved_views",
+        value = "/api/saved_views/",
         consumes = { "application/json" }
     )
     
@@ -119,7 +119,7 @@ public interface ConfigApi {
 
 
     /**
-     * POST /api/ui_settings
+     * POST /api/ui_settings/
      *
      * @param createUISettingsRequest  (optional)
      * @return Success (status code 200)
@@ -135,7 +135,7 @@ public interface ConfigApi {
     )
     @RequestMapping(
         method = RequestMethod.POST,
-        value = "/api/ui_settings",
+        value = "/api/ui_settings/",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
@@ -152,7 +152,7 @@ public interface ConfigApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
@@ -209,7 +209,7 @@ public interface ConfigApi {
 
 
     /**
-     * GET /api/saved_views
+     * GET /api/saved_views/
      *
      * @param page  (optional)
      * @param pageSize  (optional)
@@ -226,7 +226,7 @@ public interface ConfigApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/api/saved_views",
+        value = "/api/saved_views/",
         produces = { "application/json" }
     )
     
@@ -243,7 +243,7 @@ public interface ConfigApi {
                 }
             }
         });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 

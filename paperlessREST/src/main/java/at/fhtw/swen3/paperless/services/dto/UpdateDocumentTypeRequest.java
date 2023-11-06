@@ -2,7 +2,7 @@ package at.fhtw.swen3.paperless.services.dto;
 
 import java.net.URI;
 import java.util.Objects;
-import at.fhtw.swen3.paperless.services.dto.UpdateDocumentRequestPermissions;
+import at.fhtw.swen3.paperless.services.dto.GetTags200ResponseResultsInnerPermissions;
 import at.fhtw.swen3.paperless.services.dto.UpdateDocumentTypeRequestPermissionsForm;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -41,7 +41,7 @@ public class UpdateDocumentTypeRequest {
 
   private Integer owner;
 
-  private UpdateDocumentRequestPermissions permissions;
+  private GetTags200ResponseResultsInnerPermissions permissions;
 
   private UpdateDocumentTypeRequestPermissionsForm permissionsForm;
 
@@ -52,7 +52,7 @@ public class UpdateDocumentTypeRequest {
   /**
    * Constructor with only required parameters
    */
-  public UpdateDocumentTypeRequest(Integer id, String slug, String name, String match, Integer matchingAlgorithm, Boolean isInsensitive, Integer documentCount, Integer owner, UpdateDocumentRequestPermissions permissions) {
+  public UpdateDocumentTypeRequest(Integer id, String slug, String name, String match, Integer matchingAlgorithm, Boolean isInsensitive, Integer documentCount, Integer owner, GetTags200ResponseResultsInnerPermissions permissions) {
     this.id = id;
     this.slug = slug;
     this.name = name;
@@ -224,7 +224,7 @@ public class UpdateDocumentTypeRequest {
     this.owner = owner;
   }
 
-  public UpdateDocumentTypeRequest permissions(UpdateDocumentRequestPermissions permissions) {
+  public UpdateDocumentTypeRequest permissions(GetTags200ResponseResultsInnerPermissions permissions) {
     this.permissions = permissions;
     return this;
   }
@@ -236,11 +236,11 @@ public class UpdateDocumentTypeRequest {
   @NotNull @Valid 
   @Schema(name = "permissions", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("permissions")
-  public UpdateDocumentRequestPermissions getPermissions() {
+  public GetTags200ResponseResultsInnerPermissions getPermissions() {
     return permissions;
   }
 
-  public void setPermissions(UpdateDocumentRequestPermissions permissions) {
+  public void setPermissions(GetTags200ResponseResultsInnerPermissions permissions) {
     this.permissions = permissions;
   }
 
