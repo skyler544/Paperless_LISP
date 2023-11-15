@@ -43,7 +43,7 @@ public interface SearchApi {
     }
 
     /**
-     * GET /api/search/autocomplete
+     * GET /api/search/autocomplete/
      *
      * @param term  (optional)
      * @param limit  (optional)
@@ -60,7 +60,7 @@ public interface SearchApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/api/search/autocomplete",
+        value = "/api/search/autocomplete/",
         produces = { "application/json" }
     )
     

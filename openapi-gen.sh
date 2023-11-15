@@ -19,6 +19,9 @@ docker run \
   --additional-properties requestMappingMode=controller \
   --additional-properties useSpringController=true \
   --additional-properties useTags=true \
+  --additional-properties groupId='at.fhtw.swen3' \
+  --additional-properties artifactId='paperlessREST' \
+  --additional-properties ensureUniqueParams=true \
   -o /tmp/out/
 
 docker cp openapi-gen:/tmp/out/ ./out/
