@@ -251,7 +251,7 @@ public interface DocumentsApi {
 
 
     /**
-     * POST /api/documents/post_document
+     * POST /api/documents/post_document/
      *
      * @param title  (optional)
      * @param created  (optional)
@@ -270,10 +270,10 @@ public interface DocumentsApi {
     )
     @RequestMapping(
         method = RequestMethod.POST,
-        value = "/api/documents/post_document",
+        value = "/api/documents/post_document/",
         consumes = { "multipart/form-data" }
     )
-    
+
     default ResponseEntity<Void> uploadDocument(
         @Parameter(name = "title", description = "") @Valid @RequestParam(value = "title", required = false) String title,
         @Parameter(name = "created", description = "") @Valid @RequestParam(value = "created", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime created,
