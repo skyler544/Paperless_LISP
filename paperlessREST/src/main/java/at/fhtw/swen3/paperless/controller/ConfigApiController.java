@@ -1,15 +1,10 @@
 package at.fhtw.swen3.paperless.controller;
 
 import at.fhtw.swen3.paperless.services.dto.CreateSavedViewsRequest;
-import at.fhtw.swen3.paperless.services.dto.CreateStoragePath200Response;
-import at.fhtw.swen3.paperless.services.dto.CreateStoragePathRequest;
 import at.fhtw.swen3.paperless.services.dto.CreateUISettings200Response;
 import at.fhtw.swen3.paperless.services.dto.CreateUISettingsRequest;
 import at.fhtw.swen3.paperless.services.dto.GetSavedViews200Response;
-import at.fhtw.swen3.paperless.services.dto.GetStoragePaths200Response;
 import at.fhtw.swen3.paperless.services.dto.GetUISettings200Response;
-import at.fhtw.swen3.paperless.services.dto.UpdateStoragePath200Response;
-import at.fhtw.swen3.paperless.services.dto.UpdateStoragePathRequest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
