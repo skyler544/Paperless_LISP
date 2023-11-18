@@ -1,12 +1,11 @@
 package at.fhtw.swen3.paperless.controller;
 
+import at.fhtw.swen3.paperless.services.DocumentService;
+import at.fhtw.swen3.paperless.services.dto.*;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.format.annotation.DateTimeFormat;
-import at.fhtw.swen3.paperless.services.dto.GetDocument200Response;
-import at.fhtw.swen3.paperless.services.dto.GetDocumentMetadata200Response;
-import at.fhtw.swen3.paperless.services.dto.GetDocuments200Response;
+
 import java.time.OffsetDateTime;
-import at.fhtw.swen3.paperless.services.dto.UpdateDocument200Response;
-import at.fhtw.swen3.paperless.services.dto.UpdateDocumentRequest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +38,11 @@ public class DocumentsApiController implements DocumentsApi {
 
     private final NativeWebRequest request;
 
+    private final DocumentService documentService;
+
     @Autowired
-    public DocumentsApiController(NativeWebRequest request) {
+    public DocumentsApiController(NativeWebRequest request, DocumentService documentService) {
+        this.documentService = documentService;
         this.request = request;
     }
 
@@ -49,4 +51,22 @@ public class DocumentsApiController implements DocumentsApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public ResponseEntity<Void> uploadDocument(
+            @Parameter(name = "title", description = "") @Valid @RequestParam(value = "title", required = false) String title,
+            @Parameter(name = "created", description = "") @Valid @RequestParam(value = "created", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime created,
+            @Parameter(name = "document_type", description = "") @Valid @RequestParam(value = "document_type", required = false) Integer documentType,
+            @Parameter(name = "tags", description = "") @Valid @RequestPart(value = "tags", required = false) List<Integer> tags,
+            @Parameter(name = "correspondent", description = "") @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
+            @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
+    ) {
+
+        PostDocumentRequestDto postDocumentRequestDto = new PostDocumentRequestDto();
+        postDocumentRequestDto.setTitle(title);
+        postDocumentRequestDto.setDocumentType(documentType);
+
+        documentService.saveDocument(postDocumentRequestDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
 }
