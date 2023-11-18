@@ -1,18 +1,18 @@
 package at.fhtw.swen3.paperless.models.entity;
 
-import jakarta.validation.Valid;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "document")
 public class DocumentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +21,7 @@ public class DocumentEntity {
 
     private Integer documentType;
 
-    private Integer storagePath;
+    //private Integer storagePath;
 
     private String title;
 
@@ -35,16 +35,16 @@ public class DocumentEntity {
     private String created;
 
     private String createdDate;
-
-    private String modified;
-
-    private String added;
-
-    private Integer archiveSerialNumber;
-
-    private String originalFileName;
-
-    private String archivedFileName;
-
-    private Integer owner;
+//
+//    private String modified;
+//
+//    private String added;
+//
+//    private Integer archiveSerialNumber;
+//
+//    private String originalFileName;
+//
+//    private String archivedFileName;
+//
+//    private Integer owner;
 }
