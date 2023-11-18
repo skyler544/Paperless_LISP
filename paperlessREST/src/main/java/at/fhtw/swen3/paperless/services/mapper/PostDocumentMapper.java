@@ -21,6 +21,9 @@ public interface PostDocumentMapper extends BaseMapper<DocumentEntity, PostDocum
 
     @Named("parseOffSetToString")
     default String map(OffsetDateTime offsetDateTime) {
+        if (offsetDateTime == null)
+            return "";
+
         return offsetDateTime.toString();
     }
 
