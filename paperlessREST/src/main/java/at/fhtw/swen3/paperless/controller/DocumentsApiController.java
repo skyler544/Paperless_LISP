@@ -55,6 +55,9 @@ public class DocumentsApiController implements DocumentsApi {
             @Parameter(name = "correspondent", description = "") @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
             @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
     ) {
+        System.out.println("#################### Received request for upload document ####################");
+        System.out.println("Doc title: " + title);
+        System.out.println("Created: " + created);
 
         PostDocumentRequestDto postDocumentRequestDto = new PostDocumentRequestDto();
         postDocumentRequestDto.setTitle(title);
@@ -73,9 +76,9 @@ public class DocumentsApiController implements DocumentsApi {
 
                         String encodedFileContent = Base64.getEncoder().encodeToString(docBites);
 
-                        System.out.println("File length is: " + encodedFileContent.length());
-
                         postDocumentRequestDto.setDocumentContentBase64(encodedFileContent);
+
+                        System.out.println("Base64 length" + encodedFileContent.length());
 
                         break;
 
