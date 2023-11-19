@@ -17,6 +17,7 @@ public interface PostDocumentMapper extends BaseMapper<DocumentEntity, PostDocum
     @Mapping(source="correspondent", target = "correspondent")
     @Mapping(source="documentType", target = "documentType")
     @Mapping(source="offsetDateTime", target = "createdDate", qualifiedByName = "parseOffSetToString")
+    @Mapping(source = "documentContentBase64", target = "content")
     DocumentEntity dtoToEntity(PostDocumentRequestDto postDocumentRequestDto);
 
     @Named("parseOffSetToString")

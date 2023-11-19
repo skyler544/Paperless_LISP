@@ -18,6 +18,7 @@ public class PostDocumentRequestDto {
     private Integer documentType;
     private List<Integer> tags;
     private Integer correspondent;
+    private String documentContentBase64;
     // TODO implement mapping and parsing
     // private List<MultipartFile> document;
 }
