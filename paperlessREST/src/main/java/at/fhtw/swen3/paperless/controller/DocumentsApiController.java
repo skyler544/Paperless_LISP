@@ -5,29 +5,24 @@ import at.fhtw.swen3.paperless.services.dto.*;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.*;
 import java.time.OffsetDateTime;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
 
+import java.util.Base64;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
@@ -64,6 +59,38 @@ public class DocumentsApiController implements DocumentsApi {
         PostDocumentRequestDto postDocumentRequestDto = new PostDocumentRequestDto();
         postDocumentRequestDto.setTitle(title);
         postDocumentRequestDto.setDocumentType(documentType);
+
+        try {
+
+            if (document != null && !document.isEmpty()) {
+
+                //TODO check with prof if we have to parse multiple docs
+                for (MultipartFile singleDoc : document) {
+
+                    if (singleDoc != null && singleDoc.getOriginalFilename() != null) {
+
+                        byte[] docBites = singleDoc.getBytes();
+
+                        String encodedFileContent = Base64.getEncoder().encodeToString(docBites);
+
+                        System.out.println("File length is: " + encodedFileContent.length());
+
+                        postDocumentRequestDto.setDocumentContentBase64(encodedFileContent);
+
+                        break;
+
+                    }
+
+                }
+            }
+
+        } catch (IOException ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if (created == null) {
+            postDocumentRequestDto.setOffsetDateTime(OffsetDateTime.now());
+        }
 
         documentService.saveDocument(postDocumentRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
