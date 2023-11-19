@@ -1,4 +1,4 @@
-package at.fhtw.swen3.paperless.services.repositories;
+package at.fhtw.swen3.paperless.repositories;
 
 
 import at.fhtw.swen3.paperless.models.entity.DocumentEntity;

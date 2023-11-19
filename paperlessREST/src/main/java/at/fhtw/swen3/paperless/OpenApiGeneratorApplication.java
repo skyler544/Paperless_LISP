@@ -13,7 +13,7 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 @ComponentScan(
-    basePackages = {"at.fhtw.swen3.paperless.services", "at.fhtw.swen3.paperless.controller" , "at.fhtw.swen3.paperless.config", "at.fhtw.swen3.paperless.services.repositories"},
+    basePackages = {"at.fhtw.swen3.paperless.services", "at.fhtw.swen3.paperless.controller" , "at.fhtw.swen3.paperless.config", "at.fhtw.swen3.paperless.repositories"},
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
 @EntityScan(

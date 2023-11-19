@@ -1,7 +1,7 @@
 package at.fhtw.swen3.paperless.services;
 
 import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
-import at.fhtw.swen3.paperless.services.repositories.DocumentRepository;
+import at.fhtw.swen3.paperless.repositories.DocumentRepository;
 import at.fhtw.swen3.paperless.services.dto.PostDocumentRequestDto;
 import at.fhtw.swen3.paperless.services.mapper.PostDocumentMapper;
 import org.springframework.stereotype.Service;
