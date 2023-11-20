@@ -1,7 +1,7 @@
 package at.fhtw.swen3.paperless.controller;
 
 import at.fhtw.swen3.paperless.services.DocumentService;
-import at.fhtw.swen3.paperless.services.dto.*;
+import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.format.annotation.DateTimeFormat;
 
