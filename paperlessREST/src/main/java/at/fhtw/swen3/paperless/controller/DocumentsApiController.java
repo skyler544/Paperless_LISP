@@ -60,7 +60,6 @@ public class DocumentsApiController implements DocumentsApi {
         System.out.println("Created: " + created);
 
         PostDocumentRequestDto postDocumentRequestDto = new PostDocumentRequestDto();
-        postDocumentRequestDto.setTitle(title);
         postDocumentRequestDto.setDocumentType(documentType);
 
         try {
@@ -78,7 +77,13 @@ public class DocumentsApiController implements DocumentsApi {
 
                         postDocumentRequestDto.setDocumentContentBase64(encodedFileContent);
 
-                        System.out.println("Base64 length" + encodedFileContent.length());
+                        System.out.println("Base64 length: " + encodedFileContent.length());
+
+                        if (title == null || title.isEmpty()) {
+                            postDocumentRequestDto.setTitle(singleDoc.getOriginalFilename());
+                        } else {
+                            postDocumentRequestDto.setTitle(title);
+                        }
 
                         break;
 
