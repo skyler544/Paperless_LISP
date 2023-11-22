@@ -20,6 +20,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -42,4 +43,9 @@ public class SearchApiController implements SearchApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public ResponseEntity<List<String>> autoComplete(String term, Integer limit) {
+        final List<String> autocompleteResult = new ArrayList<String>();
+        return new ResponseEntity<>(autocompleteResult, HttpStatus.NOT_IMPLEMENTED);
+    }
 }

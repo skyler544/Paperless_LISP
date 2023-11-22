@@ -45,4 +45,13 @@ public class TagsApiController implements TagsApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public ResponseEntity<CreateTag200Response> createTag(CreateTagRequest createTagRequest) {
+        return new ResponseEntity<>(new CreateTag200Response(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<GetTags200Response> getTags(Integer page, Boolean fullPerms) {
+        return new ResponseEntity<>(new GetTags200Response(), HttpStatus.OK);
+    }
 }

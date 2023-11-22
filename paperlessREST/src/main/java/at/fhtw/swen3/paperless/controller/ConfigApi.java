@@ -5,11 +5,7 @@
  */
 package at.fhtw.swen3.paperless.controller;
 
-import at.fhtw.swen3.paperless.services.dto.CreateSavedViewsRequest;
-import at.fhtw.swen3.paperless.services.dto.CreateUISettings200Response;
-import at.fhtw.swen3.paperless.services.dto.CreateUISettingsRequest;
-import at.fhtw.swen3.paperless.services.dto.GetSavedViews200Response;
-import at.fhtw.swen3.paperless.services.dto.GetUISettings200Response;
+import at.fhtw.swen3.paperless.services.dto.*;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -210,6 +206,11 @@ public interface ConfigApi {
                 }
             }
         });
+//        GetUISettings200Response responseDTO = new GetUISettings200Response();
+//        //responseDTO.setDisplayName("Test User");
+//        responseDTO.setDisplayName("Test User");
+//        //responseDTO.setSettings(new GetUISettings200ResponseSettings().setUpdateChecking(new GetUISettings200ResponseSettingsUpdateChecking()));
+//
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
