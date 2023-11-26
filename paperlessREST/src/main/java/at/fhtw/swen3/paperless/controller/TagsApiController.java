@@ -31,7 +31,7 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-11-03T13:46:03.125613Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-public class TagsApiController implements TagsApi {
+public class TagsApiController extends BaseLoggingController implements TagsApi {
 
     private final NativeWebRequest request;
 
@@ -47,11 +47,27 @@ public class TagsApiController implements TagsApi {
 
     @Override
     public ResponseEntity<CreateTag200Response> createTag(CreateTagRequest createTagRequest) {
-        return new ResponseEntity<>(new CreateTag200Response(), HttpStatus.OK);
+
+        this.logReceivedRequest("CreateTag");
+        this.logIncomingParams(createTagRequest.toString());
+
+        CreateTag200Response responseDTO = new CreateTag200Response();
+
+        this.logSentResponse("CreateTag", responseDTO.toString());
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<GetTags200Response> getTags(Integer page, Boolean fullPerms) {
-        return new ResponseEntity<>(new GetTags200Response(), HttpStatus.OK);
+
+        this.logReceivedRequest("GetTags");
+        this.logIncomingParams(String.format("page: %s, fullPerms: %s", page.toString(), fullPerms.toString()));
+
+        GetTags200Response responseDTO = new GetTags200Response();
+
+        this.logSentResponse("GetTags", responseDTO.toString());
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 }

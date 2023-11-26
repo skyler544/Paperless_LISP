@@ -30,7 +30,7 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-11-03T12:56:46.892911Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-public class TasksApiController implements TasksApi {
+public class TasksApiController extends BaseLoggingController implements TasksApi {
 
     private final NativeWebRequest request;
 
@@ -46,6 +46,13 @@ public class TasksApiController implements TasksApi {
 
     @Override
     public ResponseEntity<List<GetTasks200ResponseInner>> getTasks() {
-        return new ResponseEntity<>(new ArrayList<GetTasks200ResponseInner>(), HttpStatus.OK);
+
+        this.logReceivedRequest("GetTasks");
+
+        List<GetTasks200ResponseInner> responseDTO = new ArrayList<GetTasks200ResponseInner>();
+
+        this.logSentResponse("GetTasks", responseDTO.toString());
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 }

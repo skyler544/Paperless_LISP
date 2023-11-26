@@ -29,7 +29,7 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-public class SearchApiController implements SearchApi {
+public class SearchApiController extends BaseLoggingController implements SearchApi {
 
     private final NativeWebRequest request;
 
@@ -45,7 +45,14 @@ public class SearchApiController implements SearchApi {
 
     @Override
     public ResponseEntity<List<String>> autoComplete(String term, Integer limit) {
+
+        this.logReceivedRequest("Autocomplete");
+        this.logIncomingParams(String.format("term: %s, limit: %s", term, limit.toString()));
+
         final List<String> autocompleteResult = new ArrayList<String>();
+
+        this.logSentResponse("Autocomplete", autocompleteResult.toString());
+
         return new ResponseEntity<>(autocompleteResult, HttpStatus.NOT_IMPLEMENTED);
     }
 }

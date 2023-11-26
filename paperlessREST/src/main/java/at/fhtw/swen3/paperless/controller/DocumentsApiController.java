@@ -29,7 +29,7 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-public class DocumentsApiController implements DocumentsApi {
+public class DocumentsApiController extends BaseLoggingController implements DocumentsApi {
 
     private final NativeWebRequest request;
 
@@ -55,12 +55,11 @@ public class DocumentsApiController implements DocumentsApi {
             @Parameter(name = "correspondent", description = "") @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
             @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
     ) {
-        System.out.println("#################### Received request for upload document ####################");
-        System.out.println("Doc title: " + title);
-        System.out.println("Created: " + created);
 
         PostDocumentRequestDto postDocumentRequestDto = new PostDocumentRequestDto();
         postDocumentRequestDto.setDocumentType(documentType);
+
+        this.logReceivedRequest("UploadDocument");
 
         try {
 
@@ -93,6 +92,7 @@ public class DocumentsApiController implements DocumentsApi {
             }
 
         } catch (IOException ex) {
+            this.logger.error(String.format("Error occurred while fetching the document content from the request\n%s", ex));
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -100,7 +100,16 @@ public class DocumentsApiController implements DocumentsApi {
             postDocumentRequestDto.setOffsetDateTime(OffsetDateTime.now());
         }
 
-        documentService.saveDocument(postDocumentRequestDto);
+        this.logIncomingParams(postDocumentRequestDto.toString());
+
+        try {
+            documentService.saveDocument(postDocumentRequestDto);
+        } catch (Exception ex) {
+            this.logger.error(String.format("Error occurred while saving the document into the db\n%s", ex));
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
         return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
