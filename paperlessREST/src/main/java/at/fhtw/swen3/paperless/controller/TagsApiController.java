@@ -5,6 +5,8 @@ import at.fhtw.swen3.paperless.services.dto.CreateTagRequest;
 import at.fhtw.swen3.paperless.services.dto.GetTags200Response;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,7 +33,14 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-11-03T13:46:03.125613Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-public class TagsApiController extends BaseLoggingController implements TagsApi {
+public class TagsApiController implements TagsApi, BaseLoggingController {
+
+    private final Logger logger = LogManager.getLogger(ConfigApiController.class);
+
+    @Override
+    public Logger getLogger() {
+        return this.logger;
+    }
 
     private final NativeWebRequest request;
 

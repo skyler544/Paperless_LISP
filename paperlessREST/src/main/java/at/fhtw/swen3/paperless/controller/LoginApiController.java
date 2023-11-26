@@ -3,6 +3,8 @@ package at.fhtw.swen3.paperless.controller;
 import at.fhtw.swen3.paperless.services.dto.Statistics200Response;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,7 +31,14 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-11-03T12:56:46.892911Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-public class LoginApiController extends BaseLoggingController implements LoginApi {
+public class LoginApiController implements LoginApi, BaseLoggingController {
+
+    private final Logger logger = LogManager.getLogger(ConfigApiController.class);
+
+    @Override
+    public Logger getLogger() {
+        return this.logger;
+    }
 
     private final NativeWebRequest request;
 

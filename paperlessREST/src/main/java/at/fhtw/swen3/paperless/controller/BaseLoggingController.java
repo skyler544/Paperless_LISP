@@ -3,25 +3,25 @@ package at.fhtw.swen3.paperless.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BaseLoggingController {
+public interface BaseLoggingController {
 
-    protected final Logger logger = LogManager.getLogger(BaseLoggingController.class);
+    Logger getLogger();
 
-    protected final void logReceivedRequest(String endpointName) {
+    default void logReceivedRequest(String endpointName) {
 
-        this.logger.info(String.format("Received request %s", endpointName));
-
-    }
-
-    protected final void logIncomingParams(String parametersAsString) {
-
-        this.logger.info(String.format("With parameters: \n %s", parametersAsString));
+        this.getLogger().info(String.format("Received request %s", endpointName));
 
     }
 
-    protected final void logSentResponse(String endpointName, String responseAsString) {
+    default void logIncomingParams(String parametersAsString) {
 
-        this.logger.info(String.format("Endpoint [%s] sending response: \n %s",endpointName, responseAsString));
+        this.getLogger().info(String.format("With parameters: \n %s", parametersAsString));
+
+    }
+
+    default void logSentResponse(String endpointName, String responseAsString) {
+
+        this.getLogger().info(String.format("Endpoint [%s] sending response: \n %s",endpointName, responseAsString));
 
     }
 
