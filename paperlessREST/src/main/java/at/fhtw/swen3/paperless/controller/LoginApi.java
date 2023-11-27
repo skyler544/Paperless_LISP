@@ -66,16 +66,16 @@ public interface LoginApi {
     default ResponseEntity<Statistics200Response> statistics(
         
     ) {
-//        getRequest().ifPresent(request -> {
-//            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-//                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-//                    String exampleString = "{ \"document_file_type_counts\" : [ { \"mime_type\" : \"mime_type\", \"mime_type_count\" : 5 }, { \"mime_type\" : \"mime_type\", \"mime_type_count\" : 5 } ], \"documents_inbox\" : 6, \"inbox_tag\" : 1, \"documents_total\" : 0, \"character_count\" : 5 }";
-//                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-//                    break;
-//                }
-//            }
-//        });
-        return new ResponseEntity<>(new Statistics200Response(), HttpStatus.OK);
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"document_file_type_counts\" : [ { \"mime_type\" : \"mime_type\", \"mime_type_count\" : 5 }, { \"mime_type\" : \"mime_type\", \"mime_type_count\" : 5 } ], \"documents_inbox\" : 6, \"inbox_tag\" : 1, \"documents_total\" : 0, \"character_count\" : 5 }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
