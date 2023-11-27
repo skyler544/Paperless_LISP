@@ -21,6 +21,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -43,4 +44,8 @@ public class TasksApiController implements TasksApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public ResponseEntity<List<GetTasks200ResponseInner>> getTasks() {
+        return new ResponseEntity<>(new ArrayList<GetTasks200ResponseInner>(), HttpStatus.OK);
+    }
 }
