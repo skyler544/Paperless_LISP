@@ -1,13 +1,9 @@
 package at.fhtw.swen3.paperless.services;
-import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
-import at.fhtw.swen3.paperless.services.dto.GetDocument200Response;
-import at.fhtw.swen3.paperless.services.dto.PostDocumentRequestDto;
-import at.fhtw.swen3.paperless.services.mapper.DocumentMapper;
+import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import at.fhtw.swen3.paperless.services.mapper.PostDocumentMapper;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
