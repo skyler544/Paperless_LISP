@@ -48,7 +48,7 @@ public class CreateUISettingsRequestSettingsUpdateChecking {
    * Get backendSetting
    * @return backendSetting
   */
-  @NotNull 
+  //@NotNull
   @Schema(name = "backend_setting", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("backend_setting")
   public String getBackendSetting() {
@@ -68,7 +68,7 @@ public class CreateUISettingsRequestSettingsUpdateChecking {
    * Get enabled
    * @return enabled
   */
-  @NotNull 
+  @NotNull
   @Schema(name = "enabled", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("enabled")
   public Boolean getEnabled() {

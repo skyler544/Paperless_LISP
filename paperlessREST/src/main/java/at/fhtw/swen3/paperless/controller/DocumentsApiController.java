@@ -1,34 +1,28 @@
 package at.fhtw.swen3.paperless.controller;
 
+import at.fhtw.swen3.paperless.services.DocumentService;
+import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.format.annotation.DateTimeFormat;
-import at.fhtw.swen3.paperless.services.dto.GetDocument200Response;
-import at.fhtw.swen3.paperless.services.dto.GetDocumentMetadata200Response;
-import at.fhtw.swen3.paperless.services.dto.GetDocuments200Response;
+
+import java.io.*;
 import java.time.OffsetDateTime;
-import at.fhtw.swen3.paperless.services.dto.UpdateDocument200Response;
-import at.fhtw.swen3.paperless.services.dto.UpdateDocumentRequest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
 
+import java.util.Base64;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
@@ -39,8 +33,11 @@ public class DocumentsApiController implements DocumentsApi {
 
     private final NativeWebRequest request;
 
+    private final DocumentService documentService;
+
     @Autowired
-    public DocumentsApiController(NativeWebRequest request) {
+    public DocumentsApiController(NativeWebRequest request, DocumentService documentService) {
+        this.documentService = documentService;
         this.request = request;
     }
 
@@ -49,4 +46,62 @@ public class DocumentsApiController implements DocumentsApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public ResponseEntity<Void> uploadDocument(
+            @Parameter(name = "title", description = "") @Valid @RequestParam(value = "title", required = false) String title,
+            @Parameter(name = "created", description = "") @Valid @RequestParam(value = "created", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime created,
+            @Parameter(name = "document_type", description = "") @Valid @RequestParam(value = "document_type", required = false) Integer documentType,
+            @Parameter(name = "tags", description = "") @Valid @RequestPart(value = "tags", required = false) List<Integer> tags,
+            @Parameter(name = "correspondent", description = "") @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
+            @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
+    ) {
+        System.out.println("#################### Received request for upload document ####################");
+        System.out.println("Doc title: " + title);
+        System.out.println("Created: " + created);
+
+        PostDocumentRequestDto postDocumentRequestDto = new PostDocumentRequestDto();
+        postDocumentRequestDto.setDocumentType(documentType);
+
+        try {
+
+            if (document != null && !document.isEmpty()) {
+
+                //TODO check with prof if we have to parse multiple docs
+                for (MultipartFile singleDoc : document) {
+
+                    if (singleDoc != null && singleDoc.getOriginalFilename() != null) {
+
+                        byte[] docBites = singleDoc.getBytes();
+
+                        String encodedFileContent = Base64.getEncoder().encodeToString(docBites);
+
+                        postDocumentRequestDto.setDocumentContentBase64(encodedFileContent);
+
+                        System.out.println("Base64 length: " + encodedFileContent.length());
+
+                        if (title == null || title.isEmpty()) {
+                            postDocumentRequestDto.setTitle(singleDoc.getOriginalFilename());
+                        } else {
+                            postDocumentRequestDto.setTitle(title);
+                        }
+
+                        break;
+
+                    }
+
+                }
+            }
+
+        } catch (IOException ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if (created == null) {
+            postDocumentRequestDto.setOffsetDateTime(OffsetDateTime.now());
+        }
+
+        documentService.saveDocument(postDocumentRequestDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
 }
