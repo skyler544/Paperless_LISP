@@ -1,7 +1,7 @@
 package at.fhtw.swen3.paperless.services.mapper;
 
 import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
-import at.fhtw.swen3.paperless.services.dto.PostDocumentRequestDto;
+import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

@@ -1640,8 +1640,6 @@ paths:
                         properties:
                           backend_setting:
                             type: string
-                        required:
-                          - backend_setting
                     required:
                       - update_checking
                   permissions:

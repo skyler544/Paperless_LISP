@@ -7,6 +7,10 @@ import at.fhtw.swen3.paperless.services.dto.GetSavedViews200Response;
 import at.fhtw.swen3.paperless.services.dto.GetUISettings200Response;
 
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -47,5 +51,28 @@ public class ConfigApiController implements ConfigApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public ResponseEntity<GetUISettings200Response> getUISettings() {
+        GetUISettings200Response responseDTO = new GetUISettings200Response();
+        responseDTO.setDisplayName("Test User");
 
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<CreateUISettings200Response> createUISettings(CreateUISettingsRequest createUISettingsRequest) {
+
+        CreateUISettings200Response responseDTO = new CreateUISettings200Response();
+        responseDTO.setSuccess(true);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+
+    }
+
+    @Override
+    public ResponseEntity<GetSavedViews200Response> getSavedViews(Integer page, Integer pageSize) {
+
+        GetSavedViews200Response response = new GetSavedViews200Response();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+    }
 }

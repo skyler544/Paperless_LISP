@@ -1,4 +1,4 @@
-package at.fhtw.swen3.paperless.services.dto;
+package at.fhtw.swen3.paperless.services.customDTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
