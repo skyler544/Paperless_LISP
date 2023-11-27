@@ -74,7 +74,6 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
 
             if (document != null && !document.isEmpty()) {
 
-                //TODO check with prof if we have to parse multiple docs
                 for (MultipartFile singleDoc : document) {
 
                     if (singleDoc != null && singleDoc.getOriginalFilename() != null) {

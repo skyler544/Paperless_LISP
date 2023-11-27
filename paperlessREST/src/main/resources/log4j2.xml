@@ -11,28 +11,8 @@
         </Console>
     </Appenders>
     <Loggers>
-        <!--<Logger name="at.technikum.swen2_tourplanner_server" level="debug" additivity="false">
-            <AppenderRef ref="ConsoleAppender" />
-            <AppenderRef ref="FileAppender"/>
-        </Logger>
-        <Logger name="at.technikum.swen2_tourplanner_server" level="warn" additivity="false">
-            <AppenderRef ref="ConsoleAppender" />
-            <AppenderRef ref="FileAppender"/>
-        </Logger>
-        <Logger name="at.technikum.swen2_tourplanner_server" level="error" additivity="false">
-            <AppenderRef ref="ConsoleAppender" />
-            <AppenderRef ref="FileAppender"/>
-        </Logger>
-        <Logger name="at.technikum.swen2_tourplanner_server" level="fatal" additivity="false">
-            <AppenderRef ref="ConsoleAppender" />
-            <AppenderRef ref="FileAppender"/>
-        </Logger>-->
         <Logger name="at.fhtw.swen3.paperless" level="trace" additivity="false">
             <AppenderRef ref="ConsoleAppender" />
         </Logger>
-<!--        <Root level="info">-->
-<!--            <AppenderRef ref="ConsoleAppender" />-->
-<!--            <AppenderRef ref="FileAppender"/>-->
-<!--        </Root>-->
     </Loggers>
 </Configuration>

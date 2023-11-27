@@ -206,11 +206,7 @@ public interface ConfigApi {
                 }
             }
         });
-//        GetUISettings200Response responseDTO = new GetUISettings200Response();
-//        //responseDTO.setDisplayName("Test User");
-//        responseDTO.setDisplayName("Test User");
-//        //responseDTO.setSettings(new GetUISettings200ResponseSettings().setUpdateChecking(new GetUISettings200ResponseSettingsUpdateChecking()));
-//
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
