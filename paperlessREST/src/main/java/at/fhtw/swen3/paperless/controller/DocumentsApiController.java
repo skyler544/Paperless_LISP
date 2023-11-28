@@ -1,6 +1,6 @@
 package at.fhtw.swen3.paperless.controller;
 
-import at.fhtw.swen3.paperless.services.DocumentService;
+import at.fhtw.swen3.paperless.services.IDocumentService;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.apache.logging.log4j.LogManager;
@@ -11,7 +11,6 @@ import java.io.*;
 import java.time.OffsetDateTime;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -42,10 +41,10 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
 
     private final NativeWebRequest request;
 
-    private final DocumentService documentService;
+    private final IDocumentService documentService;
 
-    @Autowired
-    public DocumentsApiController(NativeWebRequest request, DocumentService documentService) {
+    //@Autowired
+    public DocumentsApiController(NativeWebRequest request, IDocumentService documentService) {
         this.documentService = documentService;
         this.request = request;
     }
@@ -65,10 +64,10 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
             @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
     ) {
 
+        this.logReceivedRequest("UploadDocument");
+
         PostDocumentRequestDto postDocumentRequestDto = new PostDocumentRequestDto();
         postDocumentRequestDto.setDocumentType(documentType);
-
-        this.logReceivedRequest("UploadDocument");
 
         try {
 
@@ -83,8 +82,6 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
                         String encodedFileContent = Base64.getEncoder().encodeToString(docBites);
 
                         postDocumentRequestDto.setDocumentContentBase64(encodedFileContent);
-
-                        System.out.println("Base64 length: " + encodedFileContent.length());
 
                         if (title == null || title.isEmpty()) {
                             postDocumentRequestDto.setTitle(singleDoc.getOriginalFilename());
@@ -106,6 +103,8 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
 
         if (created == null) {
             postDocumentRequestDto.setOffsetDateTime(OffsetDateTime.now());
+        } else {
+            postDocumentRequestDto.setOffsetDateTime(created);
         }
 
         this.logIncomingParams(postDocumentRequestDto.toString());
