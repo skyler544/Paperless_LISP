@@ -42,6 +42,11 @@ services:
       MINIO_ROOT_USER: paperless_minio
       MINIO_ROOT_PASSWORD: paperless
     command: server --console-address ":9001" /data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
