@@ -19,12 +19,15 @@ public class MinioService {
 
     private final String BUCKET_NAME = "documents";
 
+    // should not be modified, therefore final and directly initialized.
+    // TODO maybe make a config class and inject it in the constructor instead
     @Getter
     private final MinioClient minioClient =
             MinioClient.builder().endpoint("http://minio:9000")
                     .credentials("paperless_minio", "paperless").build();
 
     public MinioService() {
+        // how many of these logging statements is too many? great logger by the way @Billojullo
         this.logger.info(String.format("Connecting to MinIO\n"));
         try {
             if (!this.minioClient.bucketExists(
@@ -46,12 +49,14 @@ public class MinioService {
 
     public void putDocument(DocumentEntity document) {
         try {
-
+            // serialized into json; do we need this really or can we just upload it somehow?
             ObjectMapper om = new ObjectMapper();
             String doc = om.writeValueAsString(document);
             var fileAsByteArray =
                     new ByteArrayInputStream(om.writeValueAsBytes(document));
 
+            // this stream function is somewhat difficult to use; you need to give it either
+            // an object size or a part size, but I don't see an easy way to find the actual size here
             this.minioClient.putObject(PutObjectArgs.builder().bucket(BUCKET_NAME)
                     .object(document.getTitle())
                     .stream(fileAsByteArray, doc.length(), -1).build());
