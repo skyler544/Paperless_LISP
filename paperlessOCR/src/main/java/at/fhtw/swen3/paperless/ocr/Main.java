@@ -1,12 +1,11 @@
 package at.fhtw.swen3.paperless.ocr;
 
-import at.fhtw.swen3.paperless.ocr.config.ProjectConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @SpringBootApplication
 public class Main {
+    // TODO integrate Logger
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
