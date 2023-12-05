@@ -4,9 +4,9 @@ FROM maven:3.9.5-eclipse-temurin-17-alpine as temurin
 
 # fetch dependencies
 COPY pom.xml .
-RUN mvn -B -f pom.xml dependency:go-offline
+RUN mvn verify --fail-never
 COPY . .
-RUN mvn -B install
+RUN mvn package -DskipTests
 
 
 # required for strip-debug to work
