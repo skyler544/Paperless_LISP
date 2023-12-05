@@ -5,13 +5,12 @@ import at.fhtw.swen3.paperless.repositories.DocumentRepository;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import at.fhtw.swen3.paperless.services.mapper.PostDocumentMapper;
 import at.fhtw.swen3.paperless.services.messageQueue.MQService;
-import at.fhtw.swen3.paperless.services.minio.MinioService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DocumentService {
+public class DocumentService implements IDocumentService {
 
     Logger logger = LogManager.getLogger(DocumentService.class);
 
@@ -26,15 +25,14 @@ public class DocumentService {
         this.minioService = minioService;
     }
 
-    public DocumentEntity saveDocument(PostDocumentRequestDto postDocumentRequestDto) {
+    @Override
+    public void saveDocument(PostDocumentRequestDto postDocumentRequestDto) {
 
         try {
-            var result = PostDocumentMapper.INSTANCE.dtoToEntity(postDocumentRequestDto);
-            documentRepository.save(result);
-            mqService.processMessage(String.format("Save document with title %s",
-                    postDocumentRequestDto.getTitle()));
-            minioService.putDocument(result);
-            return result;
+            var mappedDocumentEntity = PostDocumentMapper.INSTANCE.dtoToEntity(postDocumentRequestDto);
+            documentRepository.save(mappedDocumentEntity);
+            minioService.putDocument(mappedDocumentEntity);
+            mqService.processMessage(String.format("Save document with title %s", postDocumentRequestDto.getTitle()));
         } catch (Exception e) {
 
             this.logger.error(String.format("Error saving document \n%s", e));
