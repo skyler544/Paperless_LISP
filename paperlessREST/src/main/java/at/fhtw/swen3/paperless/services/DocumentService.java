@@ -1,10 +1,10 @@
 package at.fhtw.swen3.paperless.services;
 
-import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.repositories.DocumentRepository;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import at.fhtw.swen3.paperless.services.mapper.PostDocumentMapper;
 import at.fhtw.swen3.paperless.services.messageQueue.MQService;
+import at.fhtw.swen3.paperless.services.minio.MinioService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
