@@ -7,14 +7,15 @@ services:
       POSTGRES_USER: paperless_postgres
       POSTGRES_PASSWORD: paperless
       POSTGRES_DB: paperlessdb
+      PGUSER: postgres
     ports:
       - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U paperless_postgres -d paperlessdb"]
+      test: "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"
       interval: 10s
-      timeout: 3s
+      timeout: 5s
       retries: 5
 
   adminer:
@@ -32,6 +33,7 @@ services:
     ports:
       - "5672:5672"
       - "9093:15672"
+    restart: always
     volumes:
       - "rabbitmq-data:/var/lib/rabbitmq"
       - "rabbitmq-log:/var/log/rabbitmq"
@@ -48,12 +50,13 @@ services:
       - "9090:9001"
     volumes:
       - minio_storage:/data
+    restart: always
     environment:
       MINIO_ROOT_USER: paperless_minio
       MINIO_ROOT_PASSWORD: paperless
     command: server --console-address ":9001" /data
     healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
+      test: "mc ready local"
       interval: 5s
       timeout: 5s
       retries: 5
@@ -96,6 +99,7 @@ services:
     image: paperless-rest-server:latest
     ports:
       - 8081:8080
+    restart: always
     depends_on:
       db:
         condition: service_healthy
@@ -122,6 +126,7 @@ services:
     image: paperless-ocr:latest
     ports:
       - 8082:8080
+    restart: always
     depends_on:
       db:
         condition: service_healthy
