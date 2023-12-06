@@ -24,8 +24,6 @@ public class DocumentEntity {
 
     private Integer documentType;
 
-    //private Integer storagePath;
-
     @NotNull(message = "Document title cannot be null")
     @NotEmpty(message = "Document title cannot be empty")
     @Size(max = 40, message = "A valid document title must contain less than 40 characters")
@@ -37,23 +35,4 @@ public class DocumentEntity {
     private String content;
 
     private String createdDate;
-    /* oh boy this is going to hurt
-    @Valid
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<> tags;
-    */
-    //private String created;
-
-//
-//    private String modified;
-//
-//    private String added;
-//
-//    private Integer archiveSerialNumber;
-//
-//    private String originalFileName;
-//
-//    private String archivedFileName;
-//
-//    private Integer owner;
 }

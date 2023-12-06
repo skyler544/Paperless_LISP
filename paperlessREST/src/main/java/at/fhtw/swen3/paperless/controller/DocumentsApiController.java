@@ -1,15 +1,16 @@
 package at.fhtw.swen3.paperless.controller;
 
-import at.fhtw.swen3.paperless.services.DocumentService;
+import at.fhtw.swen3.paperless.services.IDocumentService;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.*;
 import java.time.OffsetDateTime;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,14 +30,21 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-public class DocumentsApiController implements DocumentsApi {
+public class DocumentsApiController implements DocumentsApi, BaseLoggingController {
+
+    private final Logger logger = LogManager.getLogger(ConfigApiController.class);
+
+    @Override
+    public Logger getLogger() {
+        return this.logger;
+    }
 
     private final NativeWebRequest request;
 
-    private final DocumentService documentService;
+    private final IDocumentService documentService;
 
-    @Autowired
-    public DocumentsApiController(NativeWebRequest request, DocumentService documentService) {
+    //@Autowired
+    public DocumentsApiController(NativeWebRequest request, IDocumentService documentService) {
         this.documentService = documentService;
         this.request = request;
     }
@@ -55,9 +63,8 @@ public class DocumentsApiController implements DocumentsApi {
             @Parameter(name = "correspondent", description = "") @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
             @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
     ) {
-        System.out.println("#################### Received request for upload document ####################");
-        System.out.println("Doc title: " + title);
-        System.out.println("Created: " + created);
+
+        this.logReceivedRequest("UploadDocument");
 
         PostDocumentRequestDto postDocumentRequestDto = new PostDocumentRequestDto();
         postDocumentRequestDto.setDocumentType(documentType);
@@ -66,7 +73,6 @@ public class DocumentsApiController implements DocumentsApi {
 
             if (document != null && !document.isEmpty()) {
 
-                //TODO check with prof if we have to parse multiple docs
                 for (MultipartFile singleDoc : document) {
 
                     if (singleDoc != null && singleDoc.getOriginalFilename() != null) {
@@ -76,8 +82,6 @@ public class DocumentsApiController implements DocumentsApi {
                         String encodedFileContent = Base64.getEncoder().encodeToString(docBites);
 
                         postDocumentRequestDto.setDocumentContentBase64(encodedFileContent);
-
-                        System.out.println("Base64 length: " + encodedFileContent.length());
 
                         if (title == null || title.isEmpty()) {
                             postDocumentRequestDto.setTitle(singleDoc.getOriginalFilename());
@@ -93,14 +97,26 @@ public class DocumentsApiController implements DocumentsApi {
             }
 
         } catch (IOException ex) {
+            this.logger.error(String.format("Error occurred while fetching the document content from the request\n%s", ex));
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         if (created == null) {
             postDocumentRequestDto.setOffsetDateTime(OffsetDateTime.now());
+        } else {
+            postDocumentRequestDto.setOffsetDateTime(created);
         }
 
-        documentService.saveDocument(postDocumentRequestDto);
+        this.logIncomingParams(postDocumentRequestDto.toString());
+
+        try {
+            documentService.saveDocument(postDocumentRequestDto);
+        } catch (Exception ex) {
+            this.logger.error(String.format("Error occurred while saving the document into the db\n%s", ex));
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
         return new ResponseEntity<>(HttpStatus.CREATED);
 
     }

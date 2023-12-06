@@ -13,7 +13,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   adminer:
-    image: adminer:fastcgi
+    image: adminer
     restart: always
     ports:
       - "9091:8080"
@@ -21,6 +21,9 @@ services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
+    environment:
+      RABBITMQ_DEFAULT_USER: paperless_rabbitmq
+      RABBITMQ_DEFAULT_PASS: paperless_mq
     ports:
       - "5672:5672"
       - "9093:15672"
@@ -39,6 +42,11 @@ services:
       MINIO_ROOT_USER: paperless_minio
       MINIO_ROOT_PASSWORD: paperless
     command: server --console-address ":9001" /data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
@@ -80,6 +88,7 @@ services:
       - 8081:8080
     depends_on:
       - db
+      - minio
 
   web:
     image: nginx
