@@ -5,15 +5,11 @@ import io.minio.MakeBucketArgs;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Base64;
 
 @Component
 public class MinioService {
@@ -64,24 +60,6 @@ public class MinioService {
                     .object(document.getOriginalFilename())
                     .stream(inputStream, document.getSize(), -1).build());
             }
-
-            // serialized into json; do we need this really or can we just upload it somehow?
-            // ObjectMapper om = new ObjectMapper();
-            // String doc = om.writeValueAsString(document);
-            // String doc = document.getContent();
-            // var fileAsByteArray =
-            // new ByteArrayInputStream(om.writeValueAsBytes(document));
-
-            // TODO the DocumentEntity should not actually have this in the content
-            // byte[] file = Base64.getDecoder().decode(document.getContent());
-            // var fileAsByteArray =
-            // new ByteArrayInputStream(file);
-
-            // this stream function is somewhat difficult to use; you need to give it either
-            // an object size or a part size, but I don't see an easy way to find the actual size here
-            // this.minioClient.putObject(PutObjectArgs.builder().bucket(BUCKET_NAME)
-            // .object(document.getTitle())
-            // .stream(fileAsByteArray, file.length, -1).build());
 
             this.logger.info(String.format("Uploading document to MinIO: %s\n",
                 document.getOriginalFilename()));
