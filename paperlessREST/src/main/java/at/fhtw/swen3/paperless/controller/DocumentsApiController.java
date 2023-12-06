@@ -43,7 +43,6 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
 
     private final IDocumentService documentService;
 
-    //@Autowired
     public DocumentsApiController(NativeWebRequest request, IDocumentService documentService) {
         this.documentService = documentService;
         this.request = request;
@@ -63,48 +62,17 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
             @Parameter(name = "correspondent", description = "") @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
             @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
     ) {
-
         this.logReceivedRequest("UploadDocument");
 
-        PostDocumentRequestDto postDocumentRequestDto = new PostDocumentRequestDto();
-        postDocumentRequestDto.setDocumentType(documentType);
+        PostDocumentRequestDto postDocumentRequestDto;
 
         try {
-
-            if (document != null && !document.isEmpty()) {
-
-                for (MultipartFile singleDoc : document) {
-
-                    if (singleDoc != null && singleDoc.getOriginalFilename() != null) {
-
-                        byte[] docBites = singleDoc.getBytes();
-
-                        String encodedFileContent = Base64.getEncoder().encodeToString(docBites);
-
-                        postDocumentRequestDto.setDocumentContentBase64(encodedFileContent);
-
-                        if (title == null || title.isEmpty()) {
-                            postDocumentRequestDto.setTitle(singleDoc.getOriginalFilename());
-                        } else {
-                            postDocumentRequestDto.setTitle(title);
-                        }
-
-                        break;
-
-                    }
-
-                }
-            }
-
+            postDocumentRequestDto = extractDocumentDto(
+                title, created, documentType,
+                tags, correspondent, document);
         } catch (IOException ex) {
             this.logger.error(String.format("Error occurred while fetching the document content from the request\n%s", ex));
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        if (created == null) {
-            postDocumentRequestDto.setOffsetDateTime(OffsetDateTime.now());
-        } else {
-            postDocumentRequestDto.setOffsetDateTime(created);
         }
 
         this.logIncomingParams(postDocumentRequestDto.toString());
@@ -116,8 +84,45 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
+    private PostDocumentRequestDto extractDocumentDto(
+        String title, OffsetDateTime created,
+        Integer documentType, List<Integer> tags,
+        Integer correspondent, List<MultipartFile> document) throws IOException {
+
+        var postDocumentRequestDto = new PostDocumentRequestDto();
+        postDocumentRequestDto.setDocumentType(documentType);
+
+        if (document != null && !document.isEmpty()) {
+            for (MultipartFile singleDoc : document) {
+
+                if (singleDoc != null && singleDoc.getOriginalFilename() != null) {
+
+                    byte[] docBites = singleDoc.getBytes();
+                    String encodedFileContent = Base64.getEncoder().encodeToString(docBites);
+                    postDocumentRequestDto.setDocumentContentBase64(encodedFileContent);
+
+                    if (title == null || title.isEmpty()) {
+                        postDocumentRequestDto.setTitle(singleDoc.getOriginalFilename());
+                    } else {
+                        postDocumentRequestDto.setTitle(title);
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        if (created == null) {
+            this.logger.info("Created was null.\n");
+            postDocumentRequestDto.setOffsetDateTime(OffsetDateTime.now());
+        } else {
+            this.logger.info(String.format("Created was not Null:%s\n", created));
+            postDocumentRequestDto.setOffsetDateTime(created);
+        }
+
+        return postDocumentRequestDto;
     }
 }
