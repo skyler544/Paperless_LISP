@@ -1,5 +1,7 @@
 package at.fhtw.swen3.paperless.controller;
 
+import at.fhtw.swen3.paperless.services.DispatcherService;
+import at.fhtw.swen3.paperless.services.IDispatcherService;
 import at.fhtw.swen3.paperless.services.IDocumentService;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,18 +41,10 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
         return this.logger;
     }
 
-    private final NativeWebRequest request;
+    private final IDispatcherService dispatcherService;
 
-    private final IDocumentService documentService;
-
-    public DocumentsApiController(NativeWebRequest request, IDocumentService documentService) {
-        this.documentService = documentService;
-        this.request = request;
-    }
-
-    @Override
-    public Optional<NativeWebRequest> getRequest() {
-        return Optional.ofNullable(request);
+    public DocumentsApiController(IDispatcherService dispatcherService) {
+        this.dispatcherService = dispatcherService;
     }
 
     @Override
@@ -68,8 +62,7 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
 
         try {
             postDocumentRequestDto = extractDocumentDto(
-                title, created, documentType,
-                tags, correspondent, document);
+                title, created, documentType, document);
         } catch (IOException ex) {
             this.logger.error(String.format("Error occurred while fetching the document content from the request\n%s", ex));
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,7 +71,9 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
         this.logIncomingParams(postDocumentRequestDto.toString());
 
         try {
-            documentService.saveDocument(postDocumentRequestDto);
+            // documentService.saveDocument(postDocumentRequestDto);
+            // hardcoded, retrieve first document
+            dispatcherService.handleDocument(document.get(0), postDocumentRequestDto);
         } catch (Exception ex) {
             this.logger.error(String.format("Error occurred while saving the document into the db\n%s", ex));
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,8 +84,7 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
 
     private PostDocumentRequestDto extractDocumentDto(
         String title, OffsetDateTime created,
-        Integer documentType, List<Integer> tags,
-        Integer correspondent, List<MultipartFile> document) throws IOException {
+        Integer documentType, List<MultipartFile> document) throws IOException {
 
         var postDocumentRequestDto = new PostDocumentRequestDto();
         postDocumentRequestDto.setDocumentType(documentType);
@@ -99,10 +93,6 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
             for (MultipartFile singleDoc : document) {
 
                 if (singleDoc != null && singleDoc.getOriginalFilename() != null) {
-
-                    byte[] docBites = singleDoc.getBytes();
-                    String encodedFileContent = Base64.getEncoder().encodeToString(docBites);
-                    postDocumentRequestDto.setDocumentContentBase64(encodedFileContent);
 
                     if (title == null || title.isEmpty()) {
                         postDocumentRequestDto.setTitle(singleDoc.getOriginalFilename());
