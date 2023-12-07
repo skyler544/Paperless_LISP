@@ -24,7 +24,9 @@ RUN $JAVA_HOME/bin/jlink \
 
 
 # main app image
-FROM alpine
+# this is the ocr image with the most pulls, so... it's good?
+# https://hub.docker.com/r/jitesoft/tesseract-ocr
+FROM jitesoft/tesseract-ocr:alpine
 ENV JAVA_HOME=/jre
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
