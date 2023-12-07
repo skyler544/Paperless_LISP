@@ -98,8 +98,6 @@ services:
       - 8081:8080
     restart: always
     depends_on:
-      db:
-        condition: service_healthy
       minio:
         condition: service_healthy
       rabbitmq:
