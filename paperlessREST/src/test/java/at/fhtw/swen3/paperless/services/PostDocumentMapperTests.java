@@ -19,7 +19,6 @@ public class PostDocumentMapperTests {
         postDocumentRequestDto.setDocumentType(1);
         postDocumentRequestDto.setTags(List.of(1,2,3));
         postDocumentRequestDto.setCorrespondent(2);
-        postDocumentRequestDto.setDocumentContentBase64("I am a 64 encoded content");
 
         var result = PostDocumentMapper.INSTANCE.dtoToEntity(postDocumentRequestDto);
 
@@ -27,7 +26,6 @@ public class PostDocumentMapperTests {
         assertNotEquals(null, result.getCreatedDate());
         assertEquals(postDocumentRequestDto.getDocumentType(), result.getDocumentType());
         assertEquals(postDocumentRequestDto.getCorrespondent(), result.getCorrespondent());
-        assertEquals(postDocumentRequestDto.getDocumentContentBase64(), result.getContent());
 
     }
 }
