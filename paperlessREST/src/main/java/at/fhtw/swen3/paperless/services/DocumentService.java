@@ -31,7 +31,6 @@ public class DocumentService implements IDocumentService {
         try {
             var mappedDocumentEntity = PostDocumentMapper.INSTANCE.dtoToEntity(postDocumentRequestDto);
             documentRepository.save(mappedDocumentEntity);
-
             mqService.processMessage(String.format("Save document with title %s", postDocumentRequestDto.getTitle()));
             minioService.putDocument(mappedDocumentEntity);
         } catch (Exception e) {
