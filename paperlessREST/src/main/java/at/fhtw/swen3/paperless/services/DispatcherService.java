@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class DispatcherService implements IDispatcherService {
@@ -20,19 +22,21 @@ public class DispatcherService implements IDispatcherService {
 
     @Autowired
     public DispatcherService(DocumentService documentService, MQService mqService,
-            MinioService minioService) {
+        MinioService minioService) {
         this.documentService = documentService;
         this.mqService = mqService;
         this.minioService = minioService;
     }
 
     @Override
-    public void handleDocument(MultipartFile file, PostDocumentRequestDto postDocRequestDto) {
-       var mappedDocumentEntity = documentService.saveDocument(postDocRequestDto);
+    public void handleDocument(MultipartFile file, PostDocumentRequestDto postDocRequestDto)
+        throws JsonProcessingException {
+        var mappedDocumentEntity = documentService.saveDocument(postDocRequestDto);
         minioService.handleFileUpload(file);
 
-        // TODO: figure out what the exact content of the message should be
-        mqService.processMessage(String.format("[ID: %d]\n[Name: %s]", mappedDocumentEntity.getId(), mappedDocumentEntity.getTitle()));
+        // send the entire document entity over
+        mqService
+            .processMessage(new ObjectMapper().writeValueAsString(mappedDocumentEntity));
     }
 
 }

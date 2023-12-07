@@ -21,7 +21,7 @@ public class MQService {
 
     public void processMessage(String message) {
 
-        rabbit.convertAndSend(RabbitMQConfig.PAPERLESS_REST_QUEUE, "Message: " + message);
+        rabbit.convertAndSend(RabbitMQConfig.PAPERLESS_REST_QUEUE, message);
         logger.info(String.format("[ Sent message to %s]", message));
     }
 
