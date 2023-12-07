@@ -39,7 +39,7 @@ ENV DEFAULT_UID=${uid:-0}
 ENV DEFAULT_GID=${gid:-0}
 
 # provide directory for the documents to land in
-USER root # the next line will not work without this
+USER root
 RUN mkdir -p /documents && chmod 777 /documents
 USER ${DEFAULT_UID}:${DEFAULT_GID}
 
