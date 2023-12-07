@@ -13,19 +13,27 @@ import org.apache.logging.log4j.Logger;
 public class OcrDispatcherService {
     Logger logger = LogManager.getLogger(OcrDispatcherService.class);
 
+    private final MinioService minioService;
+
+    public OcrDispatcherService(MinioService minioService) {
+        this.minioService = minioService;
+    }
+
     public void handleMessage(String message) {
         // deserialize message
+        DocumentEntity document;
         var om = new ObjectMapper();
         try {
-            var document = om.readValue(message, DocumentEntity.class);
+            document = om.readValue(message, DocumentEntity.class);
             this.logger.info(
                 String.format("Successfully parsed document: %s\n", document.getTitle()));
-        } catch (JsonProcessingException e) {
+
+        this.minioService.retrieveFile(document.getTitle());
+        } catch (Exception e) {
             this.logger
-                .error(String.format("Could not parse document object, aborting.\n%s", e));
+                .error(String.format("An error occurred: %s\n", e));
         }
-        // log stuff
-        // run OCR job
-        // when it's done, persist the new content in the entity
+        // TODO run OCR job
+        // TODO persist content in the entity
     }
 }

@@ -125,12 +125,7 @@ services:
       - 8082:8080
     restart: always
     depends_on:
-      db:
-        condition: service_healthy
-      minio:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
+      - paperless-rest
 
 volumes:
   rabbitmq-data: {}

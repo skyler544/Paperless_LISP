@@ -31,6 +31,16 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 COPY --from=temurin /customjre $JAVA_HOME
 COPY --from=temurin ./target/paperlessOCR-1.0-SNAPSHOT.jar ./
 
+# Capture default UID and GID
+# should prevent running java with root privileges
+ENV DEFAULT_UID=${uid:-0}
+ENV DEFAULT_GID=${gid:-0}
+
+# provide directory for the documents to land in
+USER root # the next line will not work without this
+RUN mkdir -p /documents && chmod 777 /documents
+USER ${DEFAULT_UID}:${DEFAULT_GID}
+
 EXPOSE 8080
 
 ENTRYPOINT ["/jre/bin/java", "-jar", "/paperlessOCR-1.0-SNAPSHOT.jar"]
