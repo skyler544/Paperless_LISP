@@ -1,8 +1,7 @@
 package at.fhtw.swen3.paperless.services;
 
-import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
-import at.fhtw.swen3.paperless.models.entity.TestEntity;
-import at.fhtw.swen3.paperless.services.mapper.TestMapper;
+import at.fhtw.swen3.paperless.entities.TestEntity;
+import at.fhtw.swen3.paperless.mapper.TestMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
