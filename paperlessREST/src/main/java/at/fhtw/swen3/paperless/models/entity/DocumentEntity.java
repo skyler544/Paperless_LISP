@@ -27,7 +27,7 @@ public class DocumentEntity {
     @Size(max = 40, message = "A valid document title must contain less than 40 characters")
     private String title;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private String createdDate;
