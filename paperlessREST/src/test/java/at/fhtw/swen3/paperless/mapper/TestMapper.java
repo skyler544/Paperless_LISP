@@ -1,8 +1,9 @@
-package at.fhtw.swen3.paperless.services.mapper;
+package at.fhtw.swen3.paperless.mapper;
 
 
-import at.fhtw.swen3.paperless.models.entity.TestEntity;
-import at.fhtw.swen3.paperless.services.customDTOs.TestDto;
+import at.fhtw.swen3.paperless.entities.TestEntity;
+import at.fhtw.swen3.paperless.DTOs.TestDto;
+import at.fhtw.swen3.paperless.services.mapper.BaseMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
