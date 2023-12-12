@@ -4,18 +4,26 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import at.fhtw.swen3.paperless.ocr.config.RabbitMQConfig;
+import org.springframework.stereotype.Service;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Component
+@Service
 public class ConsumerService {
-    // TODO integrate Logger
+    Logger logger = LogManager.getLogger(ConsumerService.class);
+
+    private final OcrDispatcherService dispatcherService;
+
+    public ConsumerService(OcrDispatcherService dispatcherService) {
+        this.dispatcherService = dispatcherService;
+    }
 
     @RabbitListener(queues = RabbitMQConfig.PAPERLESS_REST_QUEUE)
     public void receive(String message) {
-        try {
-            System.out.println(String.format("Received a message over %s:\n%s",
-                    RabbitMQConfig.PAPERLESS_REST_QUEUE, message));
-        } catch (Exception e) {
-            System.out.println(String.format("Error occurred: %s\n", e));
-        }
+        this.logger.info(String.format("Received a message over %s:\n%s",
+            RabbitMQConfig.PAPERLESS_REST_QUEUE, message));
+
+        // TODO does this need to be threaded?
+        dispatcherService.handleMessage(message);
     }
 }

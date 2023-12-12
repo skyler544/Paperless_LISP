@@ -1,4 +1,4 @@
-package at.fhtw.swen3.paperless.models.entity;
+package at.fhtw.swen3.paperless.ocr.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -14,9 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity(name = "document")
 public class DocumentEntity {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Integer correspondent;
 
