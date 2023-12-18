@@ -2,13 +2,14 @@ package at.fhtw.swen3.paperless.services.minio;
 
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
-import lombok.Getter;
-import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.InputStream;
 
 @Component

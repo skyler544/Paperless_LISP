@@ -4,7 +4,7 @@ import at.fhtw.swen3.paperless.services.dto.CreateUISettings200Response;
 import at.fhtw.swen3.paperless.services.dto.CreateUISettingsRequest;
 import at.fhtw.swen3.paperless.services.dto.GetSavedViews200Response;
 import at.fhtw.swen3.paperless.services.dto.GetUISettings200Response;
-
+import jakarta.annotation.Generated;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
 
-
 import java.util.Optional;
-import jakarta.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
 @Controller

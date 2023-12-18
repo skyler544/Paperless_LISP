@@ -2,14 +2,15 @@ package at.fhtw.swen3.paperless.ocr.services;
 
 import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
-import org.springframework.stereotype.Service;
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
+
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Service
 public class MinioService {
