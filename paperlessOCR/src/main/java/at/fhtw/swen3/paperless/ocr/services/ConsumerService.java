@@ -1,10 +1,10 @@
 package at.fhtw.swen3.paperless.ocr.services;
 
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import at.fhtw.swen3.paperless.ocr.config.RabbitMQConfig;
-import org.springframework.stereotype.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ConsumerService {

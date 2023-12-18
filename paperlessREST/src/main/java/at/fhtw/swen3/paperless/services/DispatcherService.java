@@ -3,13 +3,13 @@ package at.fhtw.swen3.paperless.services;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import at.fhtw.swen3.paperless.services.messageQueue.MQService;
 import at.fhtw.swen3.paperless.services.minio.MinioService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class DispatcherService implements IDispatcherService {
