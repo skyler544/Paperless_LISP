@@ -3,6 +3,7 @@ package at.fhtw.swen3.paperless.ocr.services;
 import at.fhtw.swen3.paperless.ocr.entities.DocumentEntity;
 import at.fhtw.swen3.paperless.ocr.services.interfaces.DocumentDbStorageService;
 import at.fhtw.swen3.paperless.ocr.services.interfaces.OcrExecutorService;
+import at.fhtw.swen3.paperless.ocr.services.interfaces.SearchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,10 +21,13 @@ public class OcrDispatcherService {
 
     private final DocumentDbStorageService documentDbStorageService;
 
-    public OcrDispatcherService(MinioService minioService, TesseractService tesseractService, DocumentPostgresService documentPostgresService) {
+    private final SearchService searchService;
+
+    public OcrDispatcherService(MinioService minioService, TesseractService tesseractService, DocumentPostgresService documentPostgresService, SearchService searchService) {
         this.minioService = minioService;
         this.ocrExecutorService = tesseractService;
         this.documentDbStorageService = documentPostgresService;
+        this.searchService = searchService;
     }
 
     public void handleMessage(String message) {
@@ -39,10 +43,15 @@ public class OcrDispatcherService {
             this.logger.info(String.format("File fetched from minIO and temporary stored in: %s", filePath));
 
             String parsedFileContent = this.ocrExecutorService.executeOcr(filePath.toFile());
+            //we update the document with the new content, so that the search service can store it
+            document.setContent(parsedFileContent);
             this.logger.info(String.format("File %s was successfully parsed.\n Content was: \n %s", filePath, parsedFileContent));
 
             documentDbStorageService.updateDocumentContent(document.getId(), parsedFileContent);
             this.logger.info(String.format("Successfully updated document content, for document id: %03d", document.getId()));
+
+            searchService.indexDocument(document);
+            this.logger.info(String.format("Successfully indexed document in search db with id: %03d", document.getId()));
 
         } catch (Exception e) {
             this.logger
