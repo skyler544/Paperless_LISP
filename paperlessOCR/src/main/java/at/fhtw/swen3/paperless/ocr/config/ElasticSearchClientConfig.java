@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 
+import java.io.IOException;
+
 @Configuration
 public class ElasticSearchClientConfig {
 
@@ -39,8 +41,19 @@ public class ElasticSearchClientConfig {
 
 
     @Bean
-    public ElasticsearchClient getElasticsearchClient(){
-        return new ElasticsearchClient(getElasticsearchTransport());
+    public ElasticsearchClient getElasticsearchClient() throws IOException {
+        ElasticsearchClient client = new ElasticsearchClient(getElasticsearchTransport());
+
+        //if index does not yet exist we create it, more elegant than in the appropriate service
+        if (!client.indices().exists(
+                i -> i.index(ElasticSearchClientConfig.SEARCH_DOC_INDEX_NAME)
+        ).value()) {
+            client.indices().create(c -> c
+                    .index(ElasticSearchClientConfig.SEARCH_DOC_INDEX_NAME)
+            );
+        }
+
+        return client;
     }
 
 }
