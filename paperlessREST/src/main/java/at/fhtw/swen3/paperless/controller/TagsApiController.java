@@ -54,14 +54,6 @@ public class TagsApiController implements TagsApi, BaseLoggingController {
 
     @Override
     public ResponseEntity<GetTags200Response> getTags(Integer page, Boolean fullPerms) {
-
-        this.logReceivedRequest("GetTags");
-        this.logIncomingParams(String.format("page: %s, fullPerms: %s", page.toString(), fullPerms.toString()));
-
-        GetTags200Response responseDTO = new GetTags200Response();
-
-        this.logSentResponse("GetTags", responseDTO.toString());
-
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
