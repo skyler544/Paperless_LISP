@@ -49,9 +49,7 @@ public interface SearchApi {
         operationId = "autoComplete",
         tags = { "Search" },
         responses = {
-            @ApiResponse(responseCode = "200", description = "Success", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = String.class)))
-            })
+            @ApiResponse(responseCode = "200", description = "Success")
         }
     )
     @RequestMapping(
@@ -64,17 +62,7 @@ public interface SearchApi {
         @Parameter(name = "term", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "term", required = false) String term,
         @Parameter(name = "limit", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "limit", required = false) Integer limit
     ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ \"\", \"\" ]";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

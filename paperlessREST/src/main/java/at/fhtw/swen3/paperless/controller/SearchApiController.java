@@ -41,14 +41,6 @@ public class SearchApiController implements SearchApi, BaseLoggingController {
 
     @Override
     public ResponseEntity<List<String>> autoComplete(String term, Integer limit) {
-
-        this.logReceivedRequest("Autocomplete");
-        this.logIncomingParams(String.format("term: %s, limit: %s", term, limit.toString()));
-
-        final List<String> autocompleteResult = new ArrayList<String>();
-
-        this.logSentResponse("Autocomplete", autocompleteResult.toString());
-
-        return new ResponseEntity<>(autocompleteResult, HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
