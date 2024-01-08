@@ -5,6 +5,7 @@
  */
 package at.fhtw.swen3.paperless.controller;
 
+import at.fhtw.swen3.paperless.services.customDTOs.GetDocumentWrapperDTO;
 import at.fhtw.swen3.paperless.services.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -173,7 +174,7 @@ public interface DocumentsApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<GetDocuments200Response> getDocuments(
+    default ResponseEntity<GetDocumentWrapperDTO> getDocuments(
         @Parameter(name = "Page", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "Page", required = false) Integer page,
         @Parameter(name = "page_size", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "page_size", required = false) Integer pageSize,
         @Parameter(name = "query", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "query", required = false) String query,
@@ -194,7 +195,7 @@ public interface DocumentsApi {
 //                }
 //            }
 //        });
-        return new ResponseEntity<>(new GetDocuments200Response(), HttpStatus.OK);
+        return new ResponseEntity<>(new GetDocumentWrapperDTO(), HttpStatus.OK);
 
     }
 
