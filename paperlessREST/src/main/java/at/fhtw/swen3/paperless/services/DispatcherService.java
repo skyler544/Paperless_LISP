@@ -1,5 +1,6 @@
 package at.fhtw.swen3.paperless.services;
 
+import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import at.fhtw.swen3.paperless.services.messageQueue.MQService;
 import at.fhtw.swen3.paperless.services.minio.MinioService;
@@ -10,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
 
 @Service
 public class DispatcherService implements IDispatcherService {
@@ -37,6 +41,21 @@ public class DispatcherService implements IDispatcherService {
         // send the entire document entity over
         mqService
             .processMessage(new ObjectMapper().writeValueAsString(mappedDocumentEntity));
+    }
+
+    @Override
+    public List<DocumentEntity> handleGetDocuments(String query) throws IOException {
+
+        if (query == null || query.isEmpty()) {
+
+            return this.documentService.fetchAllDocuments();
+
+        } else {
+
+            return this.documentService.searchDocuments(query);
+
+        }
+
     }
 
 }

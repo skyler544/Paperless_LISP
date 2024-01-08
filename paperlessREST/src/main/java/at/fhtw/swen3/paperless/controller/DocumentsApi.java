@@ -184,6 +184,7 @@ public interface DocumentsApi {
         @Parameter(name = "correspondent__id", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "correspondent__id", required = false) Integer correspondentId,
         @Parameter(name = "truncate_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "truncate_content", required = false) Boolean truncateContent
     ) {
+        //TODO return documents
 //        getRequest().ifPresent(request -> {
 //            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
 //                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
