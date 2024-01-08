@@ -12,8 +12,9 @@ services:
       - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    healthcheck:
-      test: "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"
+# creates some problems at startup, better safe than sorry
+#    healthcheck:
+#      test: "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"
 
   adminer:
     image: adminer
@@ -109,6 +110,8 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+      db:
+        condition: service_started
 
   web:
     image: nginx
