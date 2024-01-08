@@ -1,7 +1,12 @@
 package at.fhtw.swen3.paperless.controller;
 
+import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.services.IDispatcherService;
+import at.fhtw.swen3.paperless.services.customDTOs.GetDocumentWrapperDTO;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
+import at.fhtw.swen3.paperless.services.dto.GetDocuments200Response;
+import at.fhtw.swen3.paperless.services.dto.GetDocuments200ResponseResultsInner;
+import at.fhtw.swen3.paperless.services.mapper.DocumentMapper;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.annotation.Generated;
 import jakarta.validation.Valid;
@@ -26,6 +31,28 @@ import java.util.List;
 public class DocumentsApiController implements DocumentsApi, BaseLoggingController {
 
     private final Logger logger = LogManager.getLogger(ConfigApiController.class);
+
+    @Override
+    public ResponseEntity<GetDocumentWrapperDTO> getDocuments(Integer page, Integer pageSize, String query, String ordering, List<Integer> tagsIdAll, Integer documentTypeId, Integer storagePathIdIn, Integer correspondentId, Boolean truncateContent) {
+        //add service for the documents
+        try {
+
+            List<DocumentEntity> documents = this.dispatcherService.handleGetDocuments(query);
+
+            GetDocumentWrapperDTO response = new GetDocumentWrapperDTO();
+            response.setCount(documents.size());
+            response.setResults(
+                    documents.stream().map(doc ->
+                        DocumentMapper.INSTANCE.entityToDto(doc)
+                    ).toList()
+            );
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 
     @Override
     public Logger getLogger() {

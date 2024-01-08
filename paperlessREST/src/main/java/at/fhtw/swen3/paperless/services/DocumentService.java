@@ -4,9 +4,13 @@ import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.repositories.DocumentRepository;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import at.fhtw.swen3.paperless.services.mapper.PostDocumentMapper;
+import at.fhtw.swen3.paperless.services.search.SearchService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.List;
 
 @Service
 public class DocumentService implements IDocumentService {
@@ -15,8 +19,11 @@ public class DocumentService implements IDocumentService {
 
     private final DocumentRepository documentRepository;
 
-    public DocumentService(DocumentRepository documentRepository) {
+    private final SearchService searchService;
+
+    public DocumentService(DocumentRepository documentRepository, SearchService searchService) {
         this.documentRepository = documentRepository;
+        this.searchService = searchService;
     }
 
     @Override
@@ -28,11 +35,22 @@ public class DocumentService implements IDocumentService {
 
             return mappedDocumentEntity;
         } catch (Exception e) {
-
+            this.logger.error(e.getMessage());
             this.logger.error(String.format("Error saving document \n%s", e));
             throw e;
-
         }
 
+    }
+
+    @Override
+    public List<DocumentEntity> fetchAllDocuments() {
+        return this.documentRepository.findAll();
+    }
+
+    @Override
+    public List<DocumentEntity> searchDocuments(String query) throws IOException {
+        //no need to execute a query against the db, elastic search already contains
+        //all the data we need in order to return useful results.
+        return this.searchService.searchDocumentsByQuery(query);
     }
 }

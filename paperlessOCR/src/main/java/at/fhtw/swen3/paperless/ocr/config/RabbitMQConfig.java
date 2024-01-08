@@ -4,6 +4,7 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,11 +17,18 @@ public class RabbitMQConfig {
         return new Queue(PAPERLESS_REST_QUEUE, false);
     }
 
+    @Value("${paperless.rabbitMq.username}")
+    private String rabbitMqUsername;
+
+    @Value("${paperless.rabbitMq.password}")
+    private String rabbitMqPwd;
+
+
     @Bean
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory("rabbitmq");
-        connectionFactory.setUsername("paperless_rabbitmq");
-        connectionFactory.setPassword("paperless_mq");
+        connectionFactory.setUsername(this.rabbitMqUsername);
+        connectionFactory.setPassword(this.rabbitMqPwd);
         return connectionFactory;
     }
 
