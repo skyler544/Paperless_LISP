@@ -1,5 +1,6 @@
 package at.fhtw.swen3.paperless.ocr.services;
 
+import at.fhtw.swen3.paperless.ocr.services.interfaces.DocumentStoreService;
 import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 @Service
-public class MinioService {
+public class MinioService implements DocumentStoreService {
     Logger logger = LogManager.getLogger(MinioService.class);
     private final String BUCKET_NAME = "documents";
 
@@ -22,6 +23,7 @@ public class MinioService {
         MinioClient.builder().endpoint("http://minio:9000")
             .credentials("paperless_minio", "paperless").build();
 
+    @Override
     public Path retrieveFile(String path) {
         this.logger.info(String.format("Retrieving file: %s\n", path));
 
