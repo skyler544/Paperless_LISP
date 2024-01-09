@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MQService {
+public class RabbitMQService implements MessageQueueService {
 
     private final RabbitTemplate rabbit;
 
-    private final Logger logger = LogManager.getLogger(MQService.class);
+    private final Logger logger = LogManager.getLogger(RabbitMQService.class);
 
     @Autowired
-    public MQService(RabbitTemplate rabbit) {
+    public RabbitMQService(RabbitTemplate rabbit) {
         this.rabbit = rabbit;
     }
 

@@ -2,7 +2,7 @@ package at.fhtw.swen3.paperless.services.search;
 
 import at.fhtw.swen3.paperless.config.ElasticSearchClientConfig;
 import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
-import at.fhtw.swen3.paperless.services.DocumentService;
+import at.fhtw.swen3.paperless.services.document.DocumentService;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import org.apache.logging.log4j.LogManager;

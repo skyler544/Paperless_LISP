@@ -1,4 +1,4 @@
-package at.fhtw.swen3.paperless.services;
+package at.fhtw.swen3.paperless.services.document;
 
 import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;

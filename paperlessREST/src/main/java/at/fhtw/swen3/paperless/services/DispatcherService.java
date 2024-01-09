@@ -2,8 +2,9 @@ package at.fhtw.swen3.paperless.services;
 
 import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
-import at.fhtw.swen3.paperless.services.messageQueue.MQService;
-import at.fhtw.swen3.paperless.services.minio.MinioService;
+import at.fhtw.swen3.paperless.services.document.DocumentService;
+import at.fhtw.swen3.paperless.services.messageQueue.MessageQueueService;
+import at.fhtw.swen3.paperless.services.minio.DocumentStoreService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -21,12 +22,12 @@ public class DispatcherService implements IDispatcherService {
     Logger logger = LogManager.getLogger(DispatcherService.class);
 
     private final DocumentService documentService;
-    private final MQService mqService;
-    private final MinioService minioService;
+    private final MessageQueueService mqService;
+    private final DocumentStoreService minioService;
 
     @Autowired
-    public DispatcherService(DocumentService documentService, MQService mqService,
-        MinioService minioService) {
+    public DispatcherService(DocumentService documentService, MessageQueueService mqService,
+                             DocumentStoreService minioService) {
         this.documentService = documentService;
         this.mqService = mqService;
         this.minioService = minioService;
