@@ -1,9 +1,7 @@
 package at.fhtw.swen3.paperless.ocr.services;
 
 import at.fhtw.swen3.paperless.ocr.entities.DocumentEntity;
-import at.fhtw.swen3.paperless.ocr.services.interfaces.DocumentDbStorageService;
-import at.fhtw.swen3.paperless.ocr.services.interfaces.OcrExecutorService;
-import at.fhtw.swen3.paperless.ocr.services.interfaces.SearchService;
+import at.fhtw.swen3.paperless.ocr.services.interfaces.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,10 +10,10 @@ import org.springframework.stereotype.Service;
 import java.nio.file.Path;
 
 @Service
-public class OcrDispatcherService {
+public class OcrDispatcherService implements DispatcherService {
     Logger logger = LogManager.getLogger(OcrDispatcherService.class);
 
-    private final MinioService minioService;
+    private final DocumentStoreService minioService;
 
     private final OcrExecutorService ocrExecutorService;
 
@@ -23,13 +21,14 @@ public class OcrDispatcherService {
 
     private final SearchService searchService;
 
-    public OcrDispatcherService(MinioService minioService, TesseractService tesseractService, DocumentPostgresService documentPostgresService, SearchService searchService) {
+    public OcrDispatcherService(DocumentStoreService minioService, TesseractService tesseractService, DocumentPostgresService documentPostgresService, SearchService searchService) {
         this.minioService = minioService;
         this.ocrExecutorService = tesseractService;
         this.documentDbStorageService = documentPostgresService;
         this.searchService = searchService;
     }
 
+    @Override
     public void handleMessage(String message) {
         // deserialize message
         DocumentEntity document;

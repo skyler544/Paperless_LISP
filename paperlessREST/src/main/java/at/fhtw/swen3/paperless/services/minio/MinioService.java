@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 
 @Component
-public class MinioService {
+public class MinioService implements DocumentStoreService {
 
     Logger logger = LogManager.getLogger(MinioService.class);
 
@@ -47,6 +47,7 @@ public class MinioService {
         }
     }
 
+    @Override
     public void handleFileUpload(MultipartFile document) {
 
         try {
