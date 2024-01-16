@@ -23,10 +23,12 @@ public class RabbitMQConfig {
     @Value("${paperless.rabbitMq.password}")
     private String rabbitMqPwd;
 
+    @Value("${paperless.rabbitMq.hostname}")
+    private String rabbitMqHostname;
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("rabbitmq");
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(this.rabbitMqHostname);
         connectionFactory.setUsername(this.rabbitMqUsername);
         connectionFactory.setPassword(this.rabbitMqPwd);
         return connectionFactory;
