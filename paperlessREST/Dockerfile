@@ -31,6 +31,8 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 COPY --from=temurin /customjre $JAVA_HOME
 COPY --from=temurin ./target/paperlessREST-1.0.0.jar ./
 
+RUN apk --no-cache add curl
+
 EXPOSE 8080
 
 ENTRYPOINT ["/jre/bin/java", "-jar", "/paperlessREST-1.0.0.jar"]
