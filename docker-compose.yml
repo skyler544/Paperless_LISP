@@ -142,6 +142,16 @@ services:
       - paperless-rest
       - elasticsearch
 
+  paperless-integration:
+    container_name: paperless-integration
+    build:
+      context: paperlessIntegration
+      dockerfile: Dockerfile
+    image: paperless-integration:latest
+    depends_on:
+      paperless-rest:
+        condition: service_healthy
+
 volumes:
   rabbitmq-data: {}
   rabbitmq-log: {}
