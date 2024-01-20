@@ -36,7 +36,7 @@ public class ElasticSearchService implements SearchService {
                     .document(document)
             );
 
-            if (indexResponse.result()!=Result.Created && indexResponse.result()!=Result.Updated) {
+            if (indexResponse == null || (indexResponse.result()!=Result.Created && indexResponse.result()!=Result.Updated)) {
                 logger.log(Level.ERROR, String.format("Error indexing document [DocId: %s, DocTitle: %s]", document.getId().toString(), document.getTitle()));
             }
             else {
