@@ -9,7 +9,7 @@ services:
       POSTGRES_DB: paperlessdb
       PGUSER: postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 # creates some problems at startup, better safe than sorry
@@ -20,7 +20,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - 9091:8080
+      - "9091:8080"
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -29,8 +29,8 @@ services:
       RABBITMQ_DEFAULT_USER: paperless_rabbitmq
       RABBITMQ_DEFAULT_PASS: paperless_mq
     ports:
-      - 5672:5672
-      - 9093:15672
+      - "5672:5672"
+      - "9093:15672"
     restart: always
     volumes:
       - "rabbitmq-data:/var/lib/rabbitmq"
@@ -44,8 +44,8 @@ services:
   minio:
     image: minio/minio
     ports:
-      - 9000:9000
-      - 9090:9001
+      - "9000:9000"
+      - "9090:9001"
     volumes:
       - minio_storage:/data
     restart: always
@@ -72,8 +72,8 @@ services:
       - "xpack.security.enabled=false"
       - "xpack.security.enrollment.enabled=false"
     ports:
-      - 9200:9200
-      - 9300:9300
+      - "9200:9200"
+      - "9300:9300"
     cap_add:
       - IPC_LOCK
     ulimits:
@@ -90,7 +90,7 @@ services:
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     ports:
-      - 9092:5601
+      - "9092:5601"
     depends_on:
       - elasticsearch
 
@@ -125,7 +125,7 @@ services:
       - "./web-server/nginx.conf:/etc/nginx/nginx.conf"
       - "./web-server/static:/usr/share/nginx/html"
     ports:
-      - 80:80
+      - "80:80"
     depends_on:
       - paperless-rest
 
