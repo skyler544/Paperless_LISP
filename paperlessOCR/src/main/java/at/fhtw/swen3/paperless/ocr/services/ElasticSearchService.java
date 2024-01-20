@@ -5,18 +5,13 @@ import at.fhtw.swen3.paperless.ocr.entities.DocumentEntity;
 import at.fhtw.swen3.paperless.ocr.services.interfaces.SearchService;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.Result;
-import co.elastic.clients.elasticsearch.core.GetResponse;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
-import co.elastic.clients.elasticsearch.watcher.IndexResult;
-import jdk.jshell.spi.ExecutionControl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ElasticSearchService implements SearchService {
@@ -25,14 +20,14 @@ public class ElasticSearchService implements SearchService {
 
     private final ElasticsearchClient elasticsearchClient;
 
-    public ElasticSearchService(ElasticsearchClient elasticsearchClient) throws IOException {
+    public ElasticSearchService(ElasticsearchClient elasticsearchClient) {
 
         this.elasticsearchClient = elasticsearchClient;
 
     }
 
     @Override
-    public Result indexDocument(DocumentEntity document) throws IOException {
+    public void indexDocument(DocumentEntity document) throws IOException {
         //index the document in the elastic search db
         try {
             IndexResponse indexResponse = this.elasticsearchClient.index(indexRequest -> indexRequest
@@ -47,8 +42,6 @@ public class ElasticSearchService implements SearchService {
             else {
                 logger.log(Level.INFO, String.format("Indexed document into search db. [DocId: %s, DocTitle: %s]", document.getId().toString(), document.getTitle()));
             }
-
-            return indexResponse.result();
 
         } catch (IOException e) {
             logger.log(Level.ERROR, "Failed to index document in the search db \n" + e.getMessage());
