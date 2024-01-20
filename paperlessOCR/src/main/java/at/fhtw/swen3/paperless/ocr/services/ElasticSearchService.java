@@ -21,7 +21,7 @@ import java.util.Optional;
 @Service
 public class ElasticSearchService implements SearchService {
 
-    Logger logger = LogManager.getLogger(OcrDispatcherService.class);
+    final Logger logger = LogManager.getLogger(OcrDispatcherService.class);
 
     private final ElasticsearchClient elasticsearchClient;
 

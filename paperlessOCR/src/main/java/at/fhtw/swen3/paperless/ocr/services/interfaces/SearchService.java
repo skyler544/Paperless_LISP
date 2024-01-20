@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface SearchService {
 
-    public Result indexDocument(DocumentEntity document) throws IOException;
+    Result indexDocument(DocumentEntity document) throws IOException;
 
 }
