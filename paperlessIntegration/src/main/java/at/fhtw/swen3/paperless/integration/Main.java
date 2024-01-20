@@ -1,6 +1,6 @@
 package at.fhtw.swen3.paperless.integration;
 
-import at.fhtw.swen3.paperless.integration.util.HealthChecker;
+import at.fhtw.swen3.paperless.integration.services.HealthChecker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class Main implements CommandLineRunner {
     Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        SpringApplication.run(Main.class, args).close();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package at.fhtw.swen3.paperless.integration.util;
+package at.fhtw.swen3.paperless.integration.services;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
