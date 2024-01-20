@@ -11,7 +11,4 @@ public interface SearchService {
 
     public Result indexDocument(DocumentEntity document) throws IOException;
 
-    public Optional<DocumentEntity> getDocumentById(Integer id);
-
-    public List<DocumentEntity> search(String searchString);
 }

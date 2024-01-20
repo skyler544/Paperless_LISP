@@ -57,27 +57,4 @@ public class ElasticSearchService implements SearchService {
 
     }
 
-    @Override
-    public Optional<DocumentEntity> getDocumentById(Integer id) {
-
-        try {
-
-            GetResponse<DocumentEntity> response = this.elasticsearchClient.get(getRequest -> getRequest
-                            .index(ElasticSearchClientConfig.SEARCH_DOC_INDEX_NAME)
-                            .id(String.valueOf(id)),
-                    DocumentEntity.class
-            );
-
-            return (response.found() && response.source()!=null) ? Optional.of(response.source()) : Optional.empty();
-        } catch (IOException e) {
-            logger.log(Level.ERROR, String.format("Error getting document with id=%s", id.toString()));
-            return Optional.empty();
-        }
-
-    }
-
-    @Override
-    public List<DocumentEntity> search(String searchString) {
-        throw new UnsupportedOperationException();
-    }
 }
