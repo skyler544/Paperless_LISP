@@ -11,7 +11,7 @@ import java.nio.file.Path;
 
 @Service
 public class OcrDispatcherService implements DispatcherService {
-    Logger logger = LogManager.getLogger(OcrDispatcherService.class);
+    final Logger logger = LogManager.getLogger(OcrDispatcherService.class);
 
     private final DocumentStoreService minioService;
 

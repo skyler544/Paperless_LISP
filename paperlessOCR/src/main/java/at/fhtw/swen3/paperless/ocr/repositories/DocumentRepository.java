@@ -13,6 +13,6 @@ public interface DocumentRepository extends JpaRepository<DocumentEntity, Intege
     @Transactional //transactional is needed for hibernate to work
     @Modifying //overwrite default JPA behaviour
     @Query("update document as d set d.content = :content where d.id = :id")
-    int updateDocumentContentById(@Param("content") String content, @Param("id") Integer id);
+    void updateDocumentContentById(@Param("content") String content, @Param("id") Integer id);
 
 }
