@@ -34,6 +34,7 @@ public class HealthCheckerService {
     private HttpStatus getResponseCode() {
         RestTemplate restTemplate = new RestTemplate();
         try {
+            this.logger.info("Pinging server...");
             return HttpStatus.valueOf(restTemplate.getForEntity(this.address(), String.class)
                     .getStatusCode().value());
         } catch (Exception e) {

@@ -23,6 +23,7 @@ public class IntegrationDispatcherService {
 
         // do nothing until the application is ready
         while(!healthCheckerService.isHealthy()) {}
+        this.logger.info("The server is awake and ready. Proceeding.");
 
         this.uploadDocumentService.uploadDocument();
     }
