@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ConsumerService {
-    Logger logger = LogManager.getLogger(ConsumerService.class);
+    final Logger logger = LogManager.getLogger(ConsumerService.class);
 
     private final DispatcherService dispatcherService;
 

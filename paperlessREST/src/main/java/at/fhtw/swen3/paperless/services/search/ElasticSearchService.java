@@ -33,9 +33,6 @@ public class ElasticSearchService implements SearchService {
                             .multiMatch(
                                     m -> m.fields("content", "title").fuzziness("AUTO").query(query)
                             )), DocumentEntity.class);
-//                            .match(t -> t
-//                                    .field("content")
-//                                    .query(query))), DocumentEntity.class);
 
             return searchResponse.hits().hits().stream().map(hit -> hit.source()).toList();
         } catch (IOException e) {
