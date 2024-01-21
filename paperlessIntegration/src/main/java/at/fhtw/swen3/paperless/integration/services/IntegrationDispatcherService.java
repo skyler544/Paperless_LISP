@@ -10,15 +10,20 @@ public class IntegrationDispatcherService {
     Logger logger = LogManager.getLogger(IntegrationDispatcherService.class);
 
     private final HealthCheckerService healthCheckerService;
+    private final UploadDocumentService uploadDocumentService;
 
     @Autowired
-    public IntegrationDispatcherService(HealthCheckerService healthCheckerService) {
+    public IntegrationDispatcherService(HealthCheckerService healthCheckerService, UploadDocumentService uploadDocumentService) {
         this.healthCheckerService = healthCheckerService;
+        this.uploadDocumentService = uploadDocumentService;
     }
 
-    public void integrationTests() {
-        this.logger.info("We're integrating now boys.");
+    public void integrationTests() throws Exception {
+        this.logger.info("Beginning Integration Testing:");
 
-        this.logger.info("Healthy? " + this.healthCheckerService.isHealthy());
+        // do nothing until the application is ready
+        while(!healthCheckerService.isHealthy()) {}
+
+        this.uploadDocumentService.uploadDocument();
     }
 }
