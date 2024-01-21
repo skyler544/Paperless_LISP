@@ -11,12 +11,14 @@ public class IntegrationDispatcherService {
 
     private final HealthCheckerService healthCheckerService;
     private final UploadDocumentService uploadDocumentService;
+    private final QueryDocumentService queryDocumentService;
 
     @Autowired
     public IntegrationDispatcherService(HealthCheckerService healthCheckerService,
-            UploadDocumentService uploadDocumentService) {
+        UploadDocumentService uploadDocumentService, QueryDocumentService queryDocumentService) {
         this.healthCheckerService = healthCheckerService;
         this.uploadDocumentService = uploadDocumentService;
+        this.queryDocumentService = queryDocumentService;
     }
 
     public void integrationTests() throws Exception {
@@ -28,6 +30,10 @@ public class IntegrationDispatcherService {
 
         if (!this.uploadDocumentService.successfullyUploadedDocument()) {
             throw new Exception("Failed to upload document. Aborting.");
+        }
+
+        if (!this.queryDocumentService.successfullyQueriedDocument()) {
+            throw new Exception("Failed to query document. Aborting.");
         }
     }
 }
