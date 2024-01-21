@@ -38,13 +38,13 @@ The project contains two gitHub actions, namely:
     - The action is used as a status check for pull requests against main. It was implemented to guarantee that only tested code is pushed into main
     - The action builds and tests the actual version of the paperlessREST project, if any tests fail the pull request cannot be completed
    
-  ## How to write better commit messages
+## How to write better commit messages
   
-    - Why have I made these changes?
-    - What effect have my changes made?
-    - Why was the change needed?
-    - What are the changes in reference to?
+  - Why have I made these changes?
+  - What effect have my changes made?
+  - Why was the change needed?
+  - What are the changes in reference to?
 
-    e.g. git commit -m 'Add margin to nav items to prevent them from overlapping the logo'
+  e.g. git commit -m 'Add margin to nav items to prevent them from overlapping the logo'
 
-    source: https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/
+  source: https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/
