@@ -34,7 +34,7 @@ public class UploadDocumentService {
     private String filename;
 
     public boolean successfullyUploadedDocument() {
-        if (upload() == HttpStatus.CREATED) {
+        if (uploadDocument() == HttpStatus.CREATED) {
             this.logger.info("Successfully uploaded document.");
             return true;
         } else {
@@ -52,7 +52,7 @@ public class UploadDocumentService {
         return new FileSystemResource(file);
     }
 
-    private HttpStatus upload() {
+    private HttpStatus uploadDocument() {
         this.logger.info("Uploading document to: " + this.address());
 
         try {
