@@ -29,10 +29,8 @@ ENV JAVA_HOME=/jre
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 COPY --from=temurin /customjre $JAVA_HOME
-COPY --from=temurin ./target/paperlessREST-1.0.0.jar ./
+COPY --from=temurin ./target/paperlessIntegration-1.0-SNAPSHOT.jar ./
 
-RUN apk --no-cache add curl
+COPY testdata/HelloWorld.pdf /testdata/HelloWorld.pdf
 
-EXPOSE 8080
-
-ENTRYPOINT ["/jre/bin/java", "-jar", "/paperlessREST-1.0.0.jar"]
+ENTRYPOINT ["/jre/bin/java", "-jar", "/paperlessIntegration-1.0-SNAPSHOT.jar"]
