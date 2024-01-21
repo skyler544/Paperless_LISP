@@ -48,3 +48,17 @@ The project contains two gitHub actions, namely:
   e.g. git commit -m 'Add margin to nav items to prevent them from overlapping the logo'
 
   source: https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/
+
+## Integration Testing
+
+At the shell, run the following:
+
+```
+$ cd SWKOM_Paperless
+$ docker compose up -d
+  ... output ...
+$ docker logs paperless-integration
+  ... integration test logs here ...
+```
+
+The integration testing container logs everything it does; individual integration testing use cases are implemented in dedicated service classes. The name of the service indicates which use case is being tested, and the messages logged indicate successes or failures. Messages about successful integration tests are logged under `INFO`, while failures are logged as `ERROR`.
