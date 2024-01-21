@@ -15,8 +15,7 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class MinioService implements DocumentStoreService {
-    Logger logger = LogManager.getLogger(MinioService.class);
-    private final String BUCKET_NAME = "documents";
+    final Logger logger = LogManager.getLogger(MinioService.class);
 
     @Getter
     private final MinioClient minioClient =
@@ -27,6 +26,7 @@ public class MinioService implements DocumentStoreService {
     public Path retrieveFile(String path) {
         this.logger.info(String.format("Retrieving file: %s\n", path));
 
+        String BUCKET_NAME = "documents";
         try (InputStream stream =
             minioClient.getObject(GetObjectArgs
                 .builder()

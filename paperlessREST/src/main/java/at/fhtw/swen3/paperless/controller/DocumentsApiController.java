@@ -32,6 +32,17 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
 
     private final Logger logger = LogManager.getLogger(ConfigApiController.class);
 
+    private final IDispatcherService dispatcherService;
+
+    public DocumentsApiController(IDispatcherService dispatcherService) {
+        this.dispatcherService = dispatcherService;
+    }
+
+    @Override
+    public Logger getLogger() {
+        return this.logger;
+    }
+
     @Override
     public ResponseEntity<GetDocumentWrapperDTO> getDocuments(Integer page, Integer pageSize, String query, String ordering, List<Integer> tagsIdAll, Integer documentTypeId, Integer storagePathIdIn, Integer correspondentId, Boolean truncateContent) {
         //add service for the documents
@@ -52,17 +63,6 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-    }
-
-    @Override
-    public Logger getLogger() {
-        return this.logger;
-    }
-
-    private final IDispatcherService dispatcherService;
-
-    public DocumentsApiController(IDispatcherService dispatcherService) {
-        this.dispatcherService = dispatcherService;
     }
 
     @Override
