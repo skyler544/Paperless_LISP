@@ -1,6 +1,5 @@
 package at.fhtw.swen3.paperless.integration;
 
-import at.fhtw.swen3.paperless.integration.services.HealthChecker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +7,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import at.fhtw.swen3.paperless.integration.services.IntegrationDispatcherService;
+
 @SpringBootApplication
 public class Main implements CommandLineRunner {
+    Logger logger = LogManager.getLogger(Main.class);
 
     @Autowired
-    private HealthChecker healthCheck;
-
-    Logger logger = LogManager.getLogger(Main.class);
+    IntegrationDispatcherService dispatcher;
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args).close();
@@ -22,6 +22,6 @@ public class Main implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        this.logger.info(healthCheck.getResponseCode());
+        dispatcher.integrationTests();
     }
 }
