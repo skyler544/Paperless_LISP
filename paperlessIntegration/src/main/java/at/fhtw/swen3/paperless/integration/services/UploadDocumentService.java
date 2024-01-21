@@ -60,6 +60,7 @@ public class UploadDocumentService {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
+            // we need to use this format to satisfy the type constraints on this endpoint
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             body.add("title", filename);
             body.add("document", fileContent());
