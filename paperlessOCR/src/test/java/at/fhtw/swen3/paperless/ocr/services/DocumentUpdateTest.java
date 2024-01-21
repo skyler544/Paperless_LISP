@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.sql.Time;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,14 +28,13 @@ public class DocumentUpdateTest {
     @Test
     public void testUpdate() {
 
+        //given
         Integer id = 1;
         String docContent = "Document content";
         DocumentEntity documentEntity = new DocumentEntity();
         documentEntity.setId(id);
         documentEntity.setTitle("Title");
         documentEntity.setCreatedDate("Timestamp");
-
-        //given
         this.documentRepository.save(documentEntity);
 
         //when

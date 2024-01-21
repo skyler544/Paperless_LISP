@@ -23,11 +23,16 @@ public class DocumentPostgresServiceTest {
 
     @Test
     public void whenDocumentUpdatedRepositoryCalled() {
+
+        //given
+        Integer docId = 1;
+        String parsedDocContent = "Doc content";
+
         //when
-        documentPostgresService.updateDocumentContent(1, "blabla");
+        documentPostgresService.updateDocumentContent(docId, parsedDocContent) ;
 
         //then
-        Mockito.verify(documentRepository, Mockito.times(1)).updateDocumentContentById("blabla", 1);
+        Mockito.verify(documentRepository, Mockito.times(1)).updateDocumentContentById(parsedDocContent, docId);
 
     }
 

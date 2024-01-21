@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.io.IOException;
 import java.util.function.Function;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -28,22 +30,19 @@ public class ElasticSearchServiceTest {
     private ElasticSearchService elasticSearchService;
 
     @Test
-    public void whenIndexCalledClientSendsRequest() {
+    public void whenIndexCalledClientSendsRequest() throws IOException {
 
-        try {
+        //given
+        DocumentEntity doc = new DocumentEntity();
+        doc.setId(1);
+        doc.setContent("Document content");
 
-            DocumentEntity doc = new DocumentEntity();
-            doc.setId(1);
-            doc.setContent("Document content");
-            elasticSearchService.indexDocument(doc);
+        //when
+        elasticSearchService.indexDocument(doc);
 
-            //since we create the request as a lambda we have to use the any() to just see if the method is called
-            Mockito.verify(elasticsearchClient, Mockito.times(1)).index((Function<IndexRequest.Builder<Object>, ObjectBuilder<IndexRequest<Object>>>) any());
-
-        } catch (Exception e) {
-            System.out.printf(e.getMessage());
-            throw new RuntimeException(e);
-        }
+        //then
+        //since we create the request as a lambda we have to use the any() to just see if the method is called
+        Mockito.verify(elasticsearchClient, Mockito.times(1)).index((Function<IndexRequest.Builder<Object>, ObjectBuilder<IndexRequest<Object>>>) any());
 
     }
 

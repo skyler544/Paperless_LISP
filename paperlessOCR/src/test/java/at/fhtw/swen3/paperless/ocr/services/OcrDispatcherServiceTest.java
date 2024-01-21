@@ -1,9 +1,6 @@
 package at.fhtw.swen3.paperless.ocr.services;
 
 import at.fhtw.swen3.paperless.ocr.entities.DocumentEntity;
-import at.fhtw.swen3.paperless.ocr.services.interfaces.*;
-import co.elastic.clients.elasticsearch.core.IndexRequest;
-import co.elastic.clients.util.ObjectBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.sourceforge.tess4j.TesseractException;
 import org.junit.Test;
@@ -20,9 +17,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.OffsetDateTime;
-import java.util.function.Function;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 
 @ActiveProfiles("test")

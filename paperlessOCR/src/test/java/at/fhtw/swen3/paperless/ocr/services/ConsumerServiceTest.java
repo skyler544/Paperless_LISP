@@ -24,10 +24,15 @@ public class ConsumerServiceTest {
     private ConsumerService consumerService;
     @Test
     public void whenMsgReceivedDispatcherCalled() {
-        consumerService.receive("");
+
+        //Given
+        String message = "Incoming message";
+
+        //when
+        consumerService.receive(message);
 
         // Then
-        Mockito.verify(dispatcherService, Mockito.times(1)).handleMessage("");
+        Mockito.verify(dispatcherService, Mockito.times(1)).handleMessage(message);
     }
 
 }
