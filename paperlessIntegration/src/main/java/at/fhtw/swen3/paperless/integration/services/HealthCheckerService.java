@@ -21,12 +21,12 @@ public class HealthCheckerService {
     @Value("${healthcheck.endpoint}")
     private String endpoint;
 
-    public String address() {
-        return "http://" + this.serverAddress + this.port + this.endpoint;
-    }
-
     public boolean isHealthy() {
         return this.getResponseCode() == HttpStatus.OK;
+    }
+
+    private String address() {
+        return "http://" + this.serverAddress + this.port + this.endpoint;
     }
 
     private HttpStatus getResponseCode() {
