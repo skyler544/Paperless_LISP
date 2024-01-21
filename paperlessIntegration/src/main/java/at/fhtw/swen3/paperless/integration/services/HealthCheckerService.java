@@ -16,9 +16,9 @@ import lombok.NoArgsConstructor;
 public class HealthCheckerService {
     Logger logger = LogManager.getLogger(HealthCheckerService.class);
 
-    @Value("${healthcheck.server}")
+    @Value("${server.hostname}")
     private String serverAddress;
-    @Value("${healthcheck.port}")
+    @Value("${server.port}")
     private String port;
     @Value("${healthcheck.endpoint}")
     private String endpoint;
