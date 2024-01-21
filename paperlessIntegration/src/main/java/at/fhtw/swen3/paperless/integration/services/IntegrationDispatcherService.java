@@ -24,6 +24,7 @@ public class IntegrationDispatcherService {
     public void integrationTests() throws Exception {
         this.logger.info("Beginning Integration Testing:");
 
+
         // do nothing until the application is ready
         while(!healthCheckerService.isHealthy()) {}
         this.logger.info("The server is awake and ready. Proceeding.");
@@ -35,5 +36,8 @@ public class IntegrationDispatcherService {
         if (!this.queryDocumentService.successfullyQueriedDocuments()) {
             throw new Exception("Failed to query documents. Aborting.");
         }
+
+
+        this.logger.info("Integration Testing completed; goodbye.");
     }
 }
