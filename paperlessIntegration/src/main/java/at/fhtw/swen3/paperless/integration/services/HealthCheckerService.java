@@ -7,10 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @NoArgsConstructor
 @Service
 public class HealthCheckerService {
@@ -32,9 +30,9 @@ public class HealthCheckerService {
     }
 
     private HttpStatus getResponseCode() {
-        RestTemplate restTemplate = new RestTemplate();
         try {
             this.logger.info("Pinging server...");
+            RestTemplate restTemplate = new RestTemplate();
             return HttpStatus.valueOf(restTemplate.getForEntity(this.address(), String.class)
                     .getStatusCode().value());
         } catch (Exception e) {
