@@ -31,4 +31,6 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 COPY --from=temurin /customjre $JAVA_HOME
 COPY --from=temurin ./target/paperlessIntegration-1.0-SNAPSHOT.jar ./
 
+COPY testdata/HelloWorld.pdf /testdata/HelloWorld.pdf
+
 ENTRYPOINT ["/jre/bin/java", "-jar", "/paperlessIntegration-1.0-SNAPSHOT.jar"]
