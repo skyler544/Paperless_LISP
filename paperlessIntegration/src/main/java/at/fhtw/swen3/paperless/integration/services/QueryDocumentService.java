@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import org.json.JSONObject;
+
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -33,36 +35,32 @@ public class QueryDocumentService {
         return "http://" + this.serverAddress + this.port + this.endpoint;
     }
 
-    public boolean successfullyQueriedDocument() {
-        if (queryDocument() == HttpStatus.OK) {
-            this.logger.info("Successfully queried document.");
+    public boolean successfullyQueriedDocuments() {
+        if (queryDocuments() == HttpStatus.OK) {
+            this.logger.info("Successfully queried documents.");
             return true;
         } else {
-            this.logger.error("Failed to query document.");
+            this.logger.error("Failed to query documents.");
             return false;
         }
     }
 
-    private HttpStatus queryDocument() {
-        this.logger.info("Querying for: [" + query + "] at: " + this.address());
+    private HttpStatus queryDocuments() {
+        this.logger.info("Querying for: [ " + query + " ] at: " + this.address());
 
         try {
-            String url = UriComponentsBuilder.fromUriString(this.address())
-                    .queryParam("query", query)
-                    .build()
-                    .toUriString();
+            ResponseEntity<String> responseEntity = getResponseEntity();
 
-            this.logger.info("Query url: " + url);
-            this.logger.info(url);
+            JSONObject response = new JSONObject(responseEntity.getBody());
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            this.logger.info("Number of hits: " + response.get("count"));
+            var results = response.getJSONArray("results");
 
-            HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
-            ResponseEntity<String> responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, requestEntity,
-                    String.class);
-
-            this.logger.info(responseEntity.toString());
+            for (int i = 0; i < results.length(); i++) {
+                JSONObject result = results.getJSONObject(i);
+                this.logger.info("Result id: " + result.get("id"));
+                this.logger.info("Result content: " + result.get("content"));
+            }
 
             return HttpStatus.valueOf(responseEntity.getStatusCode().value());
         } catch (Exception e) {
@@ -70,5 +68,22 @@ public class QueryDocumentService {
         }
 
         return HttpStatus.INTERNAL_SERVER_ERROR;
+    }
+
+    private ResponseEntity<String> getResponseEntity() {
+        String url = UriComponentsBuilder.fromUriString(this.address())
+                .queryParam("query", query)
+                .build()
+                .toUriString();
+
+        this.logger.info("Query url: " + url);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+        ResponseEntity<String> responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, requestEntity,
+                String.class);
+        return responseEntity;
     }
 }

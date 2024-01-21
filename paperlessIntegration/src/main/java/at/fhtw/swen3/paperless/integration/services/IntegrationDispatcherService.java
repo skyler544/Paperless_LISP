@@ -32,8 +32,8 @@ public class IntegrationDispatcherService {
             throw new Exception("Failed to upload document. Aborting.");
         }
 
-        if (!this.queryDocumentService.successfullyQueriedDocument()) {
-            throw new Exception("Failed to query document. Aborting.");
+        if (!this.queryDocumentService.successfullyQueriedDocuments()) {
+            throw new Exception("Failed to query documents. Aborting.");
         }
     }
 }
