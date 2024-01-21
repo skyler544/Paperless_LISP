@@ -2,9 +2,6 @@ package at.fhtw.swen3.paperless.integration.services;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.nio.file.Files;
-import java.util.Arrays;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,6 +33,16 @@ public class UploadDocumentService {
     @Value("${filename}")
     private String filename;
 
+    public boolean successfullyUploadedDocument() {
+        if (upload() == HttpStatus.CREATED) {
+            this.logger.info("Successfully uploaded document.");
+            return true;
+        } else {
+            this.logger.error("Failed to upload document.");
+            return false;
+        }
+    }
+
     private String address() {
         return "http://" + this.serverAddress + this.port + this.endpoint;
     }
@@ -43,13 +50,6 @@ public class UploadDocumentService {
     private FileSystemResource fileContent() throws IOException {
         var file = new File(filepath + filename);
         return new FileSystemResource(file);
-    }
-
-    public void uploadDocument() {
-        String message = upload() == HttpStatus.CREATED ? "Successfully uploaded document."
-                : "Failed to upload document.";
-
-        this.logger.info(message);
     }
 
     private HttpStatus upload() {

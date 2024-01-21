@@ -13,7 +13,8 @@ public class IntegrationDispatcherService {
     private final UploadDocumentService uploadDocumentService;
 
     @Autowired
-    public IntegrationDispatcherService(HealthCheckerService healthCheckerService, UploadDocumentService uploadDocumentService) {
+    public IntegrationDispatcherService(HealthCheckerService healthCheckerService,
+            UploadDocumentService uploadDocumentService) {
         this.healthCheckerService = healthCheckerService;
         this.uploadDocumentService = uploadDocumentService;
     }
@@ -25,6 +26,8 @@ public class IntegrationDispatcherService {
         while(!healthCheckerService.isHealthy()) {}
         this.logger.info("The server is awake and ready. Proceeding.");
 
-        this.uploadDocumentService.uploadDocument();
+        if (!this.uploadDocumentService.successfullyUploadedDocument()) {
+            throw new Exception("Failed to upload document. Aborting.");
+        }
     }
 }
