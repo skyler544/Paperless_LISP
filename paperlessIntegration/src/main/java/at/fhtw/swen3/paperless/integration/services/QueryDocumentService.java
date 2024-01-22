@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Service
 public class QueryDocumentService {
-    Logger logger = LogManager.getLogger(HealthCheckerService.class);
+    Logger logger = LogManager.getLogger(QueryDocumentService.class);
 
     @Value("${server.hostname}")
     private String serverAddress;
@@ -29,7 +29,7 @@ public class QueryDocumentService {
     @Value("${get_document.endpoint}")
     private String endpoint;
 
-    private String query = "hello";
+    private final String query = "hello";
 
     public String address() {
         return "http://" + this.serverAddress + this.port + this.endpoint;
@@ -82,8 +82,8 @@ public class QueryDocumentService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
-        ResponseEntity<String> responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, requestEntity,
+
+        return new RestTemplate().exchange(url, HttpMethod.GET, requestEntity,
                 String.class);
-        return responseEntity;
     }
 }
