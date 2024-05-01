@@ -13,7 +13,7 @@ verify:
 	$(MVN) verify
 
 package:
-	$(MVN) package
+	$(MVN) package -DskipTests
 
 test:
 	$(MVN) test

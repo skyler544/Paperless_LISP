@@ -118,6 +118,8 @@ services:
         condition: service_healthy
       db:
         condition: service_started
+    volumes:
+      - ./paperlessREST/target/:/app/
 
   web:
     image: nginx

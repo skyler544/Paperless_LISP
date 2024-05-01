@@ -2,13 +2,6 @@
 FROM maven:3.9.5-eclipse-temurin-17-alpine as temurin
 
 
-# fetch dependencies
-COPY pom.xml .
-RUN mvn verify --fail-never
-COPY . .
-RUN mvn package -DskipTests
-
-
 # required for strip-debug to work
 RUN apk add --no-cache binutils
 
@@ -29,10 +22,9 @@ ENV JAVA_HOME=/jre
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 COPY --from=temurin /customjre $JAVA_HOME
-COPY --from=temurin ./target/paperlessREST-1.0.0.jar ./
 
 RUN apk --no-cache add curl
 
 EXPOSE 8080
 
-ENTRYPOINT ["/jre/bin/java", "-jar", "/paperlessREST-1.0.0.jar"]
+ENTRYPOINT ["/jre/bin/java", "-jar", "/app/paperlessREST-1.0.0.jar"]
