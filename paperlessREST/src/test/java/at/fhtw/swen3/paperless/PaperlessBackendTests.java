@@ -5,9 +5,9 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-class OpenApiGeneratorApplicationTests {
+class PaperlessBackendTests {
 
-    Logger logger = LogManager.getLogger(OpenApiGeneratorApplicationTests.class);
+    Logger logger = LogManager.getLogger(PaperlessBackendTests.class);
 
     @Test
     void contextLoads() {

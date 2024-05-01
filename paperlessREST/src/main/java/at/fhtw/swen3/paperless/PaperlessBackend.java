@@ -19,13 +19,13 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
 @EntityScan(
         basePackages = {"at.fhtw.swen3.paperless.models.entity"}
 )
-public class OpenApiGeneratorApplication {
+public class PaperlessBackend {
 
     public static void main(String[] args) {
-        SpringApplication.run(OpenApiGeneratorApplication.class, args);
+        SpringApplication.run(PaperlessBackend.class, args);
     }
 
-    @Bean(name = "at.fhtw.swen3.paperless.OpenApiGeneratorApplication.jsonNullableModule")
+    @Bean(name = "at.fhtw.swen3.paperless.PaperlessBackend.jsonNullableModule")
     public Module jsonNullableModule() {
         return new JsonNullableModule();
     }
