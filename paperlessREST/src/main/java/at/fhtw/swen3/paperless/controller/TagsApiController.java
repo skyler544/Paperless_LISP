@@ -1,9 +1,9 @@
 package at.fhtw.swen3.paperless.controller;
 
-import at.fhtw.swen3.paperless.services.dto.CreateTag200Response;
-import at.fhtw.swen3.paperless.services.dto.CreateTagRequest;
-import at.fhtw.swen3.paperless.services.dto.GetTags200Response;
+import at.fhtw.swen3.paperless.services.dto.Http200Response;
+
 import jakarta.annotation.Generated;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,9 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.Optional;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-11-03T13:46:03.125613Z[Etc/UTC]")
+@Generated(
+        value = "org.openapitools.codegen.languages.SpringCodegen",
+        date = "2023-11-03T13:46:03.125613Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
 public class TagsApiController implements TagsApi, BaseLoggingController {
@@ -40,20 +42,7 @@ public class TagsApiController implements TagsApi, BaseLoggingController {
     }
 
     @Override
-    public ResponseEntity<CreateTag200Response> createTag(CreateTagRequest createTagRequest) {
-
-        this.logReceivedRequest("CreateTag");
-        this.logIncomingParams(createTagRequest.toString());
-
-        CreateTag200Response responseDTO = new CreateTag200Response();
-
-        this.logSentResponse("CreateTag", responseDTO.toString());
-
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<GetTags200Response> getTags(Integer page, Boolean fullPerms) {
+    public ResponseEntity<Http200Response> getTags(Integer page, Boolean fullPerms) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
