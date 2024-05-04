@@ -27,30 +27,6 @@ public interface ConfigApi {
         return Optional.empty();
     }
 
-    /**
-     * POST /api/saved_views/
-     *
-     * @param createSavedViewsRequest (optional)
-     * @return Success (status code 200)
-     */
-    @RequestMapping(
-            method = RequestMethod.POST,
-            value = "/api/saved_views/",
-            consumes = {"application/json"})
-    default ResponseEntity<Void> createSavedViews(
-            @Parameter(name = "CreateSavedViewsRequest", description = "")
-                    @Valid
-                    @RequestBody(required = false)
-                    CreateSavedViewsRequest createSavedViewsRequest) {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    /**
-     * POST /api/ui_settings/
-     *
-     * @param createUISettingsRequest (optional)
-     * @return Success (status code 200)
-     */
     @RequestMapping(
             method = RequestMethod.POST,
             value = "/api/ui_settings/",
@@ -64,29 +40,16 @@ public interface ConfigApi {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /**
-     * GET /ws/status/
-     *
-     * @return Success (status code 200)
-     */
     @RequestMapping(method = RequestMethod.GET, value = "/ws/status/")
     default ResponseEntity<Void> get() {
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /**
-     * GET /api/saved_views/
-     *
-     * @param page (optional)
-     * @param pageSize (optional)
-     * @return Success (status code 200)
-     */
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/api/saved_views/",
             produces = {"application/json"})
-    default ResponseEntity<Http200Response> getSavedViews(
+    default ResponseEntity<GetSavedViews200Response> getSavedViews(
             @Parameter(name = "page", description = "", in = ParameterIn.QUERY)
                     @Valid
                     @RequestParam(value = "page", required = false)
@@ -98,16 +61,11 @@ public interface ConfigApi {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /**
-     * GET /api/ui_settings/
-     *
-     * @return Success (status code 200)
-     */
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/api/ui_settings/",
             produces = {"application/json"})
-    default ResponseEntity<Http200Response> getUISettings() {
+    default ResponseEntity<GetUISettings200Response> getUISettings() {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
