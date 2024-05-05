@@ -2,8 +2,8 @@ package at.fhtw.swen3.paperless.controller;
 
 import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.services.IDispatcherService;
-import at.fhtw.swen3.paperless.services.customDTOs.GetDocumentWrapperDTO;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
+import at.fhtw.swen3.paperless.services.dto.GetDocuments200Response;
 import at.fhtw.swen3.paperless.services.mapper.DocumentMapper;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -41,7 +41,7 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
     }
 
     @Override
-    public ResponseEntity<GetDocumentWrapperDTO> getDocuments(
+    public ResponseEntity<GetDocuments200Response> getDocuments(
             Integer page,
             Integer pageSize,
             String query,
@@ -55,7 +55,7 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
         try {
             List<DocumentEntity> documents = this.dispatcherService.handleGetDocuments(query);
 
-            GetDocumentWrapperDTO response = new GetDocumentWrapperDTO();
+            GetDocuments200Response response = new GetDocuments200Response();
             response.setCount(documents.size());
             response.setResults(
                     documents.stream().map(DocumentMapper.INSTANCE::entityToDto).toList());

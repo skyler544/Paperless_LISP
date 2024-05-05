@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
 
+import lombok.*;
 
 @Getter
 @Setter
@@ -18,6 +18,7 @@ public class DocumentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     private Integer correspondent;
 
     private Integer documentType;

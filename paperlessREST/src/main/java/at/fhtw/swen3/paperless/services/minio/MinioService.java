@@ -16,7 +16,6 @@ import java.io.InputStream;
 
 @Component
 public class MinioService implements DocumentStoreService {
-
     final Logger logger = LogManager.getLogger(MinioService.class);
 
     private final MinioConfig minioConfig;

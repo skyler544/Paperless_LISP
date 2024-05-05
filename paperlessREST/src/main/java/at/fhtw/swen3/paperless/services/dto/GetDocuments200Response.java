@@ -45,7 +45,7 @@ public class GetDocuments200Response {
     @NotNull
     @Schema(name = "results", requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("results")
-    private List<@Valid GetDocuments200Response> results = new ArrayList<>();
+    private List<@Valid GetDocument200Response> results = new ArrayList<>();
 
     public GetDocuments200Response() {
         super();

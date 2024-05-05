@@ -1,6 +1,5 @@
 package at.fhtw.swen3.paperless.controller;
 
-import at.fhtw.swen3.paperless.services.customDTOs.GetDocumentWrapperDTO;
 import at.fhtw.swen3.paperless.services.dto.*;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -44,7 +43,7 @@ public interface DocumentsApi {
             method = RequestMethod.GET,
             value = "/api/documents/",
             produces = {"application/json"})
-    default ResponseEntity<GetDocumentWrapperDTO> getDocuments(
+    default ResponseEntity<GetDocuments200Response> getDocuments(
             @Parameter(name = "Page", in = ParameterIn.QUERY)
                     @Valid
                     @RequestParam(value = "Page", required = false)
@@ -81,7 +80,7 @@ public interface DocumentsApi {
                     @Valid
                     @RequestParam(value = "truncate_content", required = false)
                     Boolean truncateContent) {
-        return new ResponseEntity<>(new GetDocumentWrapperDTO(), HttpStatus.OK);
+        return new ResponseEntity<>(new GetDocuments200Response(), HttpStatus.OK);
     }
 
     @RequestMapping(
