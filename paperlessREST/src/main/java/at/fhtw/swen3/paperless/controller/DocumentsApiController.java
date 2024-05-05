@@ -8,7 +8,6 @@ import at.fhtw.swen3.paperless.services.mapper.DocumentMapper;
 
 import io.swagger.v3.oas.annotations.Parameter;
 
-import jakarta.annotation.Generated;
 import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +16,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,14 +24,10 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-@Generated(
-        value = "org.openapitools.codegen.languages.SpringCodegen",
-        date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
 @Controller
-@RequestMapping("${openapi.paperlessRestServer.base-path:}")
 public class DocumentsApiController implements DocumentsApi, BaseLoggingController {
 
-    private final Logger logger = LogManager.getLogger(ConfigApiController.class);
+    private final Logger logger = LogManager.getLogger(DocumentsApiController.class);
 
     private final IDispatcherService dispatcherService;
 
@@ -57,17 +51,14 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
             Integer storagePathIdIn,
             Integer correspondentId,
             Boolean truncateContent) {
-        // add service for the documents
-        try {
 
+        try {
             List<DocumentEntity> documents = this.dispatcherService.handleGetDocuments(query);
 
             GetDocumentWrapperDTO response = new GetDocumentWrapperDTO();
             response.setCount(documents.size());
             response.setResults(
-                    documents.stream()
-                            .map(DocumentMapper.INSTANCE::entityToDto)
-                            .toList());
+                    documents.stream().map(DocumentMapper.INSTANCE::entityToDto).toList());
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (IOException e) {

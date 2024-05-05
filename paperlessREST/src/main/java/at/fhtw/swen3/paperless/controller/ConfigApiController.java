@@ -10,10 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("${openapi.paperlessRestServer.base-path:}")
 public class ConfigApiController implements ConfigApi, BaseLoggingController {
 
     private final Logger logger = LogManager.getLogger(ConfigApiController.class);
@@ -25,7 +23,6 @@ public class ConfigApiController implements ConfigApi, BaseLoggingController {
 
     @Override
     public ResponseEntity<GetUISettings200Response> getUISettings() {
-
         this.logReceivedRequest("GetUISettings");
 
         GetUISettings200Response responseDTO = new GetUISettings200Response();
@@ -38,7 +35,6 @@ public class ConfigApiController implements ConfigApi, BaseLoggingController {
     @Override
     public ResponseEntity<Http200Response> createUISettings(
             CreateUISettingsRequest createUISettingsRequest) {
-
         this.logReceivedRequest("CreateUISettings");
         this.logIncomingParams(createUISettingsRequest.toString());
 

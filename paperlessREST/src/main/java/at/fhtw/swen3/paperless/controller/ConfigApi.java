@@ -30,11 +30,6 @@ public interface ConfigApi {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/ws/status/")
-    default ResponseEntity<Void> get() {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/api/saved_views/",
