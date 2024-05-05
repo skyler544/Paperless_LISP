@@ -24,10 +24,8 @@ public class ConfigApiController implements ConfigApi, BaseLoggingController {
     @Override
     public ResponseEntity<GetUISettings200Response> getUISettings() {
         this.logReceivedRequest("GetUISettings");
-
         GetUISettings200Response responseDTO = new GetUISettings200Response();
         responseDTO.setDisplayName("Test User");
-
         this.logSentResponse("GetUISettings", responseDTO.toString());
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
@@ -40,17 +38,15 @@ public class ConfigApiController implements ConfigApi, BaseLoggingController {
 
         Http200Response responseDTO = new Http200Response();
         responseDTO.setSuccess(true);
-
         this.logSentResponse("CreateUISettings", responseDTO.toString());
+
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<GetSavedViews200Response> getSavedViews(Integer page, Integer pageSize) {
-
         this.logReceivedRequest("GetSavedViews");
         GetSavedViews200Response responseDTO = new GetSavedViews200Response();
-
         this.logSentResponse("GetSavedViews", responseDTO.toString());
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }

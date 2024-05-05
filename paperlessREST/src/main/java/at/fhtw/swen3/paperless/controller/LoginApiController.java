@@ -7,10 +7,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("${openapi.paperlessRestServer.base-path:}")
 public class LoginApiController implements LoginApi, BaseLoggingController {
 
     private final Logger logger = LogManager.getLogger(ConfigApiController.class);
@@ -22,13 +20,9 @@ public class LoginApiController implements LoginApi, BaseLoggingController {
 
     @Override
     public ResponseEntity<Statistics200Response> statistics() {
-
         this.logReceivedRequest("GetStatistics");
-
         Statistics200Response responseDTO = new Statistics200Response();
-
         this.logSentResponse("GetStatistics", responseDTO.toString());
-
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 }

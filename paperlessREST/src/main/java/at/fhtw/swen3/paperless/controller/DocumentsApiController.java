@@ -96,7 +96,6 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
         this.logIncomingParams(postDocumentRequestDto.toString());
 
         try {
-            // documentService.saveDocument(postDocumentRequestDto);
             // hardcoded, retrieve first document
             dispatcherService.handleDocument(document.get(0), postDocumentRequestDto);
         } catch (Exception ex) {
