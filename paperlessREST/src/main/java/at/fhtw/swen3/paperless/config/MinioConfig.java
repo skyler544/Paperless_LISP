@@ -7,11 +7,12 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+@Getter
 @Configuration
 public class MinioConfig {
-    @Getter private final String bucketName = "documents";
-    @Getter private MinioClient minioClient;
-    @Getter private String minioEndpoint;
+    private final String bucketName = "documents";
+    private final MinioClient minioClient;
+    private final String minioEndpoint;
 
     public MinioConfig(
             @Value("${paperless.minio.username}") String minioUsername,

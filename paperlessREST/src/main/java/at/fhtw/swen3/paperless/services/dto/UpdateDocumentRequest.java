@@ -8,10 +8,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Setter
 @JsonTypeName("UpdateDocument_request")
 public class UpdateDocumentRequest {
 
@@ -45,49 +48,6 @@ public class UpdateDocumentRequest {
 
     @Valid private List<Object> notes = new ArrayList<>();
 
-    public UpdateDocumentRequest() {
-        super();
-    }
-
-    /** Constructor with only required parameters */
-    public UpdateDocumentRequest(
-            Integer id,
-            Integer correspondent,
-            Integer documentType,
-            Integer storagePath,
-            String title,
-            String content,
-            List<Integer> tags,
-            String createdDate,
-            String modified,
-            String added,
-            Integer archiveSerialNumber,
-            String originalFileName,
-            String archivedFileName,
-            Integer owner,
-            List<Object> notes) {
-        this.id = id;
-        this.correspondent = correspondent;
-        this.documentType = documentType;
-        this.storagePath = storagePath;
-        this.title = title;
-        this.content = content;
-        this.tags = tags;
-        this.createdDate = createdDate;
-        this.modified = modified;
-        this.added = added;
-        this.archiveSerialNumber = archiveSerialNumber;
-        this.originalFileName = originalFileName;
-        this.archivedFileName = archivedFileName;
-        this.owner = owner;
-        this.notes = notes;
-    }
-
-    public UpdateDocumentRequest id(Integer id) {
-        this.id = id;
-        return this;
-    }
-
     /**
      * Get id
      *
@@ -98,15 +58,6 @@ public class UpdateDocumentRequest {
     @JsonProperty("id")
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public UpdateDocumentRequest correspondent(Integer correspondent) {
-        this.correspondent = correspondent;
-        return this;
     }
 
     /**
@@ -121,15 +72,6 @@ public class UpdateDocumentRequest {
         return correspondent;
     }
 
-    public void setCorrespondent(Integer correspondent) {
-        this.correspondent = correspondent;
-    }
-
-    public UpdateDocumentRequest documentType(Integer documentType) {
-        this.documentType = documentType;
-        return this;
-    }
-
     /**
      * Get documentType
      *
@@ -140,15 +82,6 @@ public class UpdateDocumentRequest {
     @JsonProperty("document_type")
     public Integer getDocumentType() {
         return documentType;
-    }
-
-    public void setDocumentType(Integer documentType) {
-        this.documentType = documentType;
-    }
-
-    public UpdateDocumentRequest storagePath(Integer storagePath) {
-        this.storagePath = storagePath;
-        return this;
     }
 
     /**
@@ -163,15 +96,6 @@ public class UpdateDocumentRequest {
         return storagePath;
     }
 
-    public void setStoragePath(Integer storagePath) {
-        this.storagePath = storagePath;
-    }
-
-    public UpdateDocumentRequest title(String title) {
-        this.title = title;
-        return this;
-    }
-
     /**
      * Get title
      *
@@ -182,15 +106,6 @@ public class UpdateDocumentRequest {
     @JsonProperty("title")
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public UpdateDocumentRequest content(String content) {
-        this.content = content;
-        return this;
     }
 
     /**
@@ -205,23 +120,6 @@ public class UpdateDocumentRequest {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public UpdateDocumentRequest tags(List<Integer> tags) {
-        this.tags = tags;
-        return this;
-    }
-
-    public UpdateDocumentRequest addTagsItem(Integer tagsItem) {
-        if (this.tags == null) {
-            this.tags = new ArrayList<>();
-        }
-        this.tags.add(tagsItem);
-        return this;
-    }
-
     /**
      * Get tags
      *
@@ -232,15 +130,6 @@ public class UpdateDocumentRequest {
     @JsonProperty("tags")
     public List<Integer> getTags() {
         return tags;
-    }
-
-    public void setTags(List<Integer> tags) {
-        this.tags = tags;
-    }
-
-    public UpdateDocumentRequest createdDate(String createdDate) {
-        this.createdDate = createdDate;
-        return this;
     }
 
     /**
@@ -255,15 +144,6 @@ public class UpdateDocumentRequest {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public UpdateDocumentRequest modified(String modified) {
-        this.modified = modified;
-        return this;
-    }
-
     /**
      * Get modified
      *
@@ -274,15 +154,6 @@ public class UpdateDocumentRequest {
     @JsonProperty("modified")
     public String getModified() {
         return modified;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
-    }
-
-    public UpdateDocumentRequest added(String added) {
-        this.added = added;
-        return this;
     }
 
     /**
@@ -297,15 +168,6 @@ public class UpdateDocumentRequest {
         return added;
     }
 
-    public void setAdded(String added) {
-        this.added = added;
-    }
-
-    public UpdateDocumentRequest archiveSerialNumber(Integer archiveSerialNumber) {
-        this.archiveSerialNumber = archiveSerialNumber;
-        return this;
-    }
-
     /**
      * Get archiveSerialNumber
      *
@@ -316,15 +178,6 @@ public class UpdateDocumentRequest {
     @JsonProperty("archive_serial_number")
     public Integer getArchiveSerialNumber() {
         return archiveSerialNumber;
-    }
-
-    public void setArchiveSerialNumber(Integer archiveSerialNumber) {
-        this.archiveSerialNumber = archiveSerialNumber;
-    }
-
-    public UpdateDocumentRequest originalFileName(String originalFileName) {
-        this.originalFileName = originalFileName;
-        return this;
     }
 
     /**
@@ -339,15 +192,6 @@ public class UpdateDocumentRequest {
         return originalFileName;
     }
 
-    public void setOriginalFileName(String originalFileName) {
-        this.originalFileName = originalFileName;
-    }
-
-    public UpdateDocumentRequest archivedFileName(String archivedFileName) {
-        this.archivedFileName = archivedFileName;
-        return this;
-    }
-
     /**
      * Get archivedFileName
      *
@@ -358,15 +202,6 @@ public class UpdateDocumentRequest {
     @JsonProperty("archived_file_name")
     public String getArchivedFileName() {
         return archivedFileName;
-    }
-
-    public void setArchivedFileName(String archivedFileName) {
-        this.archivedFileName = archivedFileName;
-    }
-
-    public UpdateDocumentRequest owner(Integer owner) {
-        this.owner = owner;
-        return this;
     }
 
     /**
@@ -381,23 +216,6 @@ public class UpdateDocumentRequest {
         return owner;
     }
 
-    public void setOwner(Integer owner) {
-        this.owner = owner;
-    }
-
-    public UpdateDocumentRequest notes(List<Object> notes) {
-        this.notes = notes;
-        return this;
-    }
-
-    public UpdateDocumentRequest addNotesItem(Object notesItem) {
-        if (this.notes == null) {
-            this.notes = new ArrayList<>();
-        }
-        this.notes.add(notesItem);
-        return this;
-    }
-
     /**
      * Get notes
      *
@@ -408,10 +226,6 @@ public class UpdateDocumentRequest {
     @JsonProperty("notes")
     public List<Object> getNotes() {
         return notes;
-    }
-
-    public void setNotes(List<Object> notes) {
-        this.notes = notes;
     }
 
     @Override
@@ -463,27 +277,53 @@ public class UpdateDocumentRequest {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class UpdateDocumentRequest {\n");
-        sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    correspondent: ").append(toIndentedString(correspondent)).append("\n");
-        sb.append("    documentType: ").append(toIndentedString(documentType)).append("\n");
-        sb.append("    storagePath: ").append(toIndentedString(storagePath)).append("\n");
-        sb.append("    title: ").append(toIndentedString(title)).append("\n");
-        sb.append("    content: ").append(toIndentedString(content)).append("\n");
-        sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
-        sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
-        sb.append("    modified: ").append(toIndentedString(modified)).append("\n");
-        sb.append("    added: ").append(toIndentedString(added)).append("\n");
-        sb.append("    archiveSerialNumber: ")
-                .append(toIndentedString(archiveSerialNumber))
-                .append("\n");
-        sb.append("    originalFileName: ").append(toIndentedString(originalFileName)).append("\n");
-        sb.append("    archivedFileName: ").append(toIndentedString(archivedFileName)).append("\n");
-        sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
-        sb.append("    notes: ").append(toIndentedString(notes)).append("\n");
-        sb.append("}");
-        return sb.toString();
+        return "class UpdateDocumentRequest {\n"
+                + "    id: "
+                + toIndentedString(id)
+                + "\n"
+                + "    correspondent: "
+                + toIndentedString(correspondent)
+                + "\n"
+                + "    documentType: "
+                + toIndentedString(documentType)
+                + "\n"
+                + "    storagePath: "
+                + toIndentedString(storagePath)
+                + "\n"
+                + "    title: "
+                + toIndentedString(title)
+                + "\n"
+                + "    content: "
+                + toIndentedString(content)
+                + "\n"
+                + "    tags: "
+                + toIndentedString(tags)
+                + "\n"
+                + "    createdDate: "
+                + toIndentedString(createdDate)
+                + "\n"
+                + "    modified: "
+                + toIndentedString(modified)
+                + "\n"
+                + "    added: "
+                + toIndentedString(added)
+                + "\n"
+                + "    archiveSerialNumber: "
+                + toIndentedString(archiveSerialNumber)
+                + "\n"
+                + "    originalFileName: "
+                + toIndentedString(originalFileName)
+                + "\n"
+                + "    archivedFileName: "
+                + toIndentedString(archivedFileName)
+                + "\n"
+                + "    owner: "
+                + toIndentedString(owner)
+                + "\n"
+                + "    notes: "
+                + toIndentedString(notes)
+                + "\n"
+                + "}";
     }
 
     /**

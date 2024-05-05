@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class DocumentService implements IDocumentService {
 
-    Logger logger = LogManager.getLogger(DocumentService.class);
+    final Logger logger = LogManager.getLogger(DocumentService.class);
 
     private final DocumentRepository documentRepository;
 

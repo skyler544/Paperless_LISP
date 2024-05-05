@@ -4,12 +4,13 @@ import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.services.IDispatcherService;
 import at.fhtw.swen3.paperless.services.customDTOs.GetDocumentWrapperDTO;
 import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
-import at.fhtw.swen3.paperless.services.dto.GetDocuments200Response;
-import at.fhtw.swen3.paperless.services.dto.GetDocuments200ResponseResultsInner;
 import at.fhtw.swen3.paperless.services.mapper.DocumentMapper;
+
 import io.swagger.v3.oas.annotations.Parameter;
+
 import jakarta.annotation.Generated;
 import jakarta.validation.Valid;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,7 +26,9 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
+@Generated(
+        value = "org.openapitools.codegen.languages.SpringCodegen",
+        date = "2023-10-26T19:12:48.175385Z[Etc/UTC]")
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
 public class DocumentsApiController implements DocumentsApi, BaseLoggingController {
@@ -44,8 +47,17 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
     }
 
     @Override
-    public ResponseEntity<GetDocumentWrapperDTO> getDocuments(Integer page, Integer pageSize, String query, String ordering, List<Integer> tagsIdAll, Integer documentTypeId, Integer storagePathIdIn, Integer correspondentId, Boolean truncateContent) {
-        //add service for the documents
+    public ResponseEntity<GetDocumentWrapperDTO> getDocuments(
+            Integer page,
+            Integer pageSize,
+            String query,
+            String ordering,
+            List<Integer> tagsIdAll,
+            Integer documentTypeId,
+            Integer storagePathIdIn,
+            Integer correspondentId,
+            Boolean truncateContent) {
+        // add service for the documents
         try {
 
             List<DocumentEntity> documents = this.dispatcherService.handleGetDocuments(query);
@@ -53,38 +65,42 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
             GetDocumentWrapperDTO response = new GetDocumentWrapperDTO();
             response.setCount(documents.size());
             response.setResults(
-                    documents.stream().map(doc ->
-                        DocumentMapper.INSTANCE.entityToDto(doc)
-                    ).toList()
-            );
+                    documents.stream()
+                            .map(DocumentMapper.INSTANCE::entityToDto)
+                            .toList());
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 
     @Override
     public ResponseEntity<Void> uploadDocument(
-            @Parameter(name = "title", description = "") @Valid @RequestParam(value = "title", required = false) String title,
-            @Parameter(name = "created", description = "") @Valid @RequestParam(value = "created", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime created,
-            @Parameter(name = "document_type", description = "") @Valid @RequestParam(value = "document_type", required = false) Integer documentType,
-            @Parameter(name = "tags", description = "") @Valid @RequestPart(value = "tags", required = false) List<Integer> tags,
-            @Parameter(name = "correspondent", description = "") @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
-            @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
-    ) {
+            @Parameter(name = "title") @Valid @RequestParam(value = "title", required = false)
+                    String title,
+            @Parameter(name = "created")
+                    @Valid
+                    @RequestParam(value = "created", required = false)
+                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                    OffsetDateTime created,
+            @Parameter(name = "document_type")
+                    @Valid
+                    @RequestParam(value = "document_type", required = false)
+                    Integer documentType,
+            @Parameter(name = "tags") @Valid @RequestPart(value = "tags", required = false)
+                    List<Integer> tags,
+            @Parameter(name = "correspondent")
+                    @Valid
+                    @RequestParam(value = "correspondent", required = false)
+                    Integer correspondent,
+            @Parameter(name = "document") @RequestPart(value = "document", required = false)
+                    List<MultipartFile> document) {
         this.logReceivedRequest("UploadDocument");
 
         PostDocumentRequestDto postDocumentRequestDto;
 
-        try {
-            postDocumentRequestDto = extractDocumentDto(
-                title, created, documentType, document);
-        } catch (IOException ex) {
-            this.logger.error(String.format("Error occurred while fetching the document content from the request\n%s", ex));
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        postDocumentRequestDto = extractDocumentDto(title, created, documentType, document);
 
         this.logIncomingParams(postDocumentRequestDto.toString());
 
@@ -93,7 +109,8 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
             // hardcoded, retrieve first document
             dispatcherService.handleDocument(document.get(0), postDocumentRequestDto);
         } catch (Exception ex) {
-            this.logger.error(String.format("Error occurred while saving the document into the db\n%s", ex));
+            this.logger.error(
+                    String.format("Error occurred while saving the document into the db\n%s", ex));
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -101,8 +118,10 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
     }
 
     private PostDocumentRequestDto extractDocumentDto(
-        String title, OffsetDateTime created,
-        Integer documentType, List<MultipartFile> document) throws IOException {
+            String title,
+            OffsetDateTime created,
+            Integer documentType,
+            List<MultipartFile> document) {
 
         var postDocumentRequestDto = new PostDocumentRequestDto();
         postDocumentRequestDto.setDocumentType(documentType);

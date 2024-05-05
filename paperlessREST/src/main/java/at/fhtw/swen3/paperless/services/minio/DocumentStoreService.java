@@ -4,6 +4,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface DocumentStoreService {
 
-    public void handleFileUpload(MultipartFile document);
+    void handleFileUpload(MultipartFile document);
 
 }

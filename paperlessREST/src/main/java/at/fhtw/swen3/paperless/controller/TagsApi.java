@@ -24,14 +24,14 @@ public interface TagsApi {
             value = "/api/tags/",
             produces = {"application/json"})
     default ResponseEntity<Http200Response> getTags(
-            @Parameter(name = "page", description = "", in = ParameterIn.QUERY)
+            @Parameter(name = "page", in = ParameterIn.QUERY)
                     @Valid
                     @RequestParam(value = "page", required = false)
                     Integer page,
-            @Parameter(name = "full_perms", description = "", in = ParameterIn.QUERY)
+            @Parameter(name = "full_perms", in = ParameterIn.QUERY)
                     @Valid
                     @RequestParam(value = "full_perms", required = false)
                     Boolean fullPerms) {
-        return new ResponseEntity<Http200Response>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

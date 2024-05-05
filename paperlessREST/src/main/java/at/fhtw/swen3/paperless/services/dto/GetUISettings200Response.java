@@ -8,11 +8,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /** GetUISettings200Response */
+@Setter
 @JsonTypeName("GetUISettings_200_response")
 public class GetUISettings200Response {
 
@@ -22,17 +25,6 @@ public class GetUISettings200Response {
 
     public GetUISettings200Response() {
         super();
-    }
-
-    /** Constructor with only required parameters */
-    public GetUISettings200Response(String displayName, List<String> permissions) {
-        this.displayName = displayName;
-        this.permissions = permissions;
-    }
-
-    public GetUISettings200Response displayName(String displayName) {
-        this.displayName = displayName;
-        return this;
     }
 
     /**
@@ -47,23 +39,6 @@ public class GetUISettings200Response {
         return displayName;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public GetUISettings200Response permissions(List<String> permissions) {
-        this.permissions = permissions;
-        return this;
-    }
-
-    public GetUISettings200Response addPermissionsItem(String permissionsItem) {
-        if (this.permissions == null) {
-            this.permissions = new ArrayList<>();
-        }
-        this.permissions.add(permissionsItem);
-        return this;
-    }
-
     /**
      * Get permissions
      *
@@ -74,10 +49,6 @@ public class GetUISettings200Response {
     @JsonProperty("permissions")
     public List<String> getPermissions() {
         return permissions;
-    }
-
-    public void setPermissions(List<String> permissions) {
-        this.permissions = permissions;
     }
 
     @Override
@@ -100,12 +71,14 @@ public class GetUISettings200Response {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class GetUISettings200Response {\n");
-        sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
-        sb.append("    permissions: ").append(toIndentedString(permissions)).append("\n");
-        sb.append("}");
-        return sb.toString();
+        return "class GetUISettings200Response {\n"
+                + "    displayName: "
+                + toIndentedString(displayName)
+                + "\n"
+                + "    permissions: "
+                + toIndentedString(permissions)
+                + "\n"
+                + "}";
     }
 
     /**

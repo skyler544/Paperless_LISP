@@ -25,9 +25,7 @@ public interface ConfigApi {
             produces = {"application/json"},
             consumes = {"application/json"})
     default ResponseEntity<Http200Response> createUISettings(
-            @Parameter(name = "CreateUISettingsRequest", description = "")
-                    @Valid
-                    @RequestBody(required = false)
+            @Parameter(name = "CreateUISettingsRequest") @Valid @RequestBody(required = false)
                     CreateUISettingsRequest createUISettingsRequest) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -42,11 +40,11 @@ public interface ConfigApi {
             value = "/api/saved_views/",
             produces = {"application/json"})
     default ResponseEntity<GetSavedViews200Response> getSavedViews(
-            @Parameter(name = "page", description = "", in = ParameterIn.QUERY)
+            @Parameter(name = "page", in = ParameterIn.QUERY)
                     @Valid
                     @RequestParam(value = "page", required = false)
                     Integer page,
-            @Parameter(name = "page_size", description = "", in = ParameterIn.QUERY)
+            @Parameter(name = "page_size", in = ParameterIn.QUERY)
                     @Valid
                     @RequestParam(value = "page_size", required = false)
                     Integer pageSize) {

@@ -26,7 +26,7 @@ public class TasksApiController implements TasksApi, BaseLoggingController {
     public ResponseEntity<List<Http200Response>> getTasks() {
         this.logReceivedRequest("GetTasks");
 
-        List<Http200Response> responseDTO = new ArrayList<Http200Response>();
+        List<Http200Response> responseDTO = new ArrayList<>();
 
         this.logSentResponse("GetTasks", responseDTO.toString());
 

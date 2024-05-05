@@ -25,11 +25,11 @@ public interface SearchApi {
             value = "/api/search/autocomplete/",
             produces = {"application/json"})
     default ResponseEntity<List<String>> autoComplete(
-            @Parameter(name = "term", description = "", in = ParameterIn.QUERY)
+            @Parameter(name = "term", in = ParameterIn.QUERY)
                     @Valid
                     @RequestParam(value = "term", required = false)
                     String term,
-            @Parameter(name = "limit", description = "", in = ParameterIn.QUERY)
+            @Parameter(name = "limit", in = ParameterIn.QUERY)
                     @Valid
                     @RequestParam(value = "limit", required = false)
                     Integer limit) {

@@ -18,16 +18,25 @@ public class PostDocumentRequestDto {
     private Integer documentType;
     private List<Integer> tags;
     private Integer correspondent;
+
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class PostDocumentRequestDto {\n");
-        sb.append("    title: ").append(toIndentedString(title)).append("\n");
-        sb.append("    offsetDateTime: ").append(toIndentedString(offsetDateTime)).append("\n");
-        sb.append("    documentType: ").append(toIndentedString(documentType)).append("\n");
-        sb.append("    correspondent: ").append(toIndentedString(correspondent)).append("\n");
-        sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
-        sb.append("}");
-        return sb.toString();
+        return "class PostDocumentRequestDto {\n"
+                + "    title: "
+                + toIndentedString(title)
+                + "\n"
+                + "    offsetDateTime: "
+                + toIndentedString(offsetDateTime)
+                + "\n"
+                + "    documentType: "
+                + toIndentedString(documentType)
+                + "\n"
+                + "    correspondent: "
+                + toIndentedString(correspondent)
+                + "\n"
+                + "    tags: "
+                + toIndentedString(tags)
+                + "\n"
+                + "}";
     }
 
     private String toIndentedString(Object o) {

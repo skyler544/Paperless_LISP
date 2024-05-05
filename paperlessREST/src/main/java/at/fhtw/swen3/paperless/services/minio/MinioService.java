@@ -17,13 +17,13 @@ import java.io.InputStream;
 @Component
 public class MinioService implements DocumentStoreService {
 
-    Logger logger = LogManager.getLogger(MinioService.class);
+    final Logger logger = LogManager.getLogger(MinioService.class);
 
-    private MinioConfig minioConfig;
+    private final MinioConfig minioConfig;
 
     public MinioService(@Autowired MinioConfig minioConfig) {
         this.minioConfig = minioConfig;
-        this.logger.info(String.format("Connecting to MinIO\n"));
+        this.logger.info("Connecting to MinIO\n");
         try {
             if (!minioConfig
                     .getMinioClient()
