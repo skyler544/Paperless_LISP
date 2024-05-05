@@ -21,6 +21,7 @@ public class RabbitMQConfig {
 
     @Value("${paperless.rabbitMq.hostname}")
     private String rabbitMqHostname;
+
     @Bean
     public Queue paperlessQueue() {
         return new Queue(PAPERLESS_REST_QUEUE, false);
@@ -28,7 +29,8 @@ public class RabbitMQConfig {
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(this.rabbitMqHostname);
+        CachingConnectionFactory connectionFactory =
+                new CachingConnectionFactory(this.rabbitMqHostname);
         connectionFactory.setUsername(this.rabbitMqUsername);
         connectionFactory.setPassword(this.rabbitMqPwd);
         return connectionFactory;
@@ -38,5 +40,4 @@ public class RabbitMQConfig {
     public RabbitTemplate rabbitTemplate() {
         return new RabbitTemplate(connectionFactory());
     }
-
 }
