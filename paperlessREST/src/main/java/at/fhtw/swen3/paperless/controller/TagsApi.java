@@ -2,10 +2,8 @@ package at.fhtw.swen3.paperless.controller;
 
 import at.fhtw.swen3.paperless.services.dto.Http200Response;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import jakarta.validation.Valid;
 
@@ -16,29 +14,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.NativeWebRequest;
-
-import java.util.Optional;
 
 @Validated
 @Controller
 public interface TagsApi {
 
-    default Optional<NativeWebRequest> getRequest() {
-        return Optional.empty();
-    }
-
-    /**
-     * GET /api/tags/
-     *
-     * @param page (optional)
-     * @param fullPerms (optional)
-     * @return Success (status code 200)
-     */
-    @Operation(
-            operationId = "getTags",
-            tags = {"Tags"},
-            responses = {@ApiResponse(responseCode = "200", description = "Success")})
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/api/tags/",
