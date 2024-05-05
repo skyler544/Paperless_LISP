@@ -35,7 +35,7 @@ public class RFC3339DateFormat extends DateFormat {
 
   @Override
   public Object clone() {
-      Object o = super.clone();
+      super.clone();
       return this;
   }
 }

@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class DispatcherService implements IDispatcherService {
 
-    Logger logger = LogManager.getLogger(DispatcherService.class);
+    final Logger logger = LogManager.getLogger(DispatcherService.class);
 
     private final DocumentService documentService;
     private final MessageQueueService mqService;

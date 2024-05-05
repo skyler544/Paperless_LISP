@@ -14,7 +14,6 @@ import lombok.Setter;
 @Getter
 @JsonTypeName("HTTP_200_Response")
 public class Http200Response {
-
     @NotNull
     @Schema(name = "success", requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("success")
