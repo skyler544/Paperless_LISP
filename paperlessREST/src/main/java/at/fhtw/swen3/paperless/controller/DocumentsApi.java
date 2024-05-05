@@ -94,39 +94,6 @@ public interface DocumentsApi {
     }
 
     /**
-     * GET /api/documents/{id}/metadata/
-     *
-     * @param id (required)
-     * @return Success (status code 200)
-     */
-    @Operation(
-            operationId = "getDocumentMetadata",
-            tags = {"Documents"},
-            responses = {
-                @ApiResponse(
-                        responseCode = "200",
-                        description = "Success",
-                        content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema =
-                                            @Schema(
-                                                    implementation =
-                                                            GetDocumentMetadata200Response.class))
-                        })
-            })
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/api/documents/{id}/metadata/",
-            produces = {"application/json"})
-    default ResponseEntity<GetDocumentMetadata200Response> getDocumentMetadata(
-            @Parameter(name = "id", required = true, in = ParameterIn.PATH) @PathVariable("id")
-                    Integer id) {
-        return new ResponseEntity<>(
-                new GetDocumentMetadata200Response(), HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    /**
      * GET /api/documents/
      *
      * @param page (optional)
@@ -196,42 +163,6 @@ public interface DocumentsApi {
                     @RequestParam(value = "truncate_content", required = false)
                     Boolean truncateContent) {
         return new ResponseEntity<>(new GetDocumentWrapperDTO(), HttpStatus.OK);
-    }
-
-    /**
-     * PUT /api/documents/{id}/
-     *
-     * @param id (required)
-     * @param updateDocumentRequest (optional)
-     * @return Success (status code 200)
-     */
-    @Operation(
-            operationId = "updateDocument",
-            tags = {"Documents"},
-            responses = {
-                @ApiResponse(
-                        responseCode = "200",
-                        description = "Success",
-                        content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema =
-                                            @Schema(
-                                                    implementation =
-                                                            UpdateDocument200Response.class))
-                        })
-            })
-    @RequestMapping(
-            method = RequestMethod.PUT,
-            value = "/api/documents/{id}/",
-            produces = {"application/json"},
-            consumes = {"application/json"})
-    default ResponseEntity<UpdateDocument200Response> updateDocument(
-            @Parameter(name = "id", required = true, in = ParameterIn.PATH) @PathVariable("id")
-                    Integer id,
-            @Parameter(name = "UpdateDocumentRequest") @Valid @RequestBody(required = false)
-                    UpdateDocumentRequest updateDocumentRequest) {
-        return new ResponseEntity<>(new UpdateDocument200Response(), HttpStatus.NOT_IMPLEMENTED);
     }
 
     /**

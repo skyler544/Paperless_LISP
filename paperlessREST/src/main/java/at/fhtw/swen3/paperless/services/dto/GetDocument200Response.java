@@ -96,18 +96,6 @@ public class GetDocument200Response {
     @JsonProperty("owner")
     private Integer owner;
 
-    @NotNull
-    @Valid
-    @Schema(name = "permissions", requiredMode = Schema.RequiredMode.REQUIRED)
-    @JsonProperty("permissions")
-    private GetDocument200ResponsePermissions permissions;
-
-    @NotNull
-    @Valid
-    @Schema(name = "notes", requiredMode = Schema.RequiredMode.REQUIRED)
-    @JsonProperty("notes")
-    private List<@Valid GetDocuments200ResponseResultsInnerNotesInner> notes = new ArrayList<>();
-
     public GetDocument200Response() {
         super();
     }
