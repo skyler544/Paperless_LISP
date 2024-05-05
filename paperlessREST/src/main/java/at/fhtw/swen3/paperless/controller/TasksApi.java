@@ -19,7 +19,6 @@ public interface TasksApi {
             value = "/api/tasks/",
             produces = {"application/json"})
     default ResponseEntity<List<Http200Response>> getTasks() {
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
