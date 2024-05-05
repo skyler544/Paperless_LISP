@@ -1,8 +1,8 @@
 package at.fhtw.swen3.paperless.services;
 
 import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
-import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
 import at.fhtw.swen3.paperless.services.document.DocumentService;
+import at.fhtw.swen3.paperless.services.dto.Document;
 import at.fhtw.swen3.paperless.services.messageQueue.MessageQueueService;
 import at.fhtw.swen3.paperless.services.minio.DocumentStoreService;
 
@@ -38,9 +38,9 @@ public class DispatcherService implements IDispatcherService {
     }
 
     @Override
-    public void handleDocument(MultipartFile file, PostDocumentRequestDto postDocRequestDto)
+    public void handleDocument(MultipartFile file, Document document)
             throws JsonProcessingException {
-        var mappedDocumentEntity = documentService.saveDocument(postDocRequestDto);
+        var mappedDocumentEntity = documentService.saveDocument(document);
 
         this.logger.info(String.format("Uploading %s to Minio.", file.toString()));
         minioService.handleFileUpload(file);

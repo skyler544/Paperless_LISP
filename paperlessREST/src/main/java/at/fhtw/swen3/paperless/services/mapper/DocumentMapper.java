@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
         componentModel = "spring")
-public interface DocumentMapper extends BaseMapper<DocumentEntity, GetDocument200Response> {
+public interface DocumentMapper {
     DocumentMapper INSTANCE = Mappers.getMapper(DocumentMapper.class);
 
     @Mapping(source = "id", target = "id")

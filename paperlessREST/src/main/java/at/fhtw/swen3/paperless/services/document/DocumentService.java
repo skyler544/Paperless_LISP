@@ -2,7 +2,7 @@ package at.fhtw.swen3.paperless.services.document;
 
 import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.repositories.DocumentRepository;
-import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
+import at.fhtw.swen3.paperless.services.dto.Document;
 import at.fhtw.swen3.paperless.services.mapper.PostDocumentMapper;
 import at.fhtw.swen3.paperless.services.search.SearchService;
 
@@ -26,27 +26,22 @@ public class DocumentService implements IDocumentService {
         this.searchService = searchService;
     }
 
-    @Override
-    public DocumentEntity saveDocument(PostDocumentRequestDto postDocumentRequestDto) {
+    public DocumentEntity saveDocument(Document document) {
         try {
-            var mappedDocumentEntity =
-                    PostDocumentMapper.INSTANCE.dtoToEntity(postDocumentRequestDto);
+            var mappedDocumentEntity = PostDocumentMapper.INSTANCE.dtoToEntity(document);
             documentRepository.save(mappedDocumentEntity);
 
             return mappedDocumentEntity;
         } catch (Exception e) {
-            this.logger.error(e.getMessage());
             this.logger.error(String.format("Error saving document \n%s", e));
             throw e;
         }
     }
 
-    @Override
     public List<DocumentEntity> fetchAllDocuments() {
         return this.documentRepository.findAll();
     }
 
-    @Override
     public List<DocumentEntity> searchDocuments(String query) throws IOException {
         return this.searchService.searchDocumentsByQuery(query);
     }

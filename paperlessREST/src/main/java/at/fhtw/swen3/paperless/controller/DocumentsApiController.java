@@ -2,7 +2,7 @@ package at.fhtw.swen3.paperless.controller;
 
 import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.services.IDispatcherService;
-import at.fhtw.swen3.paperless.services.customDTOs.PostDocumentRequestDto;
+import at.fhtw.swen3.paperless.services.dto.Document;
 import at.fhtw.swen3.paperless.services.dto.GetDocuments200Response;
 import at.fhtw.swen3.paperless.services.mapper.DocumentMapper;
 
@@ -87,59 +87,30 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
                     Integer correspondent,
             @Parameter(name = "document") @RequestPart(value = "document", required = false)
                     List<MultipartFile> document) {
+
         this.logReceivedRequest("UploadDocument");
+        // hardcoded, retrieve first document
+        var firstDocument = document.get(0);
 
-        PostDocumentRequestDto postDocumentRequestDto;
+        var documentDTO = getDocumentDTO(firstDocument);
 
-        postDocumentRequestDto = extractDocumentDto(title, created, documentType, document);
-
-        this.logIncomingParams(postDocumentRequestDto.toString());
+        this.logIncomingParams(documentDTO.toString());
 
         try {
-            // hardcoded, retrieve first document
-            dispatcherService.handleDocument(document.get(0), postDocumentRequestDto);
-        } catch (Exception ex) {
+            dispatcherService.handleDocument(firstDocument, documentDTO);
+        } catch (Exception e) {
             this.logger.error(
-                    String.format("Error occurred while saving the document into the db\n%s", ex));
+                    String.format("Error occurred while saving the document into the db\n%s", e));
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    private PostDocumentRequestDto extractDocumentDto(
-            String title,
-            OffsetDateTime created,
-            Integer documentType,
-            List<MultipartFile> document) {
-
-        var postDocumentRequestDto = new PostDocumentRequestDto();
-        postDocumentRequestDto.setDocumentType(documentType);
-
-        if (document != null && !document.isEmpty()) {
-            for (MultipartFile singleDoc : document) {
-
-                if (singleDoc != null && singleDoc.getOriginalFilename() != null) {
-
-                    if (title == null || title.isEmpty()) {
-                        postDocumentRequestDto.setTitle(singleDoc.getOriginalFilename());
-                    } else {
-                        postDocumentRequestDto.setTitle(title);
-                    }
-
-                    break;
-                }
-            }
-        }
-
-        if (created == null) {
-            this.logger.info("Created was null.\n");
-            postDocumentRequestDto.setOffsetDateTime(OffsetDateTime.now());
-        } else {
-            this.logger.info(String.format("Created was not Null:%s\n", created));
-            postDocumentRequestDto.setOffsetDateTime(created);
-        }
-
-        return postDocumentRequestDto;
+    private Document getDocumentDTO(MultipartFile firstDocument) {
+        var documentDTO = new Document();
+        documentDTO.setTitle(firstDocument.getOriginalFilename());
+        documentDTO.setDocumentType(firstDocument.getContentType());
+        documentDTO.setCreatedDate(OffsetDateTime.now().toString());
+        return documentDTO;
     }
 }

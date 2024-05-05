@@ -143,6 +143,8 @@ services:
     depends_on:
       - paperless-rest
       - elasticsearch
+    volumes:
+      - ./paperlessOCR/target/:/app/
 
   paperless-integration:
     container_name: paperless-integration
