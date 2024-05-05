@@ -6,8 +6,6 @@ import at.fhtw.swen3.paperless.services.dto.Document;
 import at.fhtw.swen3.paperless.services.dto.GetDocuments200Response;
 import at.fhtw.swen3.paperless.services.mapper.DocumentMapper;
 
-import io.swagger.v3.oas.annotations.Parameter;
-
 import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
@@ -68,25 +66,15 @@ public class DocumentsApiController implements DocumentsApi, BaseLoggingControll
 
     @Override
     public ResponseEntity<Void> uploadDocument(
-            @Parameter(name = "title") @Valid @RequestParam(value = "title", required = false)
-                    String title,
-            @Parameter(name = "created")
-                    @Valid
+            @Valid @RequestParam(value = "title", required = false) String title,
+            @Valid
                     @RequestParam(value = "created", required = false)
                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
                     OffsetDateTime created,
-            @Parameter(name = "document_type")
-                    @Valid
-                    @RequestParam(value = "document_type", required = false)
-                    Integer documentType,
-            @Parameter(name = "tags") @Valid @RequestPart(value = "tags", required = false)
-                    List<Integer> tags,
-            @Parameter(name = "correspondent")
-                    @Valid
-                    @RequestParam(value = "correspondent", required = false)
-                    Integer correspondent,
-            @Parameter(name = "document") @RequestPart(value = "document", required = false)
-                    List<MultipartFile> document) {
+            @Valid @RequestParam(value = "document_type", required = false) Integer documentType,
+            @Valid @RequestPart(value = "tags", required = false) List<Integer> tags,
+            @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
+            @RequestPart(value = "document", required = false) List<MultipartFile> document) {
 
         this.logReceivedRequest("UploadDocument");
         // hardcoded, retrieve first document

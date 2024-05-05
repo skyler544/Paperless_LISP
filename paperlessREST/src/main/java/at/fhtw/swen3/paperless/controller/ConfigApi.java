@@ -2,9 +2,6 @@ package at.fhtw.swen3.paperless.controller;
 
 import at.fhtw.swen3.paperless.services.dto.*;
 
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -25,8 +22,7 @@ public interface ConfigApi {
             produces = {"application/json"},
             consumes = {"application/json"})
     default ResponseEntity<Http200Response> createUISettings(
-            @Parameter(name = "CreateUISettingsRequest") @Valid @RequestBody(required = false)
-                    CreateUISettingsRequest createUISettingsRequest) {
+            @Valid @RequestBody(required = false) CreateUISettingsRequest createUISettingsRequest) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -35,14 +31,8 @@ public interface ConfigApi {
             value = "/api/saved_views/",
             produces = {"application/json"})
     default ResponseEntity<GetSavedViews200Response> getSavedViews(
-            @Parameter(name = "page", in = ParameterIn.QUERY)
-                    @Valid
-                    @RequestParam(value = "page", required = false)
-                    Integer page,
-            @Parameter(name = "page_size", in = ParameterIn.QUERY)
-                    @Valid
-                    @RequestParam(value = "page_size", required = false)
-                    Integer pageSize) {
+            @Valid @RequestParam(value = "page", required = false) Integer page,
+            @Valid @RequestParam(value = "page_size", required = false) Integer pageSize) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
