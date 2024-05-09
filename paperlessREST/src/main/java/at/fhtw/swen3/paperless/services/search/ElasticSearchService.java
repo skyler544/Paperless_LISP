@@ -5,6 +5,7 @@ import at.fhtw.swen3.paperless.models.entity.DocumentEntity;
 import at.fhtw.swen3.paperless.services.document.DocumentService;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.Hit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.List;
 @Service
 public class ElasticSearchService implements SearchService {
 
-    Logger logger = LogManager.getLogger(DocumentService.class);
+    final Logger logger = LogManager.getLogger(DocumentService.class);
 
     private final ElasticsearchClient elasticsearchClient;
 
@@ -34,9 +35,9 @@ public class ElasticSearchService implements SearchService {
                                     m -> m.fields("content", "title").fuzziness("AUTO").query(query)
                             )), DocumentEntity.class);
 
-            return searchResponse.hits().hits().stream().map(hit -> hit.source()).toList();
+            return searchResponse.hits().hits().stream().map(Hit::source).toList();
         } catch (IOException e) {
-            logger.error("Error searching for documents \n" + e.getMessage());
+            logger.error("Error searching for documents \n{}", e.getMessage());
             throw e;
         }
 

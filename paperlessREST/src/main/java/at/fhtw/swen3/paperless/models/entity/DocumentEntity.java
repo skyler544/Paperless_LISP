@@ -4,23 +4,19 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
 
+import lombok.*;
 
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "document")
 public class DocumentEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private Integer correspondent;
 
-    private Integer documentType;
+    private String documentType;
 
     @NotNull(message = "Document title cannot be null")
     @NotEmpty(message = "Document title cannot be empty")

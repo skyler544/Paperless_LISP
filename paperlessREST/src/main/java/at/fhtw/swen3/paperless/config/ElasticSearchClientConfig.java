@@ -4,7 +4,9 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
+
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.openapitools.jackson.nullable.JsonNullableModule;
@@ -21,13 +23,13 @@ public class ElasticSearchClientConfig {
 
     @Value("${elasticsearch.host}")
     private String host;
+
     @Value("${elasticsearch.port}")
     private int port;
 
     @Bean
     public RestClient getRestClient() {
-        return RestClient.builder(
-                new HttpHost(host, port)).build();
+        return RestClient.builder(new HttpHost(host, port)).build();
     }
 
     @Bean
@@ -35,25 +37,19 @@ public class ElasticSearchClientConfig {
         JacksonJsonpMapper mapper = new JacksonJsonpMapper();
         mapper.objectMapper().registerModule(new JavaTimeModule());
         mapper.objectMapper().registerModule(new JsonNullableModule());
-        return new RestClientTransport(
-                getRestClient(), mapper);
+        return new RestClientTransport(getRestClient(), mapper);
     }
-
 
     @Bean
     public ElasticsearchClient getElasticsearchClient() throws IOException {
         ElasticsearchClient client = new ElasticsearchClient(getElasticsearchTransport());
 
-        //if index does not yet exist we create it, more elegant than in the appropriate service
-        if (!client.indices().exists(
-                i -> i.index(ElasticSearchClientConfig.SEARCH_DOC_INDEX_NAME)
-        ).value()) {
-            client.indices().create(c -> c
-                    .index(ElasticSearchClientConfig.SEARCH_DOC_INDEX_NAME)
-            );
+        if (!client.indices()
+                .exists(i -> i.index(ElasticSearchClientConfig.SEARCH_DOC_INDEX_NAME))
+                .value()) {
+            client.indices().create(c -> c.index(ElasticSearchClientConfig.SEARCH_DOC_INDEX_NAME));
         }
 
         return client;
     }
-
 }

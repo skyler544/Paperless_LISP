@@ -1,6 +1,7 @@
 package at.fhtw.swen3.paperless.services.messageQueue;
 
 import at.fhtw.swen3.paperless.config.RabbitMQConfig;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -20,9 +21,7 @@ public class RabbitMQService implements MessageQueueService {
     }
 
     public void processMessage(String message) {
-
         rabbit.convertAndSend(RabbitMQConfig.PAPERLESS_REST_QUEUE, message);
-        logger.info(String.format("[ Sent message to %s]", message));
+        logger.info(String.format("[Sent message to %s]", message));
     }
-
 }

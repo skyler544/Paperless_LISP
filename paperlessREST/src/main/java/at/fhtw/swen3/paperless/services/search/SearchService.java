@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface SearchService {
 
-    public List<DocumentEntity> searchDocumentsByQuery(String query) throws IOException;
+    List<DocumentEntity> searchDocumentsByQuery(String query) throws IOException;
 
 }
