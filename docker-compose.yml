@@ -95,31 +95,16 @@ services:
       - elasticsearch
 
   paperless-rest:
-    container_name: paperless-rest-server
+    container_name: paperless-rest
     build:
       context: paperlessREST
       dockerfile: Dockerfile
-    image: paperless-rest-server:latest
+    image: paperless-rest:latest
     ports:
-      - 8081:8080
-    restart: always
-    healthcheck:
-      test: curl --fail http://localhost:8080/actuator/health || exit 1
-      interval: 20s
-      retries: 15
-      start_period: 20s
-      timeout: 10s
-    depends_on:
-      elasticsearch:
-        condition: service_started
-      minio:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-      db:
-        condition: service_started
+      - 8080:8080
     volumes:
-      - ./paperlessREST/target/:/app/
+      - ./paperlessREST:/app
+      - ./paperlessREST/.qlot/local-projects:/app/.qlot/local-projects
 
   web:
     image: nginx

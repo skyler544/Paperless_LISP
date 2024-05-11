@@ -1,0 +1,4 @@
+#!/bin/sh
+
+PORT=${PORT:-8080}
+exec .qlot/bin/clackup -S . -s paperless-rest --address 0.0.0.0 --port $PORT --debug nil main.lisp

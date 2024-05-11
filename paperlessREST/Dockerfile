@@ -1,30 +1,18 @@
-# base image to build a JRE
-FROM maven:3.9.5-eclipse-temurin-17-alpine as temurin
+# Dependency management
+FROM fukamachi/qlot as qlot
 
+WORKDIR /app
+COPY qlfile /app
+COPY qlfile.lock /app
 
-# required for strip-debug to work
-RUN apk add --no-cache binutils
+RUN set -x; qlot install --no-deps
 
-# Build small JRE image
-RUN $JAVA_HOME/bin/jlink \
-         --verbose \
-         --add-modules ALL-MODULE-PATH \
-         --strip-debug \
-         --no-man-pages \
-         --no-header-files \
-         --compress=2 \
-         --output /customjre
+# Main app image
+FROM fukamachi/sbcl:latest-alpine
 
-
-# main app image
-FROM alpine
-ENV JAVA_HOME=/jre
-ENV PATH="${JAVA_HOME}/bin:${PATH}"
-
-COPY --from=temurin /customjre $JAVA_HOME
-
-RUN apk --no-cache add curl
+WORKDIR /app
+COPY --from=qlot /app/.qlot /app/.qlot
 
 EXPOSE 8080
 
-ENTRYPOINT ["/jre/bin/java", "-jar", "/app/paperlessREST-1.0.0.jar"]
+ENTRYPOINT ["/app/start-server"]
