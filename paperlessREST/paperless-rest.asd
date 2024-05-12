@@ -6,4 +6,5 @@
   :depends-on ("paperless-rest/main"
                #:clack
                #:lack
-               #:optima))
+               #:optima
+               #:postmodern))
