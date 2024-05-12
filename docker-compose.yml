@@ -104,6 +104,7 @@ services:
       - 8080:8080
     volumes:
       - ./paperlessREST:/app
+      - /app/.qlot
       - ./paperlessREST/.qlot/local-projects:/app/.qlot/local-projects
 
   web:
