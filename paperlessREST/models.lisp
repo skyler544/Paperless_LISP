@@ -29,10 +29,7 @@ themselves."))
 VALUE)*)."
   (let ((hash-table (make-hash-table)))
     (mapcar (lambda (pair)
-              (set-hash
-               (first pair)
-               (second pair)
-               hash-table))
+              (set-hash (first pair) (second pair) hash-table))
             pairs)
     hash-table))
 
@@ -41,9 +38,9 @@ VALUE)*)."
 ;; ----------------------------------------------------
 (defun ui-settings ()
   (stringify (build-table '((display_name test-user)
-                            (user null
-                             (settings null)
-                             (permissions #()))))))
+                            (user null)
+                            (settings null)
+                            (permissions #())))))
 
 ;; Statistics
 ;; ----------------------------------------------------
