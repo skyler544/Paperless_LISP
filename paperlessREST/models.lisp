@@ -3,6 +3,8 @@
   (:import-from #:com.inuoe.jzon
                 #:stringify)
   (:export #:ui-settings)
+  (:export #:statistics)
+  (:export #:saved-views)
   (:documentation "This file contains the data models for the Paperless application. Most are
 hardcoded for now, but extending them should be as simple as adding the
 appropriate arguments to the exported functions. The functions that return the
@@ -16,6 +18,8 @@ themselves."))
 ;; whether it's worth making a hash table library for use elsewhere in the
 ;; application.
 
+;; Hash table utilities
+;; ----------------------------------------------------
 (defun set-hash (key value table)
   "Associate KEY with VALUE in TABLE."
   (setf (gethash key table) value))
@@ -33,20 +37,30 @@ VALUE)*)."
     hash-table))
 
 
-(defun user ()
-  (build-table '((id 0)
-                 (username test-user)
-                 (is_superuser t)
-                 (groups '()))))
-
-(defun update-checking ()
-  (build-table '((backend_settings none))))
-
-(defun settings ()
-  (build-table `((update_checking ,(update-checking)))))
-
+;; UI Settings
+;; ----------------------------------------------------
 (defun ui-settings ()
-  (stringify (build-table `((display_name test-user)
-                            (user ,(user))
-                            (settings ,(settings))
-                            (permissions ())))))
+  (stringify (build-table '((display_name test-user)
+                            (user null
+                             (settings null)
+                             (permissions #()))))))
+
+;; Statistics
+;; ----------------------------------------------------
+(defun statistics ()
+  (stringify (build-table
+              '((documents_total null)
+                (documents_inbox null)
+                (inbox_tag null)
+                (character_count null)
+                (document_file_type_counts #())))))
+
+;; Saved Views
+;; ----------------------------------------------------
+(defun saved-views ()
+  (stringify (build-table
+              '((count null)
+                (next null)
+                (previous null)
+                (all #())
+                (results #())))))
