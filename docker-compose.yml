@@ -107,6 +107,33 @@ services:
       - /app/.qlot
       - ./paperlessREST/.qlot/local-projects:/app/.qlot/local-projects
 
+  paperless-rest-java:
+    container_name: paperless-rest-java
+    build:
+      context: paperlessREST-Java
+      dockerfile: Dockerfile
+    image: paperless-rest-java:latest
+    ports:
+      - 8081:8080
+    restart: always
+    healthcheck:
+      test: curl --fail http://localhost:8080/actuator/health || exit 1
+      interval: 20s
+      retries: 15
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      elasticsearch:
+        condition: service_started
+      minio:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_started
+    volumes:
+      - ./paperlessREST/target/:/app/
+
   web:
     image: nginx
     volumes:
