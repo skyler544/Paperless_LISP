@@ -1,7 +1,7 @@
 (defpackage #:paperless-rest/main
   (:nicknames #:paperless-rest/main)
   (:use #:cl)
-  (:import-from #:paperless-rest/router #:handle)
+  (:import-from #:paperless-rest/controller #:router)
   (:import-from #:clack #:clackup)
   (:import-from #:lack #:builder)
   (:export #:default-server))
@@ -13,7 +13,7 @@
    :accesslog
    :backtrace
    (lambda (env)
-     (funcall 'handle env)))
+     (funcall 'router env)))
   "Container for the application entrypoint.")
 
 

@@ -1,4 +1,4 @@
-(defpackage #:paperless-rest/router
+(defpackage #:paperless-rest/controller
   (:use #:cl #:optima)
   (:import-from #:paperless-rest/models
                 #:ui-settings)
@@ -6,10 +6,10 @@
                 #:statistics)
   (:import-from #:paperless-rest/models
                 #:saved-views)
-  (:export #:handle))
-(in-package #:paperless-rest/router)
+  (:export #:router))
+(in-package #:paperless-rest/controller)
 
-(defun handle (env)
+(defun router (env)
   ;; OPTIMA:MATCH works somewhat like a switch statement but with arbitrary
   ;; pattern types
   (match env
