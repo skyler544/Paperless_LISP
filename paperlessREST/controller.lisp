@@ -1,10 +1,8 @@
 (defpackage #:paperless-rest/controller
   (:use #:cl #:optima)
   (:import-from #:paperless-rest/models
-                #:ui-settings)
-  (:import-from #:paperless-rest/models
-                #:statistics)
-  (:import-from #:paperless-rest/models
+                #:ui-settings
+                #:statistics
                 #:saved-views)
   (:export #:router))
 (in-package #:paperless-rest/controller)
