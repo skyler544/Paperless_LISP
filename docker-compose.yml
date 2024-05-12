@@ -94,12 +94,12 @@ services:
     depends_on:
       - elasticsearch
 
-  paperless-rest:
-    container_name: paperless-rest-server
+  paperless-rest-java:
+    container_name: paperless-rest-java
     build:
-      context: paperlessREST
+      context: paperlessREST-Java
       dockerfile: Dockerfile
-    image: paperless-rest-server:latest
+    image: paperless-rest-java:latest
     ports:
       - 8081:8080
     restart: always
