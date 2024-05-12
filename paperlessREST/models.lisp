@@ -2,9 +2,9 @@
   (:use #:cl)
   (:import-from #:com.inuoe.jzon
                 #:stringify)
-  (:export #:ui-settings)
-  (:export #:statistics)
-  (:export #:saved-views)
+  (:export #:ui-settings
+           #:statistics
+           #:saved-views)
   (:documentation "This file contains the data models for the Paperless application. Most are
 hardcoded for now, but extending them should be as simple as adding the
 appropriate arguments to the exported functions. The functions that return the
