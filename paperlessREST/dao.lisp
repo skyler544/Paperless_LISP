@@ -19,9 +19,6 @@
    (document_type
     :col-type (or db-null string)
     :initarg :document_type)
-   (created_date
-    :col-type date
-    :initform (local-time:now))
    (content
     :col-type (or db-null string)
     :initarg :content))
@@ -31,6 +28,7 @@
 ;; CRUD operations
 ;; ----------------------------------------------------
 (defun create-document (document)
+  (format t "~%Saving file ~A to database." document)
   (with-connection *connection*
     (unless (list-tables)
       (execute (dao-table-definition 'document)))

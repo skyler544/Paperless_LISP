@@ -6,6 +6,5 @@
   :depends-on ("paperless-rest/main"
                #:clack
                #:lack
-               #:circular-streams
                #:optima
                #:postmodern))

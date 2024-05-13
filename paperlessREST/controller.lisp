@@ -4,6 +4,9 @@
                 #:ui-settings
                 #:statistics
                 #:saved-views)
+  (:import-from #:paperless-rest/dao
+                #:document
+                #:create-document)
   (:import-from #:paperless-rest/requests
                 #:request-body)
   (:import-from #:alexandria
@@ -19,7 +22,10 @@
             (starts-with-subseq "/api/documents/post_document/" path))
      (let* ((body (request-body env))
             (document-props (assoc "document" body :test 'equal))
-            (title (third document-props)))
+            (title (third document-props))
+            (document_type (fourth document-props)))
+       (format t "~%Received document: ~A ~A" title document_type)
+       (create-document (make-instance 'document :title title :document_type document_type))
        ;; TODO
        ;; update db
        ;; send message via message queue
