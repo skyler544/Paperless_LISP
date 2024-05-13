@@ -21,8 +21,16 @@
 ("marijnh-Postmodern" .
  (:class qlot/source/ultralisp:source-ultralisp
   :initargs (:%version :latest)
-  :version "ultralisp-20240511212000"))
+  :version "ultralisp-20240512172000"))
 ("lack" .
+ (:class qlot/source/github:source-github
+  :initargs (:repos "fukamachi/lack" :ref nil :branch nil :tag nil)
+  :version "github-77509dc66e05caf30ebe44171e153a7eabae4d5b"))
+("circular-streams" .
+ (:class qlot/source/ql:source-ql
+  :initargs (:%version :latest)
+  :version "ql-2023-10-21"))
+("http-body" .
  (:class qlot/source/ql:source-ql
   :initargs (:%version :latest)
   :version "ql-2023-10-21"))

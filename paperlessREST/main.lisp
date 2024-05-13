@@ -11,7 +11,6 @@
 (defvar *app*
   (builder
    :accesslog
-   :backtrace
    (lambda (env)
      (funcall 'router env)))
   "Container for the application entrypoint.")
