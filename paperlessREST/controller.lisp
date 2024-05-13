@@ -7,6 +7,8 @@
   (:import-from #:paperless-rest/dao
                 #:document
                 #:create-document)
+  (:import-from #:paperless-rest/storage
+                #:store-file)
   (:import-from #:paperless-rest/requests
                 #:request-body)
   (:import-from #:alexandria
@@ -17,18 +19,22 @@
 (defun router (env)
   ;; OPTIMA:MATCH works somewhat like a switch statement but with arbitrary
   ;; pattern types
+
   (match env
     ((guard (property :path-info path)
             (starts-with-subseq "/api/documents/post_document/" path))
      (let* ((body (request-body env))
             (document-props (assoc "document" body :test 'equal))
-            (title (third document-props))
-            (document_type (fourth document-props)))
-       (format t "~%Received document: ~A ~A" title document_type)
-       (create-document (make-instance 'document :title title :document_type document_type))
+            (filetype (fourth document-props))
+            (filename (third document-props))
+            (file-as-string (flexi-streams:octets-to-string (alexandria:read-stream-content-into-byte-vector
+                                                             (second document-props)))))
+       (format t "~%Received document: ~A ~A" filename filetype)
+
+       (create-document (make-instance 'document :title filename :document_type filetype))
+       (store-file filename filetype file-as-string)
        ;; TODO
        ;; send message via message queue
-       ;; send file to cold storage
        `(200 nil ())))
     ((guard (property :path-info path)
             (starts-with-subseq "/api/ui_settings/" path))

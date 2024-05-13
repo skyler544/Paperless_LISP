@@ -7,4 +7,5 @@
                #:clack
                #:lack
                #:optima
-               #:postmodern))
+               #:postmodern
+               #:cl-s3))
