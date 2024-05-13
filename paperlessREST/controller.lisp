@@ -27,7 +27,6 @@
        (format t "~%Received document: ~A ~A" title document_type)
        (create-document (make-instance 'document :title title :document_type document_type))
        ;; TODO
-       ;; update db
        ;; send message via message queue
        ;; send file to cold storage
        `(200 nil ())))
