@@ -5,7 +5,6 @@
                 #:statistics
                 #:saved-views)
   (:import-from #:paperless-rest/requests
-                #:make-request
                 #:request-body)
   (:import-from #:alexandria
                 #:starts-with-subseq)
@@ -19,8 +18,8 @@
     ((guard (property :path-info path)
             (starts-with-subseq "/api/documents/post_document/" path))
      (let* ((body (request-body env))
-            (title (assoc "title" body :test 'equal))
-            (filestream (assoc "document" body :test 'equal)))
+            (document-props (assoc "document" body :test 'equal))
+            (title (third document-props)))
        ;; TODO
        ;; update db
        ;; send message via message queue
