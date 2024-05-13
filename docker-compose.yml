@@ -5,9 +5,9 @@ services:
     restart: always
     shm_size: 128mb
     environment:
-      POSTGRES_USER: paperless_postgres
+      POSTGRES_USER: paperless
       POSTGRES_PASSWORD: paperless
-      POSTGRES_DB: paperlessdb
+      POSTGRES_DB: paperless
       PGUSER: postgres
     ports:
       - 5432:5432

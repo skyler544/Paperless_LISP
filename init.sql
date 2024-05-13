@@ -1,3 +1,3 @@
 -- init.sql
-CREATE DATABASE paperlessdb;
+CREATE DATABASE paperless;
 

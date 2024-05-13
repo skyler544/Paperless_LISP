@@ -5,7 +5,7 @@
 (in-package #:paperless-rest/dao)
 
 ;; connection parameters are hardcoded, for now
-(defparameter *connection* '("paperlessdb" "paperless_postgres" "paperless" "db"))
+(defparameter *connection* '("paperless" "paperless" "paperless" "db"))
 
 ;; Data Access Object
 (defclass document ()
